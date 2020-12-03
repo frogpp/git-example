@@ -1,0 +1,84 @@
+﻿@{
+    ViewBag.Title = Resources.MvcSitemap.Sample_5;
+}
+@section buttons {
+
+}
+@section forms {
+    <ul>
+        <li>DAC請繼承<b>_Dac</b></li>
+        <li>DAC使用Dapper進行ORM處理</li>
+        <li>實作回傳資料XSS處理</li>
+        <li>實作SQL操作流水帳Log日誌，請至Web.config內的<b>KeepSqlLogTrace</b>設定</li>
+    </ul>
+}
+<h4>建立DAC時請繼承 _DAC</h4>
+<pre>
+<i>
+    //宣告DAC
+    public class {XXX}Dac : _Dac
+    {
+        public {XXX}Dac(EmpUserModel user) : base(user)
+        {
+        }
+    }
+
+    //使用DAC
+    using ({XXX}Dac dac = new {XXX}Dac(GetLoginUser()))
+    {
+        ...
+    }
+</i>
+</pre>
+<h4>ExecuteQuery(string sql, object param = null)</h4>
+<pre>
+    回傳sql查詢結果 => IList(IDictionary(string, object))
+<i>
+    //SQL Command
+    strSql = @@"select * from {table} where {column}=@@{column ID}";
+
+    //SQL Parameter
+    objParam = new
+    {
+        {column ID} = {column value}
+    };
+
+    //Get Result
+    var result = ExecuteQuery(strSql, objParam);
+</i>
+</pre>
+<h4>ExecuteQuery<T>(string sql, object param = null)</h4>
+<pre>
+    回傳sql查詢結果 => IList(<T>)
+<i>
+    //SQL Command
+    strSql = @@"select * from {table} where {column}=@@{column ID}";
+
+    //SQL Parameter
+    objParam = new
+    {
+        {column ID} = {column value}
+    };
+
+    //Get Result
+    IList(T) result = ExecuteQuery<T>(strSql, objParam);
+</i>
+</pre>
+<h4>ExecuteCommand<T>(string sql, object param = null)</h4>
+<pre>
+    執行sql
+<i>
+    //SQL Command
+    strSql = @@"select * from {table} where {column}=@@{column ID}";
+
+    //SQL Parameter
+    objParam = new
+    {
+        {column ID} = {column value}
+    };
+</i>
+</pre>
+@section scripts {
+
+}
+

@@ -1,0 +1,513 @@
+﻿@model SDO.Models.MailSetModel.EditView
+@{
+
+}
+<!-- 按鈕列 -->
+@section buttons {
+    <script type="text/javascript">
+
+        // 加入「存檔」按鈕
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B09',
+            click: function () { mailSetCreateController.Save(); }
+        });
+
+        // 加入「重設」按鈕
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B10',
+            click: function () { mailSetCreateController.ResetForm(); }
+        });
+
+    </script>
+}
+
+<!-- 新增表單 -->
+@using (Ajax.BeginForm("Create", "MailSet", null, new AjaxOptions
+{
+    OnSuccess = "mailSetCreateController.SaveSuccess",
+    OnFailure = "alertMessage"
+}, new { id = "frmCreate" }))
+{
+    @Html.AntiForgeryToken()
+    <div id="tabstripMailSet" style="padding-top: 10px;">
+        <ul>
+            <li class="k-state-active">@i18N.Label.MailSet_TAB_TEMPLATE</li>
+            <li>@i18N.Label.MailSet_TAB_MAIL_ADDRESS</li>
+        </ul>
+        <div>
+            <table>
+                <tr>
+                    <th>@Html.LabelFor(m => m.MAIL_ID)</th>
+                    <td>
+                        @Html.TextBoxFor(m => m.MAIL_ID)
+                        @Html.ValidationMessageFor(m => m.MAIL_ID)
+                    </td>
+                    <th>@Html.LabelFor(m => m.MAIL_NAME)</th>
+                    <td>
+                        @Html.TextBoxFor(m => m.MAIL_NAME)
+                        @Html.ValidationMessageFor(m => m.MAIL_NAME)
+                    </td>
+                </tr>
+                <tr>
+                    <th>@Html.LabelFor(m => m.MAIL_SUBJECT)</th>
+                    <td colspan="3">
+                        @Html.TextBoxFor(m => m.MAIL_SUBJECT, new { @style = "width: 100%;" })
+                        @Html.ValidationMessageFor(m => m.MAIL_SUBJECT)
+                    </td>
+                </tr>
+                <tr>
+                    <th>@Html.LabelFor(m => m.MAIL_CONTENT)</th>
+                    <td colspan="3">
+                        @Html.TextAreaFor(m => m.MAIL_CONTENT)
+                        @Html.ValidationMessageFor(m => m.MAIL_CONTENT)
+                    </td>
+                </tr>
+            </table>
+            <div style="color:red;">
+                <ol>
+                    <li>變數請以"<b>$</b>"符號包住，並以大寫處理，例：$USER_TITLE$</li>
+                    <li>迴圈處理請使用"<b>$LOOPSTART$</b>"、"<b>$LOOPEND$</b>"符號前後包住，例：$LOOPSTART$ 這是迴圈內容 $LOOPEND$</li>
+                </ol>
+            </div>
+        </div>
+        <div>
+            <div id="grid"></div>
+        </div>
+    </div>
+}
+
+@section scripts {
+
+    <!-- 樣版：Grid 工具列 -->
+    <script id="gridToolbar" type="text/x-kendo-template">
+        <button type="button" class="k-button k-button-icontext" onclick="mailSetCreateController.ShowEditSettingWindow(mailSetCreateController.mailSettingDefaultModel)">
+            <span class="k-icon k-i-plus"></span>@i18N.Button.B05
+        </button>
+    </script>
+
+    <!-- 樣版：關卡編輯視窗內容 -->
+    <script id="editSettingWindowContent" type="text/x-kendo-template">
+        <form id="frmEditSetting">
+            <div class="k-toolbar">
+                <button type="button" class="k-button " onclick="mailSetCreateController.SaveSetting()">@i18N.Button.B09</button>
+            </div>
+            <table style="width: 100%; margin: 10px 5px;">
+                <tr>
+                    <th>@i18N.Label.MailSet_TYPE</th>
+                    <td>
+                        <input name="mailType" type="text" data-bind="value: MAIL_TYPE" data-field-name="@i18N.Label.MailSet_TYPE" required />
+                        <div style="margin: 5px 0;">
+                            <span data-for='mailType' class='k-invalid-msg'></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <input id="mailTypeTargetEmail" type="radio" class="k-radio" value="0" data-bind="checked: MAIL_TYPE_TARGET, events: { change: MailTypeTargetChange }" required />
+                        <label class="k-radio-label" for="mailTypeTargetEmail">@i18N.Label.MailSet_EMAIL</label>
+                    </th>
+                    <td>
+                        <div style="float: left;">
+                            <input name="mailTitle" type="text" class="k-textbox" data-bind="value: MAIL_TITLE, enabled: IsmailTypeTargetEmailEnabled" placeholder="@i18N.Label.MailSet_MAIL_TITLE" data-field-name="@i18N.Label.MailSet_MAIL_TITLE" required />
+                            <div style="margin: 5px 0;">
+                                <span data-for='mailTitle' class='k-invalid-msg'></span>
+                            </div>
+                        </div>
+                        <div style="float: left; margin-left: 5px;">
+                            <input name="mailAddress" type="email" class="k-textbox" data-bind="value: MAIL_ADDRESS, enabled: IsmailTypeTargetEmailEnabled" placeholder="@i18N.Label.MailSet_MAIL_ADDRESS" data-field-name="@i18N.Label.MailSet_MAIL_ADDRESS" required />
+                            <div style="margin: 5px 0;">
+                                <span data-for='mailAddress' class='k-invalid-msg'></span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <input id="mailTypeTargetRole" type="radio" class="k-radio" value="1" data-bind="checked: MAIL_TYPE_TARGET, events: { change: MailTypeTargetChange }" />
+                        <label class="k-radio-label" for="mailTypeTargetRole">@i18N.Label.MailSet_MAIL_ROLE</label>
+                    </th>
+                    <td>
+                        <input name="mailRole" type="text" data-bind="value: MAIL_ROLE, enabled: IsMailTypeTargetRoleEnabled" data-field-name="@i18N.Label.FlowSetDetail_SET_ROLE_ID" required />
+                        <div style="margin: 5px 0;">
+                            <span data-for='mailRole' class='k-invalid-msg'></span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </script>
+
+    <script type="text/javascript">
+
+        /*
+			類別：郵件範本新增
+		    作者：Steven Tsai
+		*/
+        function MailSetCreateJS() {
+
+            var self = this;
+
+            // 預設的郵件設定資訊
+            var defaultMailSetting = [];
+
+            // 預設的設定資料模型
+            this.mailSettingDefaultModel = {
+                IS_ADD: true,
+                MAIL_TYPE: null,
+                MAIL_ROLE: null,
+                MAIL_ADDRESS: null,
+                MAIL_TITLE: null
+            };
+
+            // 選單資料列舉：郵寄類型、角色
+            var listEnum = { TYPE: 0, ROLE: 1 };
+
+            // 郵寄類型設定對象列舉
+            var mailTypeTargetEnum = { USER: 0, ROLE: 1 };
+
+            // 選單資料：郵寄類型、角色
+            var mailTypeList = @Html.Raw(Json.Encode(ViewBag.mailTypeList));
+            var roleList = @Html.Raw(Json.Encode(ViewBag.roleList));
+
+            /*
+                函數：初始化郵件設定清單
+                參數：無
+                備註：無
+            */
+            this.InitMailSettingGrid = function () {
+
+                // 初始化 Grid 控制項
+                var grid = $('#grid').kendoGrid({
+                    dataSource: defaultMailSetting,
+                    columns: [
+                        { template: '<div class="icon_edit" title="@i18N.Button.B06" onclick="mailSetCreateController.UpdateSetting(this)"><span class="k-icon k-i-edit"></span></div>', width: 30 },
+                        { template: '<div class="icon_delete" title="@i18N.Button.B07" onclick="mailSetCreateController.DeleteSetting(this)"><span class="k-icon k-i-close"></span></div>', width: 30 },
+                        { title: '@i18N.Label.MailSet_TYPE', template: mailSetCreateController.InitGridTypeField },
+                        { title: '@i18N.Label.MailSet_TARGET', template: mailSetCreateController.InitGridTargetField },
+                    ],
+                    toolbar: kendo.template($("#gridToolbar").html())
+                }).data('kendoGrid');
+
+                // 調整 Grid 預設高度, setTimeout 確保他是在初始後才執行
+                setTimeout(function() {
+                    var options = grid.getOptions();
+                    options.height = 350;
+                    grid.setOptions(options);
+                }, 10)
+
+            }
+
+            /*
+                函數：初始化 Grid 的郵寄類型欄位
+                參數：
+                    item => 設定項目資訊
+                備註：無
+            */
+            this.InitGridTypeField = function (item) {
+                return GetTextFromList(listEnum.TYPE, item.MAIL_TYPE);
+            }
+
+            /*
+                函數：初始化 Grid 的設定對象欄位
+                參數：
+                    item => 設定項目資訊
+                備註：無
+            */
+            this.InitGridTargetField = function (item) {
+                var tag;
+                if (item.MAIL_ROLE) {
+                    tag = '<span style="background-color: #4CAF50; color: white; padding: 5px; border-radius: 5px; margin-right: 5px;">{0}</span>';
+                    return (tag + '{1}').format('@i18N.Label.MailSet_MAIL_ROLE', GetTextFromList(listEnum.ROLE, item.MAIL_ROLE));
+                } else {
+                    tag = '<span style="background-color: #FF5722; color: white; padding: 5px; border-radius: 5px; margin-right: 5px;">{0}</span>';
+                    return (tag + '{1} ({2})').format('@i18N.Label.MailSet_EMAIL', item.MAIL_TITLE, item.MAIL_ADDRESS);
+                }
+            }
+
+            /*
+                函數：從指定類型的清單取得對應顯示名稱
+                參數：
+                    type => 選單類型
+                    key => 搜尋的索引值
+                備註：無
+            */
+            function GetTextFromList(type, key){
+                var typeDesc;
+                var sourceList = [];
+                switch (type) {
+                    case listEnum.TYPE:
+                        typeDesc = '@i18N.Label.MailSet_TYPE';
+                        sourceList = mailTypeList;
+                        break;
+                    case listEnum.ROLE:
+                        typeDesc = '@i18N.Label.MailSet_MAIL_ROLE';
+                        sourceList = roleList;
+                        break;
+                    default:
+                        return '';
+                }
+                var item = $.grep(sourceList, function (e) { return e['Value'] == key; });
+                return item.length > 0 ? item[0]['Text'] : '@i18N.Message.R14'.format(typeDesc);
+            }
+
+            /*
+                函數：執行更新郵件設定
+                參數：無
+                備註：無
+            */
+            this.UpdateSetting = function (e) {
+                var dataItem = $('#grid').data("kendoGrid").dataItem($(e).closest("tr"));
+                self.ShowEditSettingWindow(dataItem);
+            }
+
+            /*
+                函數：顯示編輯設定視窗
+                參數：
+                    editItem => 欲編輯的設定資料
+                備註：無
+            */
+            this.ShowEditSettingWindow = function (editItem) {
+
+                // 開啟畫面時, 預設選擇的類型設定對象
+                var defaultMailTypeTarget = editItem.MAIL_ROLE ? mailTypeTargetEnum.ROLE : mailTypeTargetEnum.USER;
+
+                // 初始設定編輯畫面的 ViewModel 資訊
+                var viewModel = kendo.observable({
+                    IS_EDIT: editItem.IS_ADD ? false : true,
+                    GRID_UID: editItem.uid,
+                    MAIL_TYPE: editItem.MAIL_TYPE ? editItem.MAIL_TYPE : '',
+                    MAIL_ROLE: editItem.MAIL_ROLE ? editItem.MAIL_ROLE : '',
+                    MAIL_TITLE: editItem.MAIL_TITLE ? editItem.MAIL_TITLE : '',
+                    MAIL_ADDRESS: editItem.MAIL_ADDRESS ? editItem.MAIL_ADDRESS : '',
+                    MAIL_TYPE_TARGET: defaultMailTypeTarget,
+                    MailTypeTargetChange: function () {
+
+                        // 清空類型設定對象資料
+                        this.set('MAIL_ROLE', '');
+                        this.set('MAIL_TITLE', '');
+                        this.set('MAIL_ADDRESS', '');
+
+                        // 根據指定類型設定對象, 判斷必填規則
+                        var mailTypeTarget = this.get('MAIL_TYPE_TARGET');
+                        var $validator = $('#frmEditSetting').data('kendoValidator');
+                        $validator.validateInput($('input[name="mailRole"]').prop('required', mailTypeTarget == mailTypeTargetEnum.ROLE));
+                        $validator.validateInput($('input[name="mailTitle"]').prop('required', mailTypeTarget == mailTypeTargetEnum.USER));
+                        $validator.validateInput($('input[name="mailAddress"]').prop('required', mailTypeTarget == mailTypeTargetEnum.USER));
+
+                    },
+                    IsMailTypeTargetRoleEnabled: function () { return this.get("MAIL_TYPE_TARGET") == mailTypeTargetEnum.ROLE; },
+                    IsmailTypeTargetEmailEnabled: function () { return this.get("MAIL_TYPE_TARGET") == mailTypeTargetEnum.USER; },
+                });
+
+                // 產生 Window 視窗版塊（Bind Tmpl 與 ViewModel）
+                $editWindowContent = $('<div>').appendTo('body');
+                $editWindowContent.attr('id', 'editSettingWindow');
+                $editWindowContent.html(kendo.template($('#editSettingWindowContent').html()));
+                kendo.bind($editWindowContent, viewModel);
+
+                // 初始化表單驗證行為
+                $('#frmEditSetting').kendoValidator({
+                    rules: {},
+                    messages: {
+                        required: function (e) {
+                            return '@i18N.Message.R13'.format(e.data('fieldName'));
+                        },
+                        email: function(e) {
+                            return '@i18N.Message.R15'.format(e.data('fieldName'));
+                        }
+                    }
+                });
+
+                // 控制項初始化：郵寄類型選單
+                $('input[name="mailType"]').kendoDropDownList({
+                    dataSource: { data: mailTypeList },
+                    dataTextField: 'Text',
+                    dataValueField: 'Value',
+                    optionLabel: "@i18N.Message.R12"
+                });
+
+                // 控制項初始化：角色選單
+                $('input[name="mailRole"]').kendoDropDownList({
+                    dataSource: { data: roleList },
+                    dataTextField: 'Text',
+                    dataValueField: 'Value',
+                    optionLabel: "@i18N.Message.R12"
+                });
+
+                // 顯示視窗, 並進行控制項初始化
+                $editWindow = $editWindowContent.kendoWindow({
+                    title: '@i18N.Label.MailSet_TAB_MAIL_ADDRESS' + ' - ' + (editItem.IS_ADD ? '@i18N.Button.B05' : '@i18N.Button.B06'),
+                    width: "850px",
+                    visible: false,
+                    modal: true,
+                    resizable: false,
+                    actions: ["Close"],
+                    activate: function () { },
+                    deactivate: function () {
+                        $editWindow.destroy();
+                    },
+                }).data("kendoWindow").center().open();
+            }
+
+            /*
+                函數：刪除郵件設定
+                參數：無
+                備註：無
+            */
+            this.DeleteSetting = function (e) {
+
+                $grid = $('#grid').data("kendoGrid");
+
+                // 取得欲刪除的項目
+                var dataItem = $grid.dataItem($(e).closest('tr'));
+
+                // 確認是否刪除
+                confirmMessage('@i18N.Message.C04', function () {
+                    $grid.dataSource.remove(dataItem);
+                });
+
+            }
+
+            /*
+                函數：重設表單
+                參數：無
+                備註：無
+            */
+            this.ResetForm = function() {
+                $("#MAIL_CONTENT").data("kendoEditor").value('');
+                $("#grid").data("kendoGrid").setDataSource(new kendo.data.DataSource({
+                    data: defaultMailSetting
+                }));
+                $('#frmCreate').resetForm();
+            }
+
+            /*
+                函數：完成編輯郵件設定
+                參數：無
+                備註：無
+            */
+            this.SaveSetting = function () {
+
+                // 編輯郵件設定的表單
+                $editFrm = $('#frmEditSetting');
+
+                // 驗證表單
+                if ($editFrm.data('kendoValidator').validate()) {
+
+                    // 抓取編輯郵件設定視窗中的 ViewModel 資訊
+                    var viewModel = $($editFrm.find('input')[0]).get(0).kendoBindingTarget.source;
+                    var dataSource = $('#grid').data('kendoGrid').dataSource;
+
+                    // 判斷是新增或更新, 如為更新需先移除舊有郵件設定資料
+                    if (viewModel.IS_EDIT) {
+                        var editItem = $.grep(dataSource.data(), function (e) { return e["uid"] === viewModel.GRID_UID; })[0];
+                        dataSource.remove(editItem);
+                    }
+
+                    // 新增（更新）郵件設定
+                    dataSource.insert(dataSource.data().length, {
+                        MAIL_TYPE: viewModel.MAIL_TYPE,
+                        MAIL_ROLE: viewModel.MAIL_ROLE,
+                        MAIL_ADDRESS: viewModel.MAIL_ADDRESS,
+                        MAIL_TITLE: viewModel.MAIL_TITLE
+                    });
+
+                    // 關閉編輯郵件設定視窗
+                    $("#editSettingWindow").data("kendoWindow").close();
+                }
+
+            }
+
+            /*
+		        函數：初始化編輯器
+		        參數：無
+		        備註：將郵件範本內文初始化成編輯器
+	        */
+            this.InitEditor = function () {
+                $("#MAIL_CONTENT").kendoEditor({
+                    tools: [
+                        "formatting", "fontName", "fontSize", "foreColor", "backColor",
+                        "cleanFormatting", "bold", "italic", "underline", "trikethrough", "subscript", "superscript",
+                        "justifyLeft", "justifyCenter", "justifyRight", "justifyFull",
+                        "insertUnorderedList", "insertOrderedList", "indent", "outdent",
+                        "createLink", "unlink", "insertImage", "insertFile",
+                        "createTable", "addColumnLeft", "addColumnRight", "addRowAbove", "addRowBelow", "deleteRow", "deleteColumn"
+                    ]
+                });
+            }
+
+            /*
+		        函數：存檔
+		        參數：無
+		        備註：執行存檔送出動作
+	        */
+            this.Save = function () {
+
+                // 表單是否驗證通過
+                if (!$('#frmCreate').valid()) {
+                    return false;
+                }
+
+                $.ajax({
+                    url: "@Url.Action("Create", "MailSet")",
+                    type: 'POST',
+                    data: {
+                        MAIL_ID: $("#MAIL_ID").val(),
+                        MAIL_NAME: $("#MAIL_NAME").val(),
+                        MAIL_SUBJECT: $("#MAIL_SUBJECT").val(),
+                        MAIL_CONTENT: $("#MAIL_CONTENT").data("kendoEditor").encodedValue(),
+                        MAIL_SETTING: JSON.parse(JSON.stringify($('#grid').data('kendoGrid').dataSource.data()))
+                    },
+                    success: self.SaveSuccess,
+                    error: alertMessage
+                });
+
+            }
+
+            /*
+		        函數：存檔成功
+		        參數：無
+		        備註：執行存檔成功 Callback 動作
+	        */
+            this.SaveSuccess = function (response) {
+                alertMessage(response, function () {
+                    if (response.success) {
+                        parent.location.reload();
+                    }
+                });
+            }
+
+        }
+
+        // 郵件範本新增 JS 控制器
+        var mailSetCreateController = new MailSetCreateJS();
+
+        /*
+			函數：載入初始化
+			參數：無
+			備註：於功能畫面載入完畢時執行
+		*/
+        $(function () {
+
+            // 將 UI 套用 TabStrip 配置呈現
+            $("#tabstripMailSet").kendoTabStrip({
+                tabPosition: "top",
+                animation: {
+                    open: {
+                        effects: "fadeIn"
+                    }
+                }
+            });
+
+            // 初始化郵件設定資訊
+            mailSetCreateController.InitMailSettingGrid();
+
+            // 將郵件範本內文初始化成編輯器
+            mailSetCreateController.InitEditor();
+
+        });
+
+    </script>
+}

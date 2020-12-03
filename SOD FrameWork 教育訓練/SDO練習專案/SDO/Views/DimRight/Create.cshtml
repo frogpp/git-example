@@ -1,0 +1,57 @@
+﻿@model SDO.Models.DimRightModel
+@{
+
+}
+@section buttons {
+    <script>
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B09',
+            click: function () {
+                $('#frmCreate').submit();
+            }
+        });
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B10',
+            click: function () {
+                $('#frmCreate').resetForm();
+            }
+        });
+    </script>
+}
+@using (Ajax.BeginForm("Create", "DimRight", null, new AjaxOptions
+{
+    OnSuccess = "alertSuccess",
+    OnFailure = "alertMessage"
+}, new { id = "frmCreate" }))
+{
+    @Html.AntiForgeryToken()
+    <table>
+        <tr>
+            <th>@Html.LabelFor(m => m.RIGHT_ID)</th>
+            <td>@Html.TextBoxFor(m => m.RIGHT_ID)@Html.ValidationMessageFor(m => m.RIGHT_ID)</td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(m => m.RIGHT_NAME)</th>
+            <td>@Html.TextBoxFor(m => m.RIGHT_NAME)@Html.ValidationMessageFor(m => m.RIGHT_NAME)</td>
+        </tr>
+        <tr>
+            <th>@i18N.Label.DimRight_MAP_SetFunction</th>
+            <td>
+                @Html.ListBox("FUNCTIONS", (IList<SelectListItem>)ViewBag.DimRightFunctions)
+                @Html.Partial("_ListSelector", new ViewDataDictionary { { "ID", "FUNCTIONS" }, { "FROM", ViewBag.SetFunctions } })
+            </td>
+        </tr>
+    </table>
+                    }
+@section scripts {
+    <script>
+        function alertSuccess(result) {
+            alertMessage(result, function () {
+                parent.location.reload();
+            });
+        }
+    </script>
+}
+

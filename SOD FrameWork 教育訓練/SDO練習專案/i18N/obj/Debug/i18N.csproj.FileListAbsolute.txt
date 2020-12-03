@@ -1,0 +1,50 @@
+C:\Users\User\Desktop\SDO底層\SDO底層\i18N\bin\Debug\i18N.dll
+C:\Users\User\Desktop\SDO底層\SDO底層\i18N\bin\Debug\i18N.pdb
+C:\Users\User\Desktop\SDO底層\SDO底層\i18N\bin\Debug\en-US\i18N.resources.dll
+C:\Users\User\Desktop\SDO底層\SDO底層\i18N\obj\Debug\i18N.csprojAssemblyReference.cache
+C:\Users\User\Desktop\SDO底層\SDO底層\i18N\obj\Debug\i18N.Flow.resources
+C:\Users\User\Desktop\SDO底層\SDO底層\i18N\obj\Debug\i18N.Button.resources
+C:\Users\User\Desktop\SDO底層\SDO底層\i18N\obj\Debug\i18N.Label.resources
+C:\Users\User\Desktop\SDO底層\SDO底層\i18N\obj\Debug\i18N.Message.resources
+C:\Users\User\Desktop\SDO底層\SDO底層\i18N\obj\Debug\i18N.Flow.en-US.resources
+C:\Users\User\Desktop\SDO底層\SDO底層\i18N\obj\Debug\i18N.Button.en-US.resources
+C:\Users\User\Desktop\SDO底層\SDO底層\i18N\obj\Debug\i18N.Label.en-US.resources
+C:\Users\User\Desktop\SDO底層\SDO底層\i18N\obj\Debug\i18N.Message.en-US.resources
+C:\Users\User\Desktop\SDO底層\SDO底層\i18N\obj\Debug\i18N.csproj.GenerateResource.cache
+C:\Users\User\Desktop\SDO底層\SDO底層\i18N\obj\Debug\i18N.csproj.CoreCompileInputs.cache
+C:\Users\User\Desktop\SDO底層\SDO底層\i18N\obj\Debug\en-US\i18N.resources.dll
+C:\Users\User\Desktop\SDO底層\SDO底層\i18N\obj\Debug\i18N.dll
+C:\Users\User\Desktop\SDO底層\SDO底層\i18N\obj\Debug\i18N.pdb
+E:\教育訓練\SDO FrameWord 課程\SDO練習專案\i18N\bin\Debug\i18N.dll
+E:\教育訓練\SDO FrameWord 課程\SDO練習專案\i18N\bin\Debug\i18N.pdb
+E:\教育訓練\SDO FrameWord 課程\SDO練習專案\i18N\bin\Debug\en-US\i18N.resources.dll
+E:\教育訓練\SDO FrameWord 課程\SDO練習專案\i18N\obj\Debug\i18N.Flow.resources
+E:\教育訓練\SDO FrameWord 課程\SDO練習專案\i18N\obj\Debug\i18N.Button.resources
+E:\教育訓練\SDO FrameWord 課程\SDO練習專案\i18N\obj\Debug\i18N.Label.resources
+E:\教育訓練\SDO FrameWord 課程\SDO練習專案\i18N\obj\Debug\i18N.Message.resources
+E:\教育訓練\SDO FrameWord 課程\SDO練習專案\i18N\obj\Debug\i18N.Flow.en-US.resources
+E:\教育訓練\SDO FrameWord 課程\SDO練習專案\i18N\obj\Debug\i18N.Button.en-US.resources
+E:\教育訓練\SDO FrameWord 課程\SDO練習專案\i18N\obj\Debug\i18N.Label.en-US.resources
+E:\教育訓練\SDO FrameWord 課程\SDO練習專案\i18N\obj\Debug\i18N.Message.en-US.resources
+E:\教育訓練\SDO FrameWord 課程\SDO練習專案\i18N\obj\Debug\i18N.csproj.GenerateResource.cache
+E:\教育訓練\SDO FrameWord 課程\SDO練習專案\i18N\obj\Debug\i18N.csproj.CoreCompileInputs.cache
+E:\教育訓練\SDO FrameWord 課程\SDO練習專案\i18N\obj\Debug\en-US\i18N.resources.dll
+E:\教育訓練\SDO FrameWord 課程\SDO練習專案\i18N\obj\Debug\i18N.dll
+E:\教育訓練\SDO FrameWord 課程\SDO練習專案\i18N\obj\Debug\i18N.pdb
+C:\Users\Haru\Desktop\新增資料夾 (2)\SDO練習專案\i18N\bin\Debug\i18N.dll
+C:\Users\Haru\Desktop\新增資料夾 (2)\SDO練習專案\i18N\bin\Debug\i18N.pdb
+C:\Users\Haru\Desktop\新增資料夾 (2)\SDO練習專案\i18N\bin\Debug\en-US\i18N.resources.dll
+C:\Users\Haru\Desktop\新增資料夾 (2)\SDO練習專案\i18N\obj\Debug\i18N.csprojResolveAssemblyReference.cache
+C:\Users\Haru\Desktop\新增資料夾 (2)\SDO練習專案\i18N\obj\Debug\i18N.Flow.resources
+C:\Users\Haru\Desktop\新增資料夾 (2)\SDO練習專案\i18N\obj\Debug\i18N.Button.resources
+C:\Users\Haru\Desktop\新增資料夾 (2)\SDO練習專案\i18N\obj\Debug\i18N.Label.resources
+C:\Users\Haru\Desktop\新增資料夾 (2)\SDO練習專案\i18N\obj\Debug\i18N.Message.resources
+C:\Users\Haru\Desktop\新增資料夾 (2)\SDO練習專案\i18N\obj\Debug\i18N.Flow.en-US.resources
+C:\Users\Haru\Desktop\新增資料夾 (2)\SDO練習專案\i18N\obj\Debug\i18N.Button.en-US.resources
+C:\Users\Haru\Desktop\新增資料夾 (2)\SDO練習專案\i18N\obj\Debug\i18N.Label.en-US.resources
+C:\Users\Haru\Desktop\新增資料夾 (2)\SDO練習專案\i18N\obj\Debug\i18N.Message.en-US.resources
+C:\Users\Haru\Desktop\新增資料夾 (2)\SDO練習專案\i18N\obj\Debug\i18N.csproj.GenerateResource.Cache
+C:\Users\Haru\Desktop\新增資料夾 (2)\SDO練習專案\i18N\obj\Debug\i18N.csproj.CoreCompileInputs.cache
+C:\Users\Haru\Desktop\新增資料夾 (2)\SDO練習專案\i18N\obj\Debug\en-US\i18N.resources.dll
+C:\Users\Haru\Desktop\新增資料夾 (2)\SDO練習專案\i18N\obj\Debug\i18N.dll
+C:\Users\Haru\Desktop\新增資料夾 (2)\SDO練習專案\i18N\obj\Debug\i18N.pdb

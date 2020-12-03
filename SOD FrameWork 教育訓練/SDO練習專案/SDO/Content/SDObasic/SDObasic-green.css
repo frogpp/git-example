@@ -1,0 +1,170 @@
+﻿/*GREEN*/
+/*button*/
+.k-button {
+    background: none;
+    background-color: #76afae;
+    border: none;
+    color: white;
+}
+
+    .k-button:hover {
+        background: none;
+        background-color: #285864;
+        border: none;
+    }
+
+    .k-button:focus {
+        background: none;
+        background-color: #285864;
+        border: none;
+    }
+
+    .k-button:active {
+        background: none;
+        background-color: #285864;
+        border: none;
+    }
+
+/*dropdownlist*/
+.k-list .k-state-selected {
+    background: none;
+    background-color: #285864;
+    border: none;
+    color: white;
+}
+
+.k-list .k-state-hover {
+    background: none;
+    background-color: #76afae;
+    color: white;
+}
+
+/*footer*/
+footer {
+    background-color: #264347;
+    color: white;
+}
+
+/*menu*/
+#container nav {
+    background-color: #377f8b;
+}
+
+    #container nav .k-menu .k-item {
+        background-color: #377f8b;
+    }
+
+        #container nav .k-menu .k-item .k-link {
+            color: white;
+        }
+
+    #container nav .k-menu .k-state-hover {
+        background: none;
+        background-color: #76afae;
+    }
+
+    #container nav .k-menu .k-link.k-state-active {
+        background-color: #76afae;
+    }
+
+    #container nav .k-menu .k-state-selected {
+        background-color: #285864;
+    }
+
+/*tabs*/
+
+/*fn-path*/
+
+/*.fn-buttons*/
+.fn-buttons .k-button {
+    background: none;
+    background-color: #889293;
+    color: white;
+}
+
+    .fn-buttons .k-button:hover {
+        background: none;
+        background-color: #586162;
+    }
+
+    .fn-buttons .k-button:active {
+        background: none;
+        background-color: #586162;
+        border: none;
+    }
+
+.fn-buttons .k-button-icon {
+    background: none;
+}
+
+    .fn-buttons .k-button-icon:hover {
+        background: none;
+    }
+
+    .fn-buttons .k-button-icon .k-icon {
+        color: black;
+    }
+
+.fn-buttons .k-overflow-container {
+    background-color: white;
+}
+
+.k-toolbar-first-visible .k-overflow-button {
+    background-color: #285864;
+}
+
+.fn-buttons .k-overflow-button:hover {
+    background-color: #76afae;
+}
+
+/*grid*/
+.k-grid .k-grid-header {
+    background-color: #377f8b;
+    border-bottom: 3px solid #1f5a64;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+
+    .k-grid .k-grid-header .k-grid-header-wrap {
+        border: none;
+    }
+
+    .k-grid .k-grid-header th {
+        background-color: #377f8b;
+        color: white;
+    }
+
+.k-grid .k-grid-content tr:hover {
+    background: none;
+    background-color: #f4efd8;
+}
+
+.k-grid .k-grid-content tr.k-state-selected {
+    background: inherit;
+    color: black;
+}
+
+    .k-grid .k-grid-content tr.k-state-selected:hover {
+        background: #dbdfce;
+    }
+
+.k-grid .k-pager-wrap {
+    background-color: #377f8b;
+    border-top: 1px solid #1f5a64;
+}
+
+    .k-grid .k-pager-wrap .k-link:hover {
+        background: none;
+        background-color: #eb9c05;
+        border: none;
+        color: white;
+    }
+
+    .k-grid .k-pager-wrap .k-link .k-icon {
+        color: white;
+    }
+
+.k-grid .k-pager-numbers .k-state-selected {
+    color: white;
+    background-color: #285864;
+}

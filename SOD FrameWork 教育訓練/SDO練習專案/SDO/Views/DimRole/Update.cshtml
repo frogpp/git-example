@@ -1,0 +1,57 @@
+﻿@model SDO.Models.DimRoleModel
+@{
+
+}
+@section buttons {
+    <script>
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B09',
+            click: function () {
+                $('#frmUpdate').submit();
+            }
+        });
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B10',
+            click: function () {
+                $('#frmUpdate').resetForm();
+            }
+        });
+    </script>
+}
+@using (Ajax.BeginForm("Update", "DimRole", null, new AjaxOptions
+{
+    OnSuccess = "alertSuccess",
+    OnFailure = "alertMessage"
+}, new { id = "frmUpdate" }))
+{
+    @Html.AntiForgeryToken()
+    <table>
+        <tr>
+            <th>@Html.LabelFor(m => m.ROLE_ID)</th>
+            <td>@Html.TextBoxFor(m => m.ROLE_ID, new { @readonly = "readonly" })@Html.ValidationMessageFor(m => m.ROLE_ID)</td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(m => m.ROLE_NAME)</th>
+            <td>@Html.TextBoxFor(m => m.ROLE_NAME)@Html.ValidationMessageFor(m => m.ROLE_NAME)</td>
+        </tr>
+        <tr>
+            <th>@i18N.Label.DimRole_MAP_DimRight</th>
+            <td>
+                @Html.ListBox("RIGHTS", (IList<SelectListItem>)ViewBag.DimRoleRights)
+                @Html.Partial("_ListSelector", new ViewDataDictionary { { "ID", "RIGHTS" }, { "FROM", ViewBag.DimRights } })
+            </td>
+        </tr>
+    </table>
+                    }
+@section scripts {
+    <script>
+        function alertSuccess(result) {
+            alertMessage(result, function () {
+                parent.location.reload();
+            });
+        }
+    </script>
+}
+

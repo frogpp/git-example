@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = Resources.MvcSitemap.eFormModule_2;
+}
+@section buttons {
+    <script>
+        toolBar.add({
+            id: 'btnQuery',
+            type: 'button',
+            text: '查詢',
+            overflow: 'never',
+            click: function () {
+                $('#frmQuery').submit();
+            }
+        });
+        toolBar.add({
+            type: "separator"
+        });
+        toolBar.add({
+            type: 'button',
+            text: '新增',
+            click: function () {
+                setWinWork(encodeURI('@Url.Action("Create", "eForm")/' + $('#qryEForm_ID').val()), '新增' + $('#qryEForm_ID').val() + '_' + $('#qryEForm_ID').text());
+            }
+        });
+    </script>
+}
+@section forms {
+    @using (Ajax.BeginForm("Query", "eForm", null, new AjaxOptions
+    {
+        OnSuccess = "setGrid",
+        OnFailure = "alertMessage"
+    }, new { id = "frmQuery" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("qryUSER_ID", (string)ViewBag.GetLoginUser().USER_ID)
+        <table>
+            <tr>
+                <th>@Html.Label("表單")</th>
+                <td colspan="3">@Html.DropDownList("qryEForm_ID", (SelectList)ViewBag.eFormList)</td>
+            </tr>
+        </table>
+    }
+}
+<div id="grid"></div>
+<script>
+        var grid = $('#grid').kendoGrid({
+            columns: [
+                {
+                    command: [
+                        {
+                            name: 'deleteItem', text: '', iconClass: 'k-icon k-i-delete', title:'刪除', click: function (e) {
+                                e.preventDefault();
+                                var data = this.dataItem($(e.target).closest("tr"));
+                                confirmMessage('@i18N.Message.C04', function () {
+                                    $.post('@Url.Action("Delete", "eForm")', { 'FILL_ID': data.FILL_ID }, function (result) {
+                                        alertMessage(result, function () {
+                                            $('#btnQuery').click();
+                                        })
+                                    });
+                                });
+                            }
+                        },
+                        {
+                            name: 'updateItem', text: '', iconClass: 'k-icon k-i-edit', title: '修改', click: function (e) {
+                                e.preventDefault();
+                                var data = this.dataItem($(e.target).closest("tr"));
+                                setWinWork(encodeURI('@Url.Action("Update", "eForm")/' + data.FILL_ID), '修改');
+                            }
+                        },
+                        {
+                            name: 'sendFlow', text: '', iconClass: 'k-icon k-i-track-changes-accept', title: '送出流程', click: function (e) {
+                                e.preventDefault();
+                                var data = this.dataItem($(e.target).closest("tr"));
+                                confirmMessage('@i18N.Message.C06', function () {
+                                    $.post('@Url.Action("SendFlow", "eForm")', { 'FILL_ID': data.FILL_ID }, function (result) {
+                                        alertMessage(result, function () {
+                                            $('#btnQuery').click();
+                                        });
+                                    });
+                                });
+                            }, visible: function (e) {
+                                return !($.trim(e.FLOW_CODE).length > 0 && e.FLOW_EXECUTE);
+                            }
+                        },
+                        {
+                            name: 'queryFlow', text: '', iconClass: 'k-icon k-i-grid-layout', title: '流程關卡', click: function (e) {
+                                e.preventDefault();
+                                var data = this.dataItem($(e.target).closest("tr"));
+                                setWinWork(encodeURI('@Url.Action("QueryDetail", "ActiveFlow")/' + data.FLOW_CODE), '流程關卡');
+                            }, visible: function (e) {
+                                return $.trim(e.FLOW_CODE).length > 0;
+                            }
+                        }]
+                },
+                { field: 'FORM_TYPENAME', title: '表單類型', width: 200 },
+                { field: 'FILL_ID', title: '表單代碼' },
+                { field: 'FLOW', title: '流程' },
+                {
+                    template: function (e) {
+                        return parseTWDatetime(e.MDF_DATE);
+                    }, title: '填寫時間', width: 150
+                }
+            ],
+        }).data('kendoGrid');
+        function setGrid(result) {
+            grid.genGrid(result);
+        }
+</script>
+@section scripts {
+    <script>
+        $(function () {
+            $('#btnQuery').click();
+        });
+    </script>
+}

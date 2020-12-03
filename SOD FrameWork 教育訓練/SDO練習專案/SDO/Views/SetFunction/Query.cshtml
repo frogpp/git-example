@@ -1,0 +1,162 @@
+﻿@model SDO.Models.SetFunctionModel
+@{
+    ViewBag.Title = Resources.MvcSitemap.Sysop_4;
+}
+@section buttons {
+    <script>
+        toolBar.add({
+            id: 'btnQuery',
+            type: 'button',
+            text: '@i18N.Button.B04',
+            overflow: 'never',
+            click: function () {
+                $('#frmQuery').submit();
+            }
+        });
+        toolBar.add({
+            type: "separator"
+        });
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B13',
+            click: function () {
+                setWinWork('@Url.Action("Create", "SetFunction", new { id="ROOT"})', '@i18N.Button.B13');
+            }
+        });
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B05',
+            click: function () {
+                setWinWork('@Url.Action("Create", "SetFunction")', '@i18N.Button.B05');
+            }
+        });
+        toolBar.add({
+            type: "separator"
+        });
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B14',
+            click: function () {
+                confirmMessage('@i18N.Message.C05', function () {
+                    setOrder();
+                });
+            }
+        });
+    </script>
+}
+@section forms {
+    @using (Ajax.BeginForm("Query", "SetFunction", null, new AjaxOptions
+    {
+        OnSuccess = "setGrid",
+        OnFailure = "alertMessage"
+    }, new { id = "frmQuery" }))
+    {
+        @Html.AntiForgeryToken()
+        <table>
+            <tr>
+                <th>@Html.LabelFor(m => m.PARENT_ID)</th>
+                <td colspan="3">@Html.DropDownList("qryPARENT_ID", (SelectList)ViewBag.GroupFunctions, i18N.Label.SetFunction_PARENT_ID)</td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.FUNCTION_ID)</th>
+                <td>
+                    @Html.TextBox("qryFUNCTION_ID")
+                </td>
+                <th>@Html.LabelFor(m => m.FUNCTION_NAME)</th>
+                <td>
+                    @Html.TextBox("qryFUNCTION_NAME")
+                </td>
+            </tr>
+        </table>
+    }
+    @using (Ajax.BeginForm("Delete", "SetFunction", null, new AjaxOptions
+    {
+        OnSuccess = "deleteSuccess",
+        OnFailure = "alertMessage"
+    }, new { id = "frmDelete" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("IDS")
+    }
+}
+<div id="grid"></div>
+<script>
+    var grid = $('#grid').kendoGrid({
+        columns: [
+            { template: '<div class="icon_edit" title="@i18N.Button.B06" onclick="setWinWork(\'@Url.Action("Update","SetFunction")/#: FUNCTION_ID #\',\'@i18N.Button.B06\')"><span class="k-icon k-i-edit"></span></div>', width: 30 },
+            { template: '<div class="icon_delete" title="@i18N.Button.B07" onclick="deleteSubmit(\'#: FUNCTION_ID #\')"><span class="k-icon k-i-close"></span></div>', width: 30 },
+            { template: '<div class="icon_text" title="@i18N.Button.B08"><span class="k-icon k-i-zoom"></span></div>', width: 30 },
+            { field: 'FUNCTION_ID', title: '@i18N.Label.SetFunction_FUNCTION_ID' },
+            { field: 'FUNCTION_NAME', title: '@i18N.Label.SetFunction_FUNCTION_NAME'},
+            { field: 'FUNCTION_URL', title: '@i18N.Label.SetFunction_FUNCTION_URL' }
+        ]
+    }).data('kendoGrid');
+
+    function setGrid(result) {
+        $.when($('#frmQuery').cacheForm()).then(function () {
+            grid.genGrid(result);
+            //確保初始化排序的動作
+            setTimeout(function () {
+                setGridSort();
+            }, 10);
+        });      
+		
+    }
+
+    function setGridSort() {
+        grid.table.kendoSortable({
+            filter: '>tbody >tr',
+            cursor: 'move',
+            hint: function (e) {
+                return e.clone().css('opacity', 0.3);
+            },
+            placeholder: function (e) { return e.clone().addClass('k-state-hover').css('opacity', 0.7); },
+            container: '#grid tbody',
+            change: function (e) {
+                var skip = grid.dataSource.skip(), newIndex = e.newIndex + skip, dataItem = grid.dataSource.getByUid(e.item.data("uid"));
+                grid.dataSource.remove(dataItem);
+                grid.dataSource.insert(newIndex, dataItem);
+            }
+        });
+    }
+
+    /*
+        函數：畫面 Resize 事件
+        參數：無
+        備註：當畫面 Resize 時, Grid 會被 Rebuild, 屆時仍須重新初始化排序行為
+    */
+    $(window).resize(function () {
+        setTimeout(function () {
+            setGridSort();
+        }, 10);
+    });
+</script>
+@section scripts {
+    <script>
+        function deleteSubmit(id) {
+            confirmMessage('@i18N.Message.C04', function () {
+                $('#frmDelete').find('#IDS').val(id);
+                $('#frmDelete').submit();
+            });
+        }
+        function deleteSuccess(result) {
+            alertMessage(result, function () {
+                $('#btnQuery').click();
+            });
+        }
+        function setOrder() {
+            var sortData = $.map(grid.dataSource.data(), function (obj, i) {
+                return obj.FUNCTION_ID;
+            });
+            alertMessage(JSON.stringify(sortData));
+            $.post('@Url.Action("SetSortorder", "SetFunction")', { sortData: sortData }, function (result) {
+                alertMessage(result);
+            });
+        }
+        $(function () {
+            $.when($('#frmQuery').restoreForm()).then(function () {
+                $('#btnQuery').click();
+			});
+        });
+    </script>
+}

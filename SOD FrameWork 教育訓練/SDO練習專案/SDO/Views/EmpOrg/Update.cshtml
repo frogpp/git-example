@@ -1,0 +1,68 @@
+﻿@model SDO.Models.EmpOrgModel
+@{
+
+}
+@section buttons {
+    <script>
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B09',
+            click: function () {
+                $('#frmUpdate').submit();
+            }
+        });
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B10',
+            click: function () {
+                $('#frmUpdate').resetForm();
+            }
+        });
+    </script>
+}
+@section forms {
+
+}
+@using (Ajax.BeginForm("Update", "EmpOrg", null, new AjaxOptions
+{
+    OnSuccess = "alertSuccess",
+    OnFailure = "alertMessage"
+}, new { id = "frmUpdate" }))
+{
+    @Html.AntiForgeryToken()
+    <table>
+        <tr>
+            <th>@Html.LabelFor(m => m.ORG_ID)</th>
+            <td>@Html.TextBoxFor(m => m.ORG_ID, new { @readonly = "readonly" })@Html.ValidationMessageFor(m => m.ORG_ID)</td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(m => m.ORG_NAME)</th>
+            <td>@Html.TextBoxFor(m => m.ORG_NAME)@Html.ValidationMessageFor(m => m.ORG_NAME)</td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(m => m.PARENT_ID)</th>
+            <td>
+                @Html.DropDownList("PARENT_ID", (IList<SelectListItem>)ViewBag.ParentOrg)
+                @Html.Partial("_OrgSelector", new ViewDataDictionary { { "ID", "PARENT_ID" }, { "PARENT_NODEID", "" }, { "MULTISELECT", false } })
+                @Html.ValidationMessageFor(m => m.PARENT_ID)
+            </td>
+        </tr>
+        <tr>
+            <th>所屬使用者</th>
+            <td>
+                @Html.ListBox("USERS", (IList<SelectListItem>)ViewBag.EmpOrgUsers)
+                @Html.Partial("_ListSelector", new ViewDataDictionary { { "ID", "USERS" }, { "FROM", ViewBag.EmpUsers } })
+            </td>
+        </tr>
+    </table>
+}
+@section scripts {
+    <script>
+        function alertSuccess(result) {
+            alertMessage(result, function () {
+                parent.location.reload();
+            });
+        }
+    </script>
+}
+

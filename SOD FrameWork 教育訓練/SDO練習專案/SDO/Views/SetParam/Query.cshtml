@@ -1,0 +1,166 @@
+﻿@model SDO.Models.SetParamModel
+@{
+    ViewBag.Title = Resources.MvcSitemap.Sysop_7;
+}
+@section buttons {
+    <script>
+        toolBar.add({
+            id: 'btnQuery',
+            type: 'button',
+            text: '查詢',
+            overflow: 'never',
+            click: function () {
+                $('#frmQuery').submit();
+            }
+        });
+        toolBar.add({
+            type: "separator"
+        });
+        toolBar.add({
+            type: 'button',
+            text: '新增參數類別',
+            click: function () {
+                setWinWork('@Url.Action("CreateItem", "SetParam")', '@i18N.Button.B13');
+            }
+        });
+        toolBar.add({
+            type: 'button',
+            text: '新增參數',
+            click: function () {
+                setWinWork('@Url.Action("Create", "SetParam")', '@i18N.Button.B05');
+            }
+        });
+    </script>
+}
+@section forms {
+    @using (Ajax.BeginForm("QueryItem", "SetParam", null, new AjaxOptions
+    {
+        OnSuccess = "setGrid",
+        OnFailure = "alertMessage"
+    }, new { id = "frmQuery" }))
+    {
+        @Html.AntiForgeryToken()
+    }
+    @using (Ajax.BeginForm("DeleteItem", "SetParam", null, new AjaxOptions
+    {
+        OnSuccess = "deleteSuccess",
+        OnFailure = "alertMessage"
+    }, new { id = "frmDeleteItem" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("SET_ITEM")
+    }
+    @using (Ajax.BeginForm("Delete", "SetParam", null, new AjaxOptions
+    {
+        OnSuccess = "deleteSuccess",
+        OnFailure = "alertMessage"
+    }, new { id = "frmDelete" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("SET_ITEM")
+        @Html.Hidden("SET_TYPE")
+    }
+}
+<div id="grid"></div>
+<script>
+    var grid = $('#grid').kendoGrid({
+        columns: [
+            {
+                command: [
+                    {
+                        name: 'deleteItem', text: '', iconClass: 'k-icon k-i-delete', title: '刪除', click: function (e) {
+                            e.preventDefault();
+                            var data = this.dataItem($(e.target).closest("tr"));
+                            confirmMessage('@i18N.Message.C04', function () {
+                                $('#SET_ITEM', $('#frmDeleteItem')).val(data.SET_ITEM);
+                                $('#frmDeleteItem').submit();
+                            });
+                        }, visible: function (e) {
+                            return e.EDITABLE === 'Y';
+                        }
+                    },
+                    {
+                        name: 'updateItem', text: '', iconClass: 'k-icon k-i-edit', title: '修改', click: function (e) {
+                            e.preventDefault();
+                            var data = this.dataItem($(e.target).closest("tr"));
+                            setWinWork(encodeURI('@Url.Action("UpdateItem","SetParam")/' + data.SET_ITEM), '修改');
+                        }
+                    }
+                ]
+            },
+            { field: 'SET_ITEM', title: '參數類別代碼' },
+            { field: 'SET_ITEM_NAME', title: '參數類別' },
+            {
+                field: 'MEMO', title: '說明', template: function (e) {
+                    return $('<span />').attr('title', e.MEMO).text(e.MEMO).prop('outerHTML');
+                }
+            }
+        ],
+        detailInit: function (e) {
+            $.post('@Url.Action("Query", "SetParam")', {
+                qrySET_ITEM: e.data.SET_ITEM
+            }, function (result) {
+                var subGrid = $("<div />").appendTo(e.detailCell).kendoGrid({
+                    columns: [
+                        {
+                            command: [
+                                {
+                                    name: 'deleteSubItem', text: '', iconClass: 'k-icon k-i-delete', title: '刪除', click: function (e) {
+                                        e.preventDefault();
+                                        var data = this.dataItem($(e.target).closest("tr"));
+                                        confirmMessage('@i18N.Message.C04', function () {
+                                            $('#SET_ITEM', $('#frmDelete')).val(data.SET_ITEM);
+                                            $('#SET_TYPE', $('#frmDelete')).val(data.SET_TYPE);
+                                            $('#frmDelete').submit();
+                                        });
+                                    }, visible: function (e) {
+                                        return e.EDITABLE === 'Y';
+                                    }
+                                },
+                                {
+                                    name: 'updateSubItem', text: '', iconClass: 'k-icon k-i-edit', title: '修改', click: function (e) {
+                                        e.preventDefault();
+                                        var data = this.dataItem($(e.target).closest("tr"));
+                                        setWinWork(encodeURI('@Url.Action("Update","SetParam")/' + data.SET_ITEM + '|' + data.SET_TYPE), '修改');
+                                    }
+                                }
+                            ]
+                        },
+                        { field: 'SET_TYPE', title: '參數代碼' },
+                        { field: 'SET_VALUE', title: '參數' },
+                        {
+                            field: 'MEMO', title: '說明', template: function (e) {
+                                return $('<span />').attr('title', htmlDecode(e.MEMO)).text(htmlDecode(e.MEMO)).prop('outerHTML');
+                            }
+                        }
+                    ]
+                }).data('kendoGrid');
+                subGrid.genGrid(result).setOptions({
+                    pageable: false
+                });
+                subGrid.dataSource.pageSize(result.length);
+                $("<div />").css('margin-bottom', '5px').appendTo(e.detailCell);
+                });
+        }
+    }).data('kendoGrid');
+    function setGrid(result) {
+        $.when($('#frmQuery').cacheForm()).then(function () {
+            grid.genGrid(result);
+        });
+    }
+
+</script>
+@section scripts {
+    <script>
+        function deleteSuccess(result) {
+            alertMessage(result, function () {
+                $('#btnQuery').click();
+            });
+        }
+        $(function () {
+            $.when($('#frmQuery').restoreForm()).then(function () {
+                $('#btnQuery').click();
+            });
+        });
+    </script>
+}

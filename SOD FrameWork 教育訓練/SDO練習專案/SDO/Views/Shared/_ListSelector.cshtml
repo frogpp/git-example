@@ -1,0 +1,23 @@
+﻿@Html.ListBox("all_" + ViewData["ID"], (IList<SelectListItem>)ViewData["FROM"])
+<script>
+    $('#@ViewData["ID"]').insertAfter($('#all_@ViewData["ID"]'))
+        .kendoListBox({
+            connectWith: 'all_@ViewData["ID"]',
+            draggable: true,
+            dropSources: ['all_@ViewData["ID"]']
+        });
+    $('#all_@ViewData["ID"]').kendoListBox({
+        connectWith: '@ViewData["ID"]',
+        toolbar: { tools: ["transferTo", "transferFrom", "transferAllTo", "transferAllFrom"] },
+        draggable: true,
+        dropSources: ['@ViewData["ID"]']
+    });
+    if ($('#@ViewData["ID"]').data('kendoListBox').dataItems().length > 0)
+        $('#all_@ViewData["ID"]').data('kendoListBox').setDataSource(new kendo.data.DataSource({
+            data: $.grep($('#all_@ViewData["ID"]').data('kendoListBox').dataItems(), function (o) {
+                return $.inArray(o.value, $.map($('#@ViewData["ID"]').data('kendoListBox').dataItems(), function (o) {
+                    return o.value;
+                })) < 0;
+            })
+        }));
+</script>

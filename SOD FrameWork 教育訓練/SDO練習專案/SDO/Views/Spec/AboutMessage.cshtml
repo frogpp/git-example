@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = Resources.MvcSitemap.Spec_5;
+}
+@section buttons {
+
+}
+@section forms{
+
+}
+<ul>
+    <li>
+        因應多國語系處理實作i18N，目前使用訊息呈顯資料庫有：
+        <ul>
+            <li>Button.resx (對應按鈕上呈現字樣)</li>
+            <li>Label.resx (對應畫面上呈現字樣，Keu格式=> "{MODELNAME}_{AttributeName}")</li>
+            <li>Message.resx (對應系統訊息上呈現字樣)</li>
+        </ul>
+        <ul>
+            <li>MvcSitemap.resx (對應功能菜單上呈現字樣)</li>
+        </ul>
+    </li>
+    <li>Visual Studio請安裝ResX Resource Manager(<a href="https://resxresourcemanager.codeplex.com/documentation" target="_blank">reference online</a>)，方便編輯訊息資料庫</li>
+    <li>呼叫方式請參考既有Model與View內的程式</li>
+</ul>
+@section scripts {
+
+}
+

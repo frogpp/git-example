@@ -1,0 +1,4 @@
+1. 請先安裝 SQL Server 2017 Express 以上的版本
+2. 請先打開MSSQL 執行Setup.sql 建立練習DB
+3. 請先安裝visual studio 2017  .NET Framework 4.7 以上版本 
+4. 打開SDO練習專案 執行後帳號輸入 SYSOP 密碼不用填 直接登入

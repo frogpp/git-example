@@ -1,0 +1,119 @@
+﻿@model SDO.Models.MailRoleModel.EditView
+@{
+
+}
+<!-- 按鈕列 -->
+@section buttons {
+    <script type="text/javascript">
+
+        // 加入「存檔」按鈕
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B09',
+            click: function () {
+                mailRoleCreateController.Save();
+            }
+        });
+
+        // 加入「重設」按鈕
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B10',
+            click: function () {
+                $('#frmCreate').resetForm();
+            }
+        });
+
+    </script>
+}
+
+<!-- 新增表單 -->
+@using (Ajax.BeginForm("Create", "MailRole", null, new AjaxOptions
+{
+    OnSuccess = "mailRoleCreateController.SaveSuccess",
+    OnFailure = "alertMessage"
+}, new { id = "frmCreate" }))
+{
+    @Html.AntiForgeryToken()
+    <table>
+        <tr>
+            <th>@Html.LabelFor(m => m.ROLE_ID)</th>
+            <td>
+                @Html.TextBoxFor(m => m.ROLE_ID)
+                @Html.ValidationMessageFor(m => m.ROLE_ID)
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(m => m.ROLE_NAME)</th>
+            <td>
+                @Html.TextBoxFor(m => m.ROLE_NAME)
+                @Html.ValidationMessageFor(m => m.ROLE_NAME)
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(m => m.MAP_USER)
+            <td>
+                @Html.ListBox(Html.NameFor(m => m.MAP_USER).ToString(), new List<SelectListItem>())
+                @Html.Partial("_OrgUserSelector", new ViewDataDictionary
+                {
+                    { "ID", Html.NameFor(m => m.MAP_USER).ToString() }
+                })
+            </td>
+        </tr>
+    </table>
+}
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        /*
+            類別：郵件角色新增
+            作者：Steven Tsai
+        */
+        function MailRoleCreateJS() {
+
+            /*
+                函數：存檔
+                參數：無
+                備註：執行存檔送出動作
+            */
+            this.Save = function () {
+
+                // 表單是否驗證通過
+                if (!$('#frmCreate').valid()) {
+                    return false;
+                }
+
+                $('#frmCreate').submit();
+
+            }
+
+            /*
+                函數：存檔成功
+                參數：無
+                備註：執行存檔成功 Callback 動作
+            */
+            this.SaveSuccess = function (response) {
+                alertMessage(response, function () {
+                    if (response.success) {
+                        parent.location.reload();
+                    }
+                });
+            }
+        }
+
+        // 郵件角色新增 JS 控制器
+        var mailRoleCreateController = new MailRoleCreateJS();
+
+        /*
+            函數：載入初始化
+            參數：無
+            備註：於功能畫面載入完畢時執行
+        */
+        $(function () {
+
+        });
+
+    </script>
+}

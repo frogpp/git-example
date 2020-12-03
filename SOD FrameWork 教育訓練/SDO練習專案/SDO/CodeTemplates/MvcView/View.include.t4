@@ -1,0 +1,17 @@
+﻿<# // 請將此 assembly 的路徑更新為專案置放的目錄（依各使用者不同） #>
+<#@ assembly name="./bin/SDO.dll" #>
+<#@ assembly name="System.ComponentModel.DataAnnotations" #>
+<#@ import namespace="SDO" #>
+<#@ import namespace="System.Reflection" #>
+<#@ import namespace="System.ComponentModel.DataAnnotations" #>
+<#@ import namespace="System.IO" #>
+<# 
+    // Controller Name, 依命名準則從 Model 名稱解析出 Function ID
+    string controllerName = ViewDataTypeShortName.Replace("Model", "");
+
+    // Project Dir, 從當前 Code Template Host 解析出專案目錄位置
+    string projectDir = new DirectoryInfo(Host.ResolvePath("..\\..")).FullName;
+
+    // SDO Assembly Info, 組件讀取專案的 DLL 檔, 用於 Reflection 專案中其他的 Model 資訊
+    var assemblySDO = Assembly.Load(File.ReadAllBytes(String.Format(@"{0}\{1}", projectDir, @"bin\SDO.dll")));
+#>

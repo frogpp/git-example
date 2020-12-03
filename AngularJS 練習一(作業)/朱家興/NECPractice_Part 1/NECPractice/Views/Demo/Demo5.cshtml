@@ -1,0 +1,185 @@
+﻿@{
+    ViewBag.Title = "使用 Filter";
+}
+
+<h2>使用 Filter</h2>
+
+<p><span style="background-color:lightyellow">如果要在地化 Filter 的輸出，只需要額外引用對應的在地化 .js 檔，如 &lt;script src="angular-locale_fr-fr.js"&gt;&lt;script&gt;</span></p>
+<p>對單一資料使用的 Filter 如下表：</p>
+<table class="list-table">
+    <thead>
+        <tr>
+            <th>Filter</th>
+            <th>描述</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>currency</td>
+            <td>對金額值格式化。可以指定幣別符號，currency:"f"。</td>
+        </tr>
+        <tr>
+            <td>date</td>
+            <td>對日期值格式化。可以指定日期格式，date:"yyyy/MM/dd EEEE"</td>
+        </tr>
+        <tr>
+            <td>json</td>
+            <td>產生物件的 JSON 字串。</td>
+        </tr>
+        <tr>
+            <td>number</td>
+            <td>對數值格式化。可以指定小數位數，number:0。</td>
+        </tr>
+        <tr>
+            <td>uppercase<br />lowercase</td>
+            <td>將字串全部轉為大寫或是小寫。</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>對資料集合使用的 Filter 如下表，搭配 ng-repeat 使用，各個 Filter的條件值可以是固定值，也可以由 function 回傳的 bool 值來限制要取得的資料：</p>
+<table class="list-table">
+    <thead>
+        <tr>
+            <th>Filter</th>
+            <th>描述</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>limitTo</td>
+            <td>限制項目的筆數。例如只取出5筆資料呈現， ng-repeat="p in products | limitTo:5"。</td>
+        </tr>
+        <tr>
+            <td>filter</td>
+            <td>選擇資料。例如選擇name="item2"的項目，ng-repeat="p in products | filter:{category: 'Fish'}"。</td>
+        </tr>
+        <tr>
+            <td>orderBy</td>
+            <td>
+                將資料進行排序，例如 | orderBy:'amount'，遞減排序則使用負號表示，| orderBy:'-amount'。<br />
+                多個欄位進行排序時，則以陣例指定，| orderBy:['name', '-amount']。
+            </td>
+        </tr>
+        <tr>
+            <td>一次要進行多個 Filter</td>
+            <td>只需將 Filter 以串接方式使用，| limitTo:5 | orderBy:'amount'。</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>實例如下：</h2>
+<div ng-app="exampleApp" ng-controller="demoCtrl" class="demo">
+    exampleApp 的 demoCtrl 作用範圍<br />
+
+    原始資料：
+    <table class="list-table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items">
+                <td ng-bind="item.id"></td>
+                <td>{{item.name}}</td>
+                <td>{{item.amount}}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <hr />
+
+    使用 Filter 進行單一資料格式化：
+    <table class="list-table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items">
+                <td ng-bind="item.id"></td>
+                <td>{{item.name | uppercase}}</td>
+                <td>{{item.amount | currency}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <hr />
+
+    對資料集合使用 Filter：
+    <table class="list-table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items | limitTo:2">
+                <td ng-bind="item.id"></td>
+                <td>{{item.name | uppercase}}</td>
+                <td>{{item.amount | currency}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p></p>
+
+    <table class="list-table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items | filter:{name:'item2'}">
+                <td ng-bind="item.id"></td>
+                <td>{{item.name | uppercase}}</td>
+                <td>{{item.amount | currency}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p></p>
+
+    <table class="list-table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items | orderBy:'amount'">
+                <td ng-bind="item.id"></td>
+                <td>{{item.name | uppercase}}</td>
+                <td>{{item.amount | currency}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+        var myApp = angular.module("exampleApp", []);
+
+        myApp.controller("demoCtrl", function ($scope) {
+            $scope.items = [
+                { id: 1, name: 'item1', amount: 12345 },
+                { id: 2, name: 'item2', amount: 1234567 },
+                { id: 3, name: 'item3', amount: 123 },
+            ];
+        });
+    </script>
+}

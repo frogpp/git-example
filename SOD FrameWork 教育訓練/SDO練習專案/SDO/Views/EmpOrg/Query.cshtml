@@ -1,0 +1,91 @@
+﻿@model SDO.Models.EmpOrgModel
+@{
+    ViewBag.Title = Resources.MvcSitemap.Sysop_6;
+}
+@section buttons {
+    <script>
+        toolBar.add({
+            type: 'button',
+            text: '新增',
+            click: function () {
+                setWinWork('@Url.Action("Create", "EmpOrg")', '@i18N.Button.B05');
+            }
+        });
+        toolBar.add({
+            type: 'button',
+            text: '修改',
+            click: function () {
+                setWinWork('@Url.Action("Update", "EmpOrg")/' + orgTree.dataItem(orgTree.select()).id, '修改');
+            }
+        });
+        toolBar.add({
+            type: 'button',
+            text: '刪除',
+            click: function () {
+                var aryChecked = [];
+                getChkTreeNodes(orgTree.dataSource.view(), aryChecked);
+                if (aryChecked.length > 0) {
+                    confirmMessage('@i18N.Message.C04', function () {
+                        $('#frmDelete').find('#IDS').val($.map(aryChecked, function (o) {
+                            return o.id;
+                        }));
+                        $('#frmDelete').submit();
+                    });
+                }
+            }
+        });
+    </script>
+}
+@section forms {
+    <form>
+        <table>
+            <tr>
+                <th>@Html.LabelFor(m => m.ORG_NAME)</th>
+                <td>
+                    @Html.TextBox("qryORG_NAME")
+                </td>
+            </tr>
+        </table>
+    </form>
+    @using (Ajax.BeginForm("Delete", "EmpOrg", null, new AjaxOptions
+    {
+        OnSuccess = "deleteSuccess",
+        OnFailure = "alertMessage"
+    }, new { id = "frmDelete" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("IDS")
+    }
+}
+
+<div id="org"></div>
+<script>
+        var orgTree = $('#org').kendoTreeView({
+            dataSource: new kendo.data.HierarchicalDataSource({
+                transport: {
+                    read: { url: '@Url.Action("QueryEmpOrgs", "EmpOrg")' }
+                },
+                schema: {
+                    model: {
+                        id: 'ORG_ID',
+                        hasChildren: 'HASCHILDREN'
+                    }
+                }
+            }),
+            dataTextField: 'ORG_DISPLAY',
+            checkboxes: true,
+            dataBound: function (e) {
+                this.expand('.k-item');
+            }
+        }).data('kendoTreeView');
+</script>
+@section scripts {
+    <script>
+        function deleteSuccess(data) {
+            alertMessage(data, function () {
+                location.reload();
+            });
+        }
+    </script>
+}
+

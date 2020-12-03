@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "AngularJS 資料繫結練習";
+}
+
+<h2>AngularJS 資料繫結練習</h2>
+
+<p>請於本頁練習以下的資料繫結</p>
+<ol>
+    <li class="ng-non-bindable">請使用 {{ }} 進行 inline 資料繫結</li>
+    <li>請使用 ng-bind 進行單向資料繫結</li>
+    <li>請使用 ng-model 進行雙向資料繫結</li>
+</ol>
+<div ng-app="example" ng-controller="testCtrl" ng-init="Name='input'">
+    <h3>test~inline~(<span>{{ Name }}</span>)~test~inline~(<span>{{ Number }}</span>)</h3>
+    <h4>Name:<input type="text" ng-model="Name"/></h4>
+    
+    <div>
+        <h3>ng-bind, ng-model</h3>
+        <input type="text" ng-model="Name"/>
+        <h3>Test~<span ng-bind="Name">AngularJS~Test</span>!!</h3>
+    </div>
+</div>
+<script>
+    var myApp = angular.module("example", []);
+    myApp.controller("testCtrl", function ($scope) {
+        $scope.Name = '';
+        //$scope.tmp = '';
+        $scope.Number = 0;
+        $scope.Add = function () {
+            $scope.Number++;
+        }
+    });
+    
+    /*var TestCtrl = function ($scope) {
+        //初始值
+        $scope.Day = 1;
+        $scope.Name = '';
+
+        //加一天
+        $scope.Add = function () {
+            $scope.Day++;
+        }
+    }*/
+
+</script>

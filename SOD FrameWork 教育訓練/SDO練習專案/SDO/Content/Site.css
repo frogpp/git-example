@@ -1,0 +1,403 @@
+﻿* {
+    box-sizing: border-box;
+}
+
+html, body {
+    background-color: white;
+    height: 100%;
+    font-family: arial,"微軟正黑體", "Microsoft JhengHei", sans-serif;
+    font-size: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+/*footer*/
+footer {
+    bottom: 0;
+    font-size: 0.75rem;
+    height: 20px;
+    line-height: 20px;
+    padding: 0 10px;
+    position: absolute;
+    text-align: right;
+    width: 100%;
+}
+
+/*header*/
+header {
+    background-color: white;
+    height: 40px;
+    line-height: 40px;
+}
+
+    header > img {
+        margin: 0 10px;
+        width: 1.5rem;
+    }
+
+    header > span a {
+        color: black;
+        font-size: 1.5rem;
+        vertical-align: middle;
+    }
+
+    /*userinfo*/
+    header ul {
+        float: right;
+        font-size: 0.8125rem;
+        margin: 0 10px;
+        padding: 0;
+        vertical-align: bottom;
+    }
+
+        header ul li {
+            list-style: none;
+            display: inline;
+        }
+
+            header ul li .k-button {
+                padding: 2px 10px;
+            }
+
+#container {
+    bottom: 20px;
+    position: absolute;
+    top: 40px;
+    width: 100%;
+}
+
+    /*menu*/
+    #container nav {
+        background: none;
+        float: left;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+        #container nav label {
+            cursor: pointer;
+        }
+
+        #container nav .k-panelbar .k-panel,
+        #container nav .k-menu .k-item {
+            position: static;
+        }
+
+    #container.navOpen nav {
+        width: 180px;
+    }
+
+    #container #main {
+        margin-left: 20px;
+    }
+
+    #container.navOpen #main {
+        margin-left: 180px;
+    }
+
+    #container nav .k-button {
+        background: inherit;
+        border: none;
+        color: white;
+        padding: 2px 10px;
+    }
+
+    #container nav .k-widget {
+        border: none
+    }
+
+    #container nav .k-header {
+        background-image: none;
+        border-color: white;
+    }
+
+/*tabs*/
+#tabs {
+    background: inherit;
+    border: none;
+    margin: 0 5px;
+}
+
+    #tabs .k-tabstrip-items {
+        border: none;
+        padding: 0;
+    }
+
+        #tabs .k-tabstrip-items li {
+            padding: 2px 10px;
+        }
+
+        #tabs .k-tabstrip-items .k-loading {
+            border: none;
+        }
+
+        #tabs .k-tabstrip-items .k-link {
+            line-height: 1rem;
+            padding: 0;
+        }
+
+        #tabs .k-tabstrip-items .k-i-x {
+            background-color: brown;
+            border-radius: 8px;
+            color: white;
+            font-size: 0.8125rem;
+            margin: 0 0 0 5px;
+            padding: 1px;
+        }
+
+    #tabs .k-content {
+        padding: 5px;
+        padding-bottom: 0;
+        margin: 0 auto;
+        overflow: hidden;
+    }
+
+/*fn-path*/
+.fn-path {
+    background-color: whitesmoke;
+    border: 1px solid lightgray;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    height: 20px;
+    line-height: 20px;
+    margin-bottom: 5px;
+    padding: 0 10px;
+}
+
+    .fn-path:empty {
+        display: none;
+    }
+
+/*fn-buttons*/
+.fn-buttons {
+    background: none;
+    border: none;
+    padding: 2px 10px;
+}
+
+    .fn-buttons .k-button {
+        padding: 2px 10px;
+    }
+
+    .fn-buttons .k-overflow-anchor {
+        border-radius: 4px;
+        line-height: 1rem;
+        height: auto;
+        width: auto;
+        padding: 2px 10px;
+        margin-top: 1rem;
+    }
+
+/*form*/
+form table {
+    margin: 5px auto;
+    width: 98%;
+}
+
+form th {
+    padding: 2px 5px;
+    text-align: right;
+    white-space: nowrap;
+    width: 120px;
+}
+
+form td {
+    padding: 2px 5px;
+}
+
+/*input*/
+input[readonly="readonly"], .k-input[readonly="readonly"], textarea[readonly="readonly"] {
+    color: gray;
+}
+
+input[type="checkbox"], input[type="radio"] {
+    height: 1rem;
+    margin: 0;
+    width: 1rem;
+    vertical-align: middle;
+}
+
+/*validate*/
+.field-validation-valid {
+    display: none;
+}
+
+.field-validation-error {
+    color: red;
+    display: block;
+    font-size: 0.8125em;
+}
+
+.input-validation-error {
+    border: none;
+    border: 1px solid red;
+}
+
+/*grid*/
+.k-grid {
+    border-radius: 4px;
+}
+
+    .k-grid .k-grid-header {
+        background: none;
+        border: none;
+    }
+
+        .k-grid .k-grid-header .k-grid-header-wrap {
+            border-top-left-radius: 4px;
+        }
+
+        .k-grid .k-grid-header th {
+            background: none;
+            border: none;
+            font-size: 0.9375rem;
+            padding: 3px;
+        }
+
+            .k-grid .k-grid-header th:first-child {
+                border-top-left-radius: 4px;
+            }
+
+    .k-grid .k-grid-content td {
+        border: none;
+        cursor: pointer;
+        padding: 3px;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+        .k-grid .k-grid-content td .k-button {
+            background: none;
+            border: none;
+            color: black;
+            padding: 2px;
+            margin: 0 auto;
+            min-width: 28px;
+            vertical-align: middle;
+        }
+
+            .k-grid .k-grid-content td .k-button .k-icon {
+                margin: 0 auto;
+            }
+
+    .k-grid .k-grid-content tr {
+        border-bottom: 1px solid lightgray;
+    }
+
+    .k-grid .k-pager-wrap {
+        background: none;
+        border: none;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        color: white;
+        font-size: 0.75rem;
+        padding: 3px;
+    }
+
+        .k-grid .k-pager-wrap .k-link {
+            border: none;
+        }
+
+        .k-grid .k-pager-wrap .k-pager-numbers .k-link {
+            color: white;
+        }
+
+            .k-grid .k-pager-wrap .k-pager-numbers .k-link.k-pager-nav {
+                color: black;
+            }
+
+/*button k-icon顏色設定*/
+.k-icon {
+    cursor: pointer;
+}
+
+.btn-default .k-icon {
+    color: black;
+}
+
+.btn-primary .k-icon {
+    color: white;
+}
+
+.btn-success .k-icon {
+    color: white;
+}
+
+.btn-info .k-icon {
+    color: white;
+}
+
+.btn-warning .k-icon {
+    color: white;
+}
+
+.btn-danger .k-icon {
+    color: white;
+}
+
+.btn-link .k-icon {
+    color: #337ab7;
+}
+
+/*dialog*/
+#timer {
+    background-color: black;
+    color: white;
+    display: inline-block;
+    margin: 5px;
+    padding: 2px 10px;
+}
+
+.k-dialog .k-dialog-titlebar .k-dialog-title {
+    font-size: 1rem;
+    line-height: 1rem;
+}
+
+.k-dialog.k-confirm, .k-dialog.k-alert {
+    min-width: 20%;
+    text-align: center;
+}
+
+.k-dialog .k-dialog-buttongroup.k-dialog-button-layout-stretched {
+    padding: 5px;
+    text-align: center;
+}
+
+    .k-dialog .k-dialog-buttongroup.k-dialog-button-layout-stretched .k-button {
+        border-radius: 4px;
+        margin: 2px 10px;
+        max-width: 30%;
+        padding: 2px 10px;
+    }
+
+/*_CheckboxList,_RadioList*/
+.checkboxList {
+    list-style: none;
+    padding: 0;
+}
+
+    .checkboxList li {
+        padding: 2px 10px;
+    }
+
+        .checkboxList li label {
+            color: #de4e15;
+        }
+
+/*_ListSelector*/
+.k-listbox .k-listbox-toolbar {
+    margin: 2px 10px;
+}
+
+.k-listbox .k-item {
+    font-size: 0.9375rem;
+    white-space: nowrap;
+}
+
+.k-tooltip-content {
+    font-size: 0.75rem;
+}

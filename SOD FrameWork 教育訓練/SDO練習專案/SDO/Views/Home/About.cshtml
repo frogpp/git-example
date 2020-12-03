@@ -1,0 +1,96 @@
+﻿@{
+    ViewBag.Title = Resources.MvcSitemap.About;
+}
+@section buttons {
+}
+@section forms{
+}
+<table id="tblLink">
+	<colgroup>
+		<col style="width:200px;" />
+		<col />
+	</colgroup>
+	<tr>
+		<th data-field="tech_name">專案使用技術</th>
+		<th data-field="tech_url">參考網址</th>
+	</tr>
+	<tr>
+		<td>SDO範例網站</td>
+		<td><a href="http://pmfdc-fw.gss.com.tw/WEBDEMO/" target="_blank">http://pmfdc-fw.gss.com.tw/WEBDEMO/</a></td>
+	</tr>
+	<tr>
+		<td>MVC.Net</td>
+		<td><a href="http://www.asp.net/mvc/overview" target="_blank">http://www.asp.net/mvc/overview</a></td>
+	</tr>
+	<tr>
+		<td>LINQ</td>
+		<td><a href="https://msdn.microsoft.com/zh-tw/library/bb386976(v=vs.110).aspx" target="_blank">https://msdn.microsoft.com/zh-tw/library/bb386976(v=vs.110).aspx</a></td>
+	</tr>
+	<tr>
+		<td>Dapper</td>
+		<td><a href="https://github.com/StackExchange/Dapper" target="_blank">https://github.com/StackExchange/Dapper</a></td>
+	</tr>
+	<tr>
+		<td>Dapper (2)</td>
+		<td><a href="http://blog.darkthread.net/post-2014-05-15-dapper.aspx" target="_blank">http://blog.darkthread.net/post-2014-05-15-dapper.aspx</a></td>
+	</tr>
+	<tr>
+		<td>Jquery</td>
+		<td><a href="http://jquery.com" target="_blank">http://jquery.com</a></td>
+	</tr>
+	<tr>
+		<td>Jquery UI</td>
+		<td><a href="https://jqueryui.com" target="_blank">https://jqueryui.com</a></td>
+	</tr>
+	<tr>
+		<td>Jquery Validate</td>
+		<td><a href="http://jqueryvalidation.org" target="_blank">http://jqueryvalidation.org</a></td>
+	</tr>
+	<tr>
+		<td>Kendo UI</td>
+		<td><a href="http://demos.telerik.com/kendo-ui" target="_blank">http://demos.telerik.com/kendo-ui</a></td>
+	</tr>
+	<tr>
+		<td>Nlog</td>
+		<td><a href="https://github.com/nlog/nlog/wiki" target="_blank">https://github.com/nlog/nlog/wiki</a></td>
+	</tr>
+	<tr>
+		<td>Nlog (2)</td>
+		<td><a href="https://dotblogs.com.tw/wasichris/archive/2015/01/11/148053.aspx" target="_blank">https://dotblogs.com.tw/wasichris/archive/2015/01/11/148053.aspx</a></td>
+	</tr>
+	<tr>
+		<td>MvcSiteMapProvider</td>
+		<td><a href="https://github.com/maartenba/MvcSiteMapProvider/wiki" target="_blank">https://github.com/maartenba/MvcSiteMapProvider/wiki</a></td>
+	</tr>
+	<tr>
+		<td>MvcSiteMapProvider (2)</td>
+		<td><a href="http://blog.kkbruce.net/2013/05/aspnet-mvc-quickly-generate-sitemap-packet-mvcsitemapprovider.html#.Vsu8wWxf1PY" target="_blank">http://blog.kkbruce.net/2013/05/aspnet-mvc-quickly-generate-sitemap-packet-mvcsitemapprovider.html#.Vsu8wWxf1PY</a></td>
+	</tr>
+	<tr>
+		<td>NPOI</td>
+		<td><a href="https://npoi.codeplex.com/documentation" target="_blank">https://npoi.codeplex.com/documentation</a></td>
+	</tr>
+	<tr>
+		<td>Resx Resource Manager</td>
+		<td><a href="https://resxresourcemanager.codeplex.com/documentation" target="_blank">https://resxresourcemanager.codeplex.com/documentation</a></td>
+	</tr>
+	<tr>
+		<td>Aspose.Net</td>
+		<td><a href="https://www.componentsource.com/product/aspose-total-net" target="_blank">https://www.componentsource.com/product/aspose-total-net</a></td>
+	</tr>
+	<tr>
+		<td>AngularJS</td>
+		<td><a href="https://docs.angularjs.org/tutorial/step_00" target="_blank">https://docs.angularjs.org/tutorial/step_00</a></td>
+	</tr>
+</table>
+@section scripts {
+    <script>
+        $(function () {
+            $('#tblLink').kendoGrid({
+                pageable: {
+                    pageSize: 20
+                }
+            });
+        });
+    </script>
+}

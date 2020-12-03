@@ -1,0 +1,202 @@
+﻿@{
+    ViewBag.Title = Resources.MvcSitemap.Sample_9;
+}
+@section buttons {
+}
+@section forms {
+    <h4>SQL Table</h4>
+    <ul id="treeSQL">
+        <li>
+            <h5>EFORM_SET - 表單主檔</h5>
+            <ul>
+                <li>form_id - 表單代碼</li>
+                <li>form_type - 表單類型(ref:SET_PARAM|eFormType)</li>
+                <li>form_name - 表單名稱</li>
+                <li>effective_date - 啟用日期</li>
+                <li>expire_date - 停用日期</li>
+                <li>memo - 說明註記</li>
+            </ul>
+        </li>
+        <li>
+            <h5>MAP_EFORM_ORG - 表單組織對應</h5>
+            <ul>
+                <li>form_id - 表單代碼</li>
+                <li>org_id - 組織單位代碼</li>
+            </ul>
+        </li>
+        <li>
+            <h5>MAP_EFORM_FLOW - 表單流程對應</h5>
+            <ul>
+                <li>form_id - 表單代碼</li>
+                <li>flow_id - 流程代碼</li>
+                <li>alert_day - 流程逾時天數限制</li>
+            </ul>
+        </li>
+        <li>
+            <h5>EFIELD_SET - 表單欄位主檔</h5>
+            <ul>
+                <li>field_id - 欄位代碼</li>
+                <li>field_name - 欄位顯示名稱</li>
+                <li>field_size - 欄位長度</li>
+                <li>field_type - 欄位類型(ref:SET_PARAM|eFieldType)</li>
+                <li>field_exttype - 欄位子類型(ref:SET_PARAM|eFieldExtType)</li>
+                <li>field_option - 欄位顯示參數，以JSON格式儲存</li>
+                <li>field_isfill - 必填</li>
+                <li>memo - 說明註記</li>
+                <li>del_flg - 刪除標記</li>
+            </ul>
+        </li>
+        <li>
+            <h5>MAP_EFORM_EFIELD - 表單欄位對應</h5>
+            <ul>
+                <li>form_id - 表單代碼</li>
+                <li>field_id - 欄位代碼</li>
+                <li>sort_id - 欄位順序</li>
+                <li>issplitter - 是否為併排欄位(目前支援一行兩欄表現)</li>
+            </ul>
+        </li>
+        <li>
+            <h5>EFORM_DATAFILL - 表單填寫主檔</h5>
+            <ul>
+                <li>fill_id - 表單填寫代碼</li>
+                <li>form_id - 表單代碼</li>
+                <li>fill_data - 表單填寫內容，以JSON格式儲存</li>
+                <li>flow_code - 流程代碼</li>
+                <li>del_flg - 刪除標記</li>
+            </ul>
+        </li>
+        <li>
+            <h5>EFORM_FLOWLOG - 表單流程啟動日誌</h5>
+            <ul>
+                <li>flow_code - 流程代碼</li>
+                <li>fill_id - 表單填寫代碼</li>
+            </ul>
+        </li>
+    </ul>
+}
+<fieldset>
+    <legend>表單欄位定義</legend>
+    <table id="tblFieldType">
+        <colgroup>
+            <col style="width:200px;" />
+            <col style="width:200px;" />
+            <col />
+            <col style="width:100px;" />
+        </colgroup>
+        <tr>
+            <th data-field="field_type">欄位類型</th>
+            <th data-field="field_exttype">欄位子類型</th>
+            <th data-field="field_option">欄位顯示參數</th>
+            <th data-field="field_size">長度限制</th>
+        </tr>
+        <tr>
+            <td>0 - 純文字顯示</td>
+            <td></td>
+            <td></td>
+            <td>N</td>
+        </tr>
+        <tr>
+            <td>1 - 下拉式選單</td>
+            <td>&nbsp;</td>
+            <td>[{ "Text": "選項", "Value": "數值" }, ...]</td>
+            <td>N</td>
+        </tr>
+        <tr>
+            <td>1 - 下拉式選單</td>
+            <td>11 - 多選格式</td>
+            <td>[{ "Text": "選項", "Value": "數值" }, ...]</td>
+            <td>N</td>
+        </tr>
+        <tr>
+            <td>1 - 下拉式選單</td>
+            <td>12 - 組織選單</td>
+            <td>{ "PARENT_NODEID": 指定根組織, "MULTISELECT": true || false }</td>
+            <td>N</td>
+        </tr>
+        <tr>
+            <td>1 - 下拉式選單</td>
+            <td>13 - 人員選單</td>
+            <td>&nbsp;</td>
+            <td>N</td>
+        </tr>
+        <tr>
+            <td>1 - 下拉式選單</td>
+            <td>14 - Checkbox格式選單</td>
+            <td>[{ "Text": "選項", "Value": "數值 || _GROUP", "Disabled": "true || false"  },...]</td>
+            <td>N</td>
+        </tr>
+        <tr>
+            <td>1 - 下拉式選單</td>
+            <td>15 - Radio格式選單</td>
+            <td>[{ "Text": "選項", "Value": "數值 || _GROUP", "Disabled": "true || false"  },...]</td>
+            <td>N</td>
+        </tr>
+        <tr>
+            <td>2 - 單行文字框</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>Y</td>
+        </tr>
+        <tr>
+            <td>2 - 單行文字框</td>
+            <td>21 - 數值</td>
+            <td>{ "format": n || c || p, "decimals": 小數點進位位置, "min": 最小值, "max": 最大值 }</td>
+            <td>N</td>
+        </tr>
+        <tr>
+            <td>2 - 單行文字框</td>
+            <td>22 - 日期</td>
+            <td>{ "DISPLAYTIME": true || false, "CASCADEFROM": 連動控制項ID }</td>
+            <td>N</td>
+        </tr>
+        <tr>
+            <td>2 - 單行文字框</td>
+            <td>23 - 格式化文字</td>
+            <td>{ "mask": 格式化範本 }</td>
+            <td>Y</td>
+        </tr>
+        <tr>
+            <td>2 - 單行文字框</td>
+            <td>24 - 拉霸式數值格式</td>
+            <td>{ "min": 最小值, "max": 最大值 }</td>
+            <td>N</td>
+        </tr>
+        <tr>
+            <td>3 - 多行文字框</td>
+            <td>&nbsp;</td>
+            <td>&nbsp;</td>
+            <td>Y</td>
+        </tr>
+        <tr>
+            <td>3 - 多行文字框</td>
+            <td>31 - 簡易編輯文字框</td>
+            <td>&nbsp;</td>
+            <td>Y</td>
+        </tr>
+        <tr>
+            <td>3 - 多行文字框</td>
+            <td>32 - 完整編輯文字框</td>
+            <td>&nbsp;</td>
+            <td>Y</td>
+        </tr>
+        <tr>
+            <td>4 - 檔案上傳</td>
+            <td>&nbsp;</td>
+            <td>{"MULTIPLE": true || false }</td>
+            <td>N</td>
+        </tr>
+    </table>
+</fieldset>
+@section scripts {
+    <script>
+        $(function () {
+            $('#treeSQL').kendoTreeView();
+            $('#tblFieldType').kendoGrid({
+                pageable: {
+                    pageSize: 10
+                }
+            });
+        });
+    </script>
+}
+

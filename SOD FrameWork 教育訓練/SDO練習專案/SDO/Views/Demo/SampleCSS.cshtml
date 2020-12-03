@@ -1,0 +1,2419 @@
+﻿@{
+    ViewBag.Title = Resources.MvcSitemap.Sample_2;
+}
+@section buttons {
+
+}
+@section forms {
+    <ul>
+
+        <li>\Content\Site.css</li>
+        <li>\Content\SDObasic\SDObasic-blue.css</li>
+        <li>\Content\SDObasic\SDObasic-green.css</li>
+        <li>\Content\SDObasic\SDObasic-purple.css</li>
+    </ul>
+}
+<style>
+    strong {
+        line-height: 40px;
+        font-size: 24px;
+        color: #0b77c3;
+    }
+
+    .show-grid {
+        margin: 15px;
+    }
+
+    .WebComponentsIcons {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+        .WebComponentsIcons li {
+            margin: 10px;
+            padding: 10px;
+            display: block;
+            float: left;
+            vertical-align: top;
+            text-align: center;
+            width: 36px;
+        }
+</style>
+<!---->
+<strong>標題</strong>
+<div>
+    <h1>h1:36px</h1>
+    <h2>h2:30px</h2>
+    <h3>h3:24px</h3>
+    <h4>h4:18px</h4>
+    <h5>h5:14px</h5>
+    <h6>h6:12px</h6>
+</div>
+<pre>
+@Html.Raw(HttpUtility.HtmlEncode("<h1>h1:36px</h1>"))
+</pre>
+<strong>清單</strong>
+<div>
+    <ul>
+        <li>無序清單：項目1</li>
+        <li>無序清單：項目2</li>
+        <li>無序清單：項目3</li>
+    </ul>
+</div>
+<pre>
+@Html.Raw(HttpUtility.HtmlEncode("<ul>"))
+@Html.Raw(HttpUtility.HtmlEncode("<li>...</li>"))
+@Html.Raw(HttpUtility.HtmlEncode("</ul>"))
+</pre>
+<div>
+    <ol>
+        <li>有序清單：項目1</li>
+        <li>有序清單：項目2</li>
+        <li>有序清單：項目3</li>
+    </ol>
+</div>
+<pre>
+@Html.Raw(HttpUtility.HtmlEncode("<ol>"))
+@Html.Raw(HttpUtility.HtmlEncode("<li>...</li>"))
+@Html.Raw(HttpUtility.HtmlEncode("</ol>"))
+</pre>
+<div>
+    <ul class="list-inline">
+        <li>橫式清單項目1</li>
+        <li>橫式清單項目2</li>
+        <li>橫式清單項目3</li>
+    </ul>
+</div>
+<pre>
+@Html.Raw(HttpUtility.HtmlEncode("<ul class=\"list-inline\">"))
+@Html.Raw(HttpUtility.HtmlEncode("<li>...</li>"))
+@Html.Raw(HttpUtility.HtmlEncode("</ul>"))
+</pre>
+<strong>Checkbox和Radio</strong>
+<h4>橫式排列</h4>
+<div>
+    <form role="form">
+        <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox2" value="option2"> 2
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" id="inlineCheckbox3" value="option3"> 3
+        </label>
+    </form>
+    <br />
+    <form role="form">
+        <label class="radio-inline">
+            <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> 1
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> 2
+        </label>
+        <label class="radio-inline">
+            <input type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3"> 3
+        </label>
+    </form>
+</div>
+<pre>
+@Html.Raw(HttpUtility.HtmlEncode("<label class=\"checkbox-inline\"><input type=\"checkbox\" id=\"inlineCheckbox1\" value=\"option1\">1</label>"))
+@Html.Raw(HttpUtility.HtmlEncode("<label class=\"radio-inline\"><input type=\"radio\" id=\"inlineRadio1\" value=\"option1\">1</label>"))
+</pre>
+<strong>按鈕</strong>
+<div>
+    <button>系統預設</button>
+    <button class="btn-default">Default</button>
+    <button class="btn-primary">Primary</button>
+    <button class="btn-success">Success</button>
+    <button class="btn-info">Info</button>
+    <button class="btn-warning">Warning</button>
+    <button class="btn-danger">Danger</button>
+    <button class="btn-link">Link</button>
+</div>
+<pre>
+@Html.Raw(HttpUtility.HtmlEncode("<button>系統預設</button>"))
+@Html.Raw(HttpUtility.HtmlEncode("<button class=\"btn-default\">Default</button>"))
+@Html.Raw(HttpUtility.HtmlEncode("<button class=\"btn-primary\">Primary</button>"))
+@Html.Raw(HttpUtility.HtmlEncode("<button class=\"btn-success\">Success</button>"))
+@Html.Raw(HttpUtility.HtmlEncode("<button class=\"btn-info\">Info</button>"))
+@Html.Raw(HttpUtility.HtmlEncode("<button class=\"btn-warning\">Warning</button>"))
+@Html.Raw(HttpUtility.HtmlEncode("<button class=\"btn-danger\">Danger</button>"))
+@Html.Raw(HttpUtility.HtmlEncode("<button class=\"btn-link\">Link</button>"))
+</pre>
+<strong>Web Font Icons</strong>
+<div>
+    有400種圖示，將class內的 k-i-copy 改成想要的圖示名稱即可
+    <br />
+    <span class="k-icon k-i-copy"></span>
+</div>
+<pre>
+@Html.Raw(HttpUtility.HtmlEncode("<span class=\"k-icon k-i-copy\"></span>"))
+</pre>
+<div>
+    要改背景顏色，只需將class內的 btn-success 換成要的按鈕顏色即可
+    <br />
+    <a class="k-button btn-success" href="#"><span class="k-icon k-i-copy">文件</span></a>
+</div>
+<pre>
+@Html.Raw(HttpUtility.HtmlEncode("<a class=\"k-button btn-success\" href=\"#\"><span class=\"k-icon k-i-copy\">文件</span></span>"))
+</pre>
+<div class="row show-grid">
+    <div class="col-md-12">
+        <h4>Actions</h4>
+        <ul class="WebComponentsIcons">
+            <li>
+                <span class="k-icon k-i-undo">
+                    .k-i-undo
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-redo">
+                    .k-i-redo
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-reset">
+                    .k-i-reset
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-reload">
+                    .k-i-reload
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-non-recurrence">
+                    .k-i-non-recurrence
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-reset-sm">
+                    .k-i-reset-sm
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-reload-sm">
+                    .k-i-reload-sm
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-clock">
+                    .k-i-clock
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-calendar">
+                    .k-i-calendar
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-save">
+                    .k-i-save
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-print">
+                    .k-i-print
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-edit">
+                    .k-i-edit
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-delete">
+                    .k-i-delete
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-attachment">
+                    .k-i-attachment
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-attachment-45">
+                    .k-i-attachment-45
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-link-horizontal">
+                    .k-i-link-horizontal
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-unlink-horizontal">
+                    .k-i-unlink-horizontal
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-link-vertical">
+                    .k-i-link-vertical
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-unlink-vertical">
+                    .k-i-unlink-vertical
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-lock">
+                    .k-i-lock
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-unlock">
+                    .k-i-unlock
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-cancel">
+                    .k-i-cancel
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-cancel-outline">
+                    .k-i-cancel-outline
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-cancel-circle">
+                    .k-i-cancel-circle
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-check">
+                    .k-i-check
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-check-outline">
+                    .k-i-check-outline
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-check-circle">
+                    .k-i-check-circle
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-close">
+                    .k-i-close
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-close-outline">
+                    .k-i-close-outline
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-close-circle">
+                    .k-i-close-circle
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-plus">
+                    .k-i-plus
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-plus-outline">
+                    .k-i-plus-outline
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-plus-circle">
+                    .k-i-plus-circle
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-minus">
+                    .k-i-minus
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-minus-outline">
+                    .k-i-minus-outline
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-minus-circle">
+                    .k-i-minus-circle
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-sort-asc">
+                    .k-i-sort-asc
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-sort-desc">
+                    .k-i-sort-desc
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-unsort">
+                    .k-i-unsort
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-sort-clear">
+                    .k-i-sort-clear
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-sort-asc-sm">
+                    .k-i-sort-asc-sm
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-sort-desc-sm">
+                    .k-i-sort-desc-sm
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-filter">
+                    .k-i-filter
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-filter-clear">
+                    .k-i-filter-clear
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-filter-sm">
+                    .k-i-filter-sm
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-filter-sort-asc-sm">
+                    .k-i-filter-sort-asc-sm
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-filter-sort-desc-sm">
+                    .k-i-filter-sort-desc-sm
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-filter-add-expression">
+                    .k-i-filter-add-expression
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-filter-add-group">
+                    .k-i-filter-add-group
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-login">
+                    .k-i-login
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-logout">
+                    .k-i-logout
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-download">
+                    .k-i-download
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-upload">
+                    .k-i-upload
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-hyperlink-open">
+                    .k-i-hyperlink-open
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-hyperlink-open-sm">
+                    .k-i-hyperlink-open-sm
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-launch">
+                    .k-i-launch
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-window">
+                    .k-i-window
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-windows">
+                    .k-i-windows
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-window-minimize">
+                    .k-i-window-minimize
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-gear">
+                    .k-i-gear
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-gears">
+                    .k-i-gears
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-wrench">
+                    .k-i-wrench
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-preview">
+                    .k-i-preview
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-zoom">
+                    .k-i-zoom
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-zoom-in">
+                    .k-i-zoom-in
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-zoom-out">
+                    .k-i-zoom-out
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-pan">
+                    .k-i-pan
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-calculator">
+                    .k-i-calculator
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-cart">
+                    .k-i-cart
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-connector">
+                    .k-i-connector
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-plus-sm">
+                    .k-i-plus-sm
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-minus-sm">
+                    .k-i-minus-sm
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row show-grid">
+    <div class="col-md-12">
+        <h4>Alerts and Notifications</h4>
+        <ul class="WebComponentsIcons">
+            <li>
+                <span class="k-icon k-i-notification">
+                    .k-i-notification
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-information">
+                    .k-i-information
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-question">
+                    .k-i-question
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-warning">
+                    .k-i-warning
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row show-grid">
+    <div class="col-md-12">
+        <h4>Editing</h4>
+        <ul class="WebComponentsIcons">
+            <li>
+                <span class="k-icon k-i-page-properties">
+                    .k-i-page-properties
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-bold">
+                    .k-i-bold
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-italic">
+                    .k-i-italic
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-underline">
+                    .k-i-underline
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-font-family">
+                    .k-i-font-family
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-foreground-color">
+                    .k-i-foreground-color
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-convert-lowercase">
+                    .k-i-convert-lowercase
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-convert-uppercase">
+                    .k-i-convert-uppercase
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-strikethrough">
+                    .k-i-strikethrough
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-sub-script">
+                    .k-i-sub-script
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-sup-script">
+                    .k-i-sup-script
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-div">
+                    .k-i-div
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-all">
+                    .k-i-all
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-h1">
+                    .k-i-h1
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-h2">
+                    .k-i-h2
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-h3">
+                    .k-i-h3
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-h4">
+                    .k-i-h4
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-h5">
+                    .k-i-h5
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-h6">
+                    .k-i-h6
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-list-ordered">
+                    .k-i-list-ordered
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-list-unordered">
+                    .k-i-list-unordered
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-indent-increase">
+                    .k-i-indent-increase
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-indent-decrease">
+                    .k-i-indent-decrease
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-insert-up">
+                    .k-i-insert-up
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-insert-middle">
+                    .k-i-insert-middle
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-insert-down">
+                    .k-i-insert-down
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-align-top">
+                    .k-i-align-top
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-align-middle">
+                    .k-i-align-middle
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-align-bottom">
+                    .k-i-align-bottom
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-align-left">
+                    .k-i-align-left
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-align-center">
+                    .k-i-align-center
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-align-right">
+                    .k-i-align-right
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-align-justify">
+                    .k-i-align-justify
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-align-remove">
+                    .k-i-align-remove
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-text-wrap">
+                    .k-i-text-wrap
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-rule-horizontal">
+                    .k-i-rule-horizontal
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-align-top-left">
+                    .k-i-table-align-top-left
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-align-top-center">
+                    .k-i-table-align-top-center
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-align-top-right">
+                    .k-i-table-align-top-right
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-align-middle-left">
+                    .k-i-table-align-middle-left
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-align-middle-center">
+                    .k-i-table-align-middle-center
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-align-middle-right">
+                    .k-i-table-align-middle-right
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-align-bottom-left">
+                    .k-i-table-align-bottom-left
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-align-bottom-center">
+                    .k-i-table-align-bottom-center
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-align-bottom-right">
+                    .k-i-table-align-bottom-right
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-align-remove">
+                    .k-i-table-align-remove
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-borders-all"> .k-i-borders-all</span>
+            </li>
+            <li>
+                <span class="k-icon k-i-borders-outside">
+                    .k-i-borders-outside
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-borders-inside">
+                    .k-i-borders-inside
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-borders-inside-horizontal">
+                    .k-i-borders-inside-horizontal
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-borders-inside-vertical">
+                    .k-i-borders-inside-vertical
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-border-top">
+                    .k-i-border-top
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-border-bottom">
+                    .k-i-border-bottom
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-border-left">
+                    .k-i-border-left
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-border-right">
+                    .k-i-border-right
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-border-no">
+                    .k-i-border-no
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-borders-show-hide">
+                    .k-i-borders-show-hide
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-form">
+                    .k-i-form<br> .k-i-border
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-form-element">
+                    .k-i-form-element
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-code-snippet">
+                    .k-i-code-snippet
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-select-all">
+                    .k-i-select-all
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-button">
+                    .k-i-button
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-select-box">
+                    .k-i-select-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-calendar-date">
+                    .k-i-calendar-date
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-group-box">
+                    .k-i-group-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-textarea">
+                    .k-i-textarea
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-textbox">
+                    .k-i-textbox
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-textbox-hidden">
+                    .k-i-textbox-hidden
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-password">
+                    .k-i-password
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-paragraph-add">
+                    .k-i-paragraph-add
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-edit-tools">
+                    .k-i-edit-tools
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-template-manager">
+                    .k-i-template-manager
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-change-manually">
+                    .k-i-change-manually
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-track-changes">
+                    .k-i-track-changes
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-track-changes-enable">
+                    .k-i-track-changes-enable
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-track-changes-accept">
+                    .k-i-track-changes-accept
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-track-changes-accept-all">
+                    .k-i-track-changes-accept-all
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-track-changes-reject">
+                    .k-i-track-changes-reject
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-track-changes-reject-all">
+                    .k-i-track-changes-reject-all
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-document-manager">
+                    .k-i-document-manager
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-custom-icon">
+                    .k-i-custom-icon
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-dictionary-add">
+                    .k-i-dictionary-add
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-image-light-dialog">
+                    .k-i-image-light-dialog
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-image-edit">
+                    .k-i-image-edit
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-image-map-editor">
+                    .k-i-image-map-editor
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-comment">
+                    .k-i-comment
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-comment-remove">
+                    .k-i-comment-remove
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-comments-remove-all">
+                    .k-i-comments-remove-all
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-silverlight">
+                    .k-i-silverlight
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-media-manager">
+                    .k-i-media-manager
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-video-external">
+                    .k-i-video-external
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-flash-manager">
+                    .k-i-flash-manager
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-find-and-replace">
+                    .k-i-find-and-replace
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-copy">
+                    .k-i-copy
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-cut">
+                    .k-i-cut
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-paste">
+                    .k-i-paste
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-paste-as-html">
+                    .k-i-paste-as-html
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-paste-from-word">
+                    .k-i-paste-from-word
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-paste-from-word-strip-file">
+                    .k-i-paste-from-word-strip-file
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-paste-html">
+                    .k-i-paste-html
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-paste-markdown">
+                    .k-i-paste-markdown
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-paste-plain-text">
+                    .k-i-paste-plain-text
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-apply-format">
+                    .k-i-apply-format
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-clear-css">
+                    .k-i-clear-css
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-copy-format">
+                    .k-i-copy-format
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-strip-all-formating">
+                    .k-i-strip-all-formating
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-strip-css-format">
+                    .k-i-strip-css-format
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-strip-font-elements">
+                    .k-i-strip-font-elements
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-strip-span-elements">
+                    .k-i-strip-span-elements
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-strip-word-formatting">
+                    .k-i-strip-word-formatting
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-format-code-block">
+                    .k-i-format-code-block
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-style-builder">
+                    .k-i-style-builder
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-module-manager">
+                    .k-i-module-manager
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-hyperlink-light-dialog">
+                    .k-i-hyperlink-light-dialog
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-hyperlink-globe">
+                    .k-i-hyperlink-globe
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-hyperlink-globe-remove">
+                    .k-i-hyperlink-globe-remove
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-hyperlink-email">
+                    .k-i-hyperlink-email
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-anchor">
+                    .k-i-anchor
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-light-dialog">
+                    .k-i-table-light-dialog
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table">
+                    .k-i-table<br> .k-i-table-unmerge
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-properties">
+                    .k-i-table-properties
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-cell">
+                    .k-i-table-cell
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-cell-properties">
+                    .k-i-table-cell-properties
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-column-insert-left">
+                    .k-i-table-column-insert-left
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-column-insert-right">
+                    .k-i-table-column-insert-right
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-row-insert-above">
+                    .k-i-table-row-insert-above
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-row-insert-below">
+                    .k-i-table-row-insert-below
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-column-delete">
+                    .k-i-table-column-delete
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-row-delete">
+                    .k-i-table-row-delete
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-cell-delete">
+                    .k-i-table-cell-delete
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-table-delete">
+                    .k-i-table-delete
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-cells-merge">
+                    .k-i-cells-merge
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-cells-merge-horizontally">
+                    .k-i-cells-merge-horizontally
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-cells-merge-vertically">
+                    .k-i-cells-merge-vertically
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-cell-split-horizontally">
+                    .k-i-cell-split-horizontally
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-cell-split-vertically">
+                    .k-i-cell-split-vertically
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-pane-freeze">
+                    .k-i-pane-freeze
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-row-freeze">
+                    .k-i-row-freeze
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-column-freeze">
+                    .k-i-column-freeze
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-toolbar-float">
+                    .k-i-toolbar-float
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-spell-checker">
+                    .k-i-spell-checker
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-validation-xhtml">
+                    .k-i-validation-xhtml
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-validation-data">
+                    .k-i-validation-data
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-toggle-full-screen-mode">
+                    .k-i-toggle-full-screen-mode
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-formula-fx">
+                    .k-i-formula-fx
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-sum">
+                    .k-i-sum
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-symbol">
+                    .k-i-symbol
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-dollar">
+                    .k-i-dollar
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-percent">
+                    .k-i-percent
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-custom-format">
+                    .k-i-custom-format
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-decimal-increase">
+                    .k-i-decimal-increase
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-decimal-decrease">
+                    .k-i-decimal-decrease
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-font-size">
+                    .k-i-font-size
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-image-absolute-position">
+                    .k-i-image-absolute-position
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row show-grid">
+    <div class="col-md-12">
+        <h4>Files and Folders</h4>
+        <ul class="WebComponentsIcons">
+            <li>
+                <span class="k-icon k-i-folder">
+                    .k-i-folder
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-folder-open">
+                    .k-i-folder-open
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-folder-add">
+                    .k-i-folder-add
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-folder-up">
+                    .k-i-folder-up
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-folder-more">
+                    .k-i-folder-more
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-aggregate-fields">
+                    .k-i-aggregate-fields
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-file">
+                    .k-i-file<br> .k-i-file-vertical
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-file-add">
+                    .k-i-file-add
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-file-txt">
+                    .k-i-file-txt
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-file-csv">
+                    .k-i-file-csv
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-file-excel">
+                    .k-i-file-excel
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-file-word">
+                    .k-i-file-word
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-file-mdb">
+                    .k-i-file-mdb
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-file-ppt">
+                    .k-i-file-ppt
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-file-pdf">
+                    .k-i-file-pdf
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-file-psd">
+                    .k-i-file-psd
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-file-flash">
+                    .k-i-file-flash
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-file-config">
+                    .k-i-file-config
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-file-ascx">
+                    .k-i-file-ascx
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-file-bac">
+                    .k-i-file-bac
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-file-zip">
+                    .k-i-file-zip
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-film">
+                    .k-i-film
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-css3">
+                    .k-i-css3
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-html5">
+                    .k-i-html5
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-html">
+                    .k-i-html
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-css">
+                    .k-i-css
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-js">
+                    .k-i-js
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-exe">
+                    .k-i-exe
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-csproj">
+                    .k-i-csproj
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-vbproj">
+                    .k-i-vbproj
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-cs">
+                    .k-i-cs
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-vb">
+                    .k-i-vb
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-sln">
+                    .k-i-sln
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-cloud">
+                    .k-i-cloud
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-file-horizontal">
+                    .k-i-file-horizontal
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row show-grid">
+    <div class="col-md-12">
+        <h4>Images</h4>
+        <ul class="WebComponentsIcons">
+            <li>
+                <span class="k-icon k-i-photo-camera">
+                    .k-i-photo-camera
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-image">
+                    .k-i-image<br> .k-i-photo
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-image-export">
+                    .k-i-image-export
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-zoom-actual-size">
+                    .k-i-zoom-actual-size
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-zoom-best-fit">
+                    .k-i-zoom-best-fit
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-image-resize">
+                    .k-i-image-resize
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-crop">
+                    .k-i-crop
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-mirror">
+                    .k-i-mirror
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-flip-horizontal">
+                    .k-i-flip-horizontal
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-flip-vertical">
+                    .k-i-flip-vertical
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-rotate">
+                    .k-i-rotate
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-rotate-right">
+                    .k-i-rotate-right
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-rotate-left">
+                    .k-i-rotate-left
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-brush">
+                    .k-i-brush
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-palette">
+                    .k-i-palette
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-paint">
+                    .k-i-paint<br> .k-i-droplet
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-line">
+                    .k-i-line<br> .k-i-shape-line
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-brightness-contrast">
+                    .k-i-brightness-contrast
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-saturation">
+                    .k-i-saturation
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-invert-colors">
+                    .k-i-invert-colors
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-transperancy">
+                    .k-i-transperancy
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-greyscale">
+                    .k-i-greyscale
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-blur">
+                    .k-i-blur
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-sharpen">
+                    .k-i-sharpen
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-shape">
+                    .k-i-shape
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-round-corners">
+                    .k-i-round-corners
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-front-element">
+                    .k-i-front-element
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-back-element">
+                    .k-i-back-element
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-forward-element">
+                    .k-i-forward-element
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-backward-element">
+                    .k-i-backward-element
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-align-left-element">
+                    .k-i-align-left-element
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-align-center-element">
+                    .k-i-align-center-element
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-align-right-element">
+                    .k-i-align-right-element
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-align-top-element">
+                    .k-i-align-top-element
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-align-middle-element">
+                    .k-i-align-middle-element
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-align-bottom-element">
+                    .k-i-align-bottom-element
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-thumbnails-up">
+                    .k-i-thumbnails-up
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-thumbnails-right">
+                    .k-i-thumbnails-right
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-thumbnails-down">
+                    .k-i-thumbnails-down
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-thumbnails-left">
+                    .k-i-thumbnails-left
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-full-screen">
+                    .k-i-full-screen
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-full-screen-exit">
+                    .k-i-full-screen-exit
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-reset-color">
+                    .k-i-reset-color
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row show-grid">
+    <div class="col-md-12">
+        <h4>Layout and Navigation</h4>
+        <ul class="WebComponentsIcons">
+            <li>
+                <span class="k-icon k-i-arrow-45-up-right">
+                    .k-i-arrow-45-up-right
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-45-down-right">
+                    .k-i-arrow-45-down-right
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-45-down-left">
+                    .k-i-arrow-45-down-left
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-45-up-left">
+                    .k-i-arrow-45-up-left
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-60-up">
+                    .k-i-arrow-60-up
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-60-right">
+                    .k-i-arrow-60-right
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-60-down">
+                    .k-i-arrow-60-down
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-60-left">
+                    .k-i-arrow-60-left
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-end-up">
+                    .k-i-arrow-end-up
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-end-right">
+                    .k-i-arrow-end-right
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-end-down">
+                    .k-i-arrow-end-down
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-end-left">
+                    .k-i-arrow-end-left
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-double-60-up">
+                    .k-i-arrow-double-60-up
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-seek-up">
+                    .k-i-arrow-seek-up
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-double-60-right">
+                    .k-i-arrow-double-60-right
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-seek-right">
+                    .k-i-arrow-seek-right
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-double-60-down">
+                    .k-i-arrow-double-60-down
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-seek-down">
+                    .k-i-arrow-seek-down
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-double-60-left">
+                    .k-i-arrow-double-60-left
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrows-kpi">
+                    .k-i-arrows-kpi<br> .k-i-kpi
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrows-no-change">
+                    .k-i-arrows-no-change
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-overflow-down">
+                    .k-i-arrow-overflow-down
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-chevron-up">
+                    .k-i-arrow-chevron-up
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-chevron-right">
+                    .k-i-arrow-chevron-right
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-chevron-down">
+                    .k-i-arrow-chevron-down
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-chevron-left">
+                    .k-i-arrow-chevron-left
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-up">
+                    .k-i-arrow-up
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-right">
+                    .k-i-arrow-righ
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-down">
+                    .k-i-arrow-down
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-left">
+                    .k-i-arrow-left
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-drill">
+                    .k-i-arrow-drill
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-parent">
+                    .k-i-arrow-parent
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrow-root">
+                    .k-i-arrow-root
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrows-resizing">
+                    .k-i-arrows-resizing
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrows-dimensions">
+                    .k-i-arrows-dimensions
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-arrows-swap">
+                    .k-i-arrows-swap
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-drag-and-drop">
+                    .k-i-drag-and-drop
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-categorize">
+                    .k-i-categorize
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-grid">
+                    .k-i-grid
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-grid-layout">
+                    .k-i-grid-layout
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-group">
+                    .k-i-group
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-ungroup">
+                    .k-i-ungroup
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-handler-drag">
+                    .k-i-handler-drag
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-layout">
+                    .k-i-layout
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-layout-1-by-4">
+                    .k-i-layout-1-by-4
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-layout-2-by-2">
+                    .k-i-layout-2-by-2
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-layout-side-by-side">
+                    .k-i-layout-side-by-side
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-layout-stacked">
+                    .k-i-layout-stacked
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-columns">
+                    .k-i-columns
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-rows">
+                    .k-i-rows
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-reorder">
+                    .k-i-reorder
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-menu">
+                    .k-i-menu
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-more-vertical">
+                    .k-i-more-vertical
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-more-horizontal">
+                    .k-i-more-horizontal
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row show-grid">
+    <div class="col-md-12">
+        <h4>Mapping</h4>
+        <ul class="WebComponentsIcons">
+            <li>
+                <span class="k-icon k-i-globe-outline">
+                    .k-i-globe-outline
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-globe">
+                    .k-i-globe
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-marker-pin">
+                    .k-i-marker-pin
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-marker-pin-target">
+                    .k-i-marker-pin-target
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-pin">
+                    .k-i-pin
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-unpin">
+                    .k-i-unpin
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row show-grid">
+    <div class="col-md-12">
+        <h4>Media</h4>
+        <ul class="WebComponentsIcons">
+            <li>
+                <span class="k-icon k-i-play">
+                    .k-i-play
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-pause">
+                    .k-i-pause
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-stop">
+                    .k-i-stop
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-rewind">
+                    .k-i-rewind
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-forward">
+                    .k-i-forward
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-volume-down">
+                    .k-i-volume-down
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-volume-up">
+                    .k-i-volume-up
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-volume-off">
+                    .k-i-volume-off
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-hd">
+                    .k-i-hd
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-subtitles">
+                    .k-i-subtitles
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-playlist">
+                    .k-i-playlist
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-audio">
+                    .k-i-audio
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row show-grid">
+    <div class="col-md-12">
+        <h4>Social Sharing</h4>
+        <ul class="WebComponentsIcons">
+            <li>
+                <span class="k-icon k-i-share">
+                    .k-i-share
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-user">
+                    .k-i-user
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-inbox">
+                    .k-i-inbox
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-blogger">
+                    .k-i-blogger
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-blogger-box">
+                    .k-i-blogger-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-delicious">
+                    .k-i-delicious
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-delicious-box">
+                    .k-i-delicious-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-digg">
+                    .k-i-digg
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-digg-box">
+                    .k-i-digg-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-email">
+                    .k-i-email
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-email-box">
+                    .k-i-email-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-facebook">
+                    .k-i-facebook
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-facebook-box">
+                    .k-i-facebook-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-google">
+                    .k-i-google
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-google-box">
+                    .k-i-google-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-google-plus">
+                    .k-i-google-plus
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-google-plus-box">
+                    .k-i-google-plus-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-linkedin">
+                    .k-i-linkedin
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-linkedin-box">
+                    .k-i-linkedin-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-myspace">
+                    .k-i-myspace
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-myspace-box">
+                    .k-i-myspace-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-pinterest">
+                    .k-i-pinterest
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-pinterest-box">
+                    .k-i-pinterest-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-reddit">
+                    .k-i-reddit
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-reddit-box">
+                    .k-i-reddit-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-stumble-upon">
+                    .k-i-stumble-upon
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-stumble-upon-box">
+                    .k-i-stumble-upon-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-tell-a-friend">
+                    .k-i-tell-a-friend
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-tell-a-friend-box">
+                    .k-i-tell-a-friend-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-tumblr">
+                    .k-i-tumblr
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-tumblr-box">
+                    .k-i-tumblr-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-twitter">
+                    .k-i-twitter
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-twitter-box">
+                    .k-i-twitter-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-yammer">
+                    .k-i-yammer
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-yammer-box">
+                    .k-i-yammer-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-behance">
+                    .k-i-behance
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-behance-box">
+                    .k-i-behance-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-dribbble">
+                    .k-i-dribbble
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-dribbble-box">
+                    .k-i-dribbble-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-rss">
+                    .k-i-rss
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-rss-box">
+                    .k-i-rss-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-vimeo">
+                    .k-i-vimeo
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-vimeo-box">
+                    .k-i-vimeo-box
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-youtube">
+                    .k-i-youtube
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-youtube-box">
+                    .k-i-youtube-box
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>
+<div class="row show-grid">
+    <div class="col-md-12">
+        <h4>Toggle</h4>
+        <ul class="WebComponentsIcons">
+            <li>
+                <span class="k-icon k-i-heart-outline">
+                    .k-i-heart-outline
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-heart">
+                    .k-i-heart
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-star-outline">
+                    .k-i-star-outline
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-star">
+                    .k-i-star
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-checkbox">
+                    .k-i-checkbox
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-checkbox-checked">
+                    .k-i-checkbox-checked
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-tri-state-indeterminate">
+                    .k-i-tri-state-indeterminate
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-tri-state-null">
+                    .k-i-tri-state-null
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-circle">
+                    .k-i-circle
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-radiobutton">
+                    .k-i-radiobutton
+                </span>
+            </li>
+            <li>
+                <span class="k-icon k-i-radiobutton-checked">
+                    .k-i-radiobutton-checked
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>
+@section scripts {
+    <script>
+        $('.WebComponentsIcons').kendoTooltip({
+            filter: 'span',
+            content: function (e) {
+                return e.target.text();
+            }
+        });
+    </script>
+}

@@ -1,0 +1,59 @@
+﻿@model SDO.Models.SetParamModel
+@{
+
+}
+@section buttons {
+	<script>
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B09',
+            click: function () {
+                $('#frmCreate').submit();
+            }
+        });
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B10',
+            click: function () {
+                $('#frmCreate').resetForm();
+            }
+        });
+	</script>
+}
+@using (Ajax.BeginForm("Create", "SetParam", null, new AjaxOptions
+{
+	OnSuccess = "alertSuccess",
+	OnFailure = "alertMessage"
+}, new { id = "frmCreate" }))
+{
+	@Html.AntiForgeryToken()
+	<table>
+		<tr>
+			<th>@Html.LabelFor(m => m.SET_ITEM)</th>
+			<td>@Html.DropDownListFor(m => m.SET_ITEM, (SelectList)ViewBag.SetParamItems)</td>
+		</tr>
+		<tr>
+			<th>@Html.LabelFor(m => m.SET_TYPE)</th>
+			<td>@Html.TextBoxFor(m => m.SET_TYPE)@Html.ValidationMessageFor(m => m.SET_TYPE)</td>
+		</tr>
+		<tr>
+			<th>@Html.LabelFor(m => m.SET_VALUE)</th>
+			<td>@Html.TextBoxFor(m => m.SET_VALUE)@Html.ValidationMessageFor(m => m.SET_VALUE)</td>
+		</tr>
+		<tr>
+			<th>@Html.LabelFor(m => m.MEMO)</th>
+			<td>@Html.TextAreaFor(m => m.MEMO)@Html.ValidationMessageFor(m => m.MEMO)</td>
+		</tr>
+	</table>
+}
+@section scripts {
+	<script>
+		function alertSuccess(result) {
+			alertMessage(result, function () {
+				parent.winWork.close();
+				parent.location.reload();
+			});
+		}
+	</script>
+}
+

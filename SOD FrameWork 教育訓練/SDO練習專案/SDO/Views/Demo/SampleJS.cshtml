@@ -1,0 +1,160 @@
+﻿@{
+    ViewBag.Title = Resources.MvcSitemap.Sample_2;
+}
+@section buttons {
+
+}
+@section forms {
+    <ul>
+        <li>
+            KendoUI
+            <ul>
+                <li>\Scripts\KENDO\extend\kenodo.grid.js</li>
+                <li>\Scripts\KENDO\extend\kenodo.twcalendar.js</li>
+            </ul>
+        </li>
+        <li>
+            jQuery
+            <ul>
+                <li>\Scripts\SDO\SDO.extend.js</li>
+                <li>\Scripts\SDO\SDO.init.js</li>
+                <li>\Scripts\SDO\SDO.message.js</li>
+            </ul>
+        </li>
+    </ul>
+}
+<h4>頁面共用變數</h4>
+<pre>
+<i>
+    pageConfig = {
+        rootPath: '{首頁路徑}'
+        cookiePath: '{目前頁面路徑}@@'
+    };
+</i>
+</pre>
+<h4>setWinWork(url, title)&nbsp;<button id="demo1">Demo</button></h4>
+<pre>
+開啟子功能網頁，以網頁中視窗的方式開啟
+<i>
+    url => 預開啟網頁路徑
+    title => 開啟視窗標題
+</i>
+</pre>
+<h4>toolBar.add({<a href="http://docs.telerik.com/kendo-ui/api/javascript/ui/toolbar" target="_blank">KendoUI toolbar reference online</a>})</h4>
+<pre>
+建立功能按鈕區(<b>section buttons</b>)內的按鈕
+<i>
+    toolBar.add({
+        id: '{button ID}',
+        type: 'button',
+        text: '{button name}',
+        click: function () {
+            //button click event
+        }
+    });
+</i>
+</pre>
+<h4>alertMessage(objMsg, callback, timeout)&nbsp;<button id="demo2">Demo</button></h4>
+<pre>
+取代 javascript <b>alert</b> function
+<i>
+    objMsg => string || {bool success, string message, dynamic result}
+    callback => javascript function || null
+    timeout => ms (automatic close message dialog)
+</i>
+</pre>
+<h4>confirmMessage(objMsg, callbackYes, callbackNo)&nbsp;<button id="demo3">Demo</button></h4>
+<pre>
+取代 javascript <b>confirm</b> function
+<i>
+    objMsg => string || {bool success, string message, dynamic result}
+    callbackYes => javascript function || null
+    callbackNo => javascript function || null
+</i>
+</pre>
+<h4>String.padLeft(max, charPad)</h4>
+<pre>
+補空左邊字串
+<i>
+    max => 字串長度
+    charPad => 補空字元
+</i>
+</pre>
+<h4>String.padRight (max, charPad)</h4>
+<pre>
+補空右邊字串
+<i>
+    max => 字串長度
+    charPad => 補空字元
+</i>
+</pre>
+<h4>String.setMask (startPos, length)</h4>
+<pre>
+制定字串中位置進行遮罩
+<i>
+    startPos => 開始遮罩位置
+    length => 遮罩長度
+</i>
+</pre>
+<h4>$(#formId).cacheForm()</h4>
+<pre>
+將表單數值以数组形式序列化輸出暫存
+<i>
+<a href="https://api.jquery.com/serializeArray/" target="_blank">jQuery serializeArray reference online</a>
+</i>
+</pre>
+<h4>$(#formId).restoreForm()</h4>
+<pre>
+<b>將暫存序列化數值填回表單</b>
+<i>
+formData => $(#formId).serializeArray()
+</i>
+</pre>
+<h4>$(#formId).resetForm()</h4>
+<pre>
+<b>重設表單填入數值</b>
+<i>
+</i>
+</pre>
+<h4>parseTWDatetime(d)</h4>
+<pre>
+將日期字串轉成民國年格式日期時間
+<i>
+    d => new date()
+</i>
+</pre>
+<h4>parseTWDate(d)</h4>
+<pre>
+將日期字串轉成民國年格式日期
+<i>
+    d => new date()
+</i>
+</pre>
+@section scripts {
+    <script>
+        $(function () {
+            $('#demo1').kendoButton({
+                click: function (e) {
+                    setWinWork('@Url.Action("SampleCSS", "Demo")', 'setWinWork');
+                }
+            });
+            $('#demo2').kendoButton({
+                click: function (e) {
+                    alertMessage('alertMessage示範 (10秒後自動關閉)', function () {
+                        alertMessage('callback');
+                    }, 10000);
+                }
+            });
+            $('#demo3').kendoButton({
+                click: function (e) {
+                    confirmMessage('confirmMessage示範', function () {
+                        alertMessage('callbackYes');
+                    }, function () {
+                        alertMessage('callbackNo');
+                    });
+                }
+            });
+        });
+    </script>
+}
+

@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+    <mvcSiteMapNode title="$resources:MvcSitemap,Home" action="Index" controller="Home" clickable="false">
+      <mvcSiteMapNode title="$resources:MvcSitemap,About" action="About" controller="Home"/>
+      <mvcSiteMapNode title="$resources:MvcSitemap,Announce" clickable="false">
+      <mvcSiteMapNode title="$resources:MvcSitemap,Announce_1" action="Query" controller="Announcement" />
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="$resources:MvcSitemap,MailModule" clickable="false">
+      <mvcSiteMapNode title="$resources:MvcSitemap,MailModule_1" action="Query" controller="MailLog" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,MailModule_2" action="Query" controller="MailRole" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,MailModule_3" action="Query" controller="MailSet" />
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="$resources:MvcSitemap,eFormModule" clickable="false">
+      <mvcSiteMapNode title="$resources:MvcSitemap,eFormModule_1" action="Query" controller="eFormSet" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,eFormModule_2" action="Query" controller="eForm" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,eFormModule_3" action="QueryFlow" controller="eForm" />
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="$resources:MvcSitemap,FlowModule" clickable="false">
+      <mvcSiteMapNode title="$resources:MvcSitemap,FlowModule_1" action="Query" controller="ActiveFlow" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,FlowModule_2" action="Query" controller="FlowRole" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,FlowModule_3" action="Query" controller="Flowset" />
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="$resources:MvcSitemap,Spec" clickable="false">
+      <mvcSiteMapNode title="$resources:MvcSitemap,Spec_1" action="AboutWebconfig" controller="Spec" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,Spec_2" action="AboutSession" controller="Spec" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,Spec_3" action="AboutLog" controller="Spec" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,Spec_4" action="AboutLayout" controller="Spec" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,Spec_5" action="AboutMessage" controller="Spec" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,Spec_6" action="AboutSitemap" controller="Spec" />
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="$resources:MvcSitemap,Sample" clickable="false">
+      <mvcSiteMapNode title="$resources:MvcSitemap,Sample_1" action="SampleCSS" controller="Demo" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,Sample_2" action="SampleJS" controller="Demo" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,Sample_3" action="SampleUsercontrol" controller="Demo" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,Sample_4" action="SampleGrid" controller="Demo" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,Sample_5" action="SampleDAC" controller="Demo" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,Sample_6" action="SampleAppCode" controller="Demo" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,Sample_7" action="SampleFlowApi" controller="Demo" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,Sample_8" action="SampleApi" controller="Demo" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,Sample_9" action="SampleEform" controller="Demo" />
+    </mvcSiteMapNode>
+    <mvcSiteMapNode title="$resources:MvcSitemap,Sysop" clickable="false">
+      <mvcSiteMapNode title="$resources:MvcSitemap,Sysop_1" action="Query" controller="EmpUser" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,Sysop_2" action="Query" controller="DimRole" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,Sysop_3" action="Query" controller="DimRight" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,Sysop_4" action="Query" controller="SetFunction" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,Sysop_5" action="Query" controller="EmpAgent" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,Sysop_6" action="Query" controller="EmpOrg" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,Sysop_7" action="Query" controller="SetParam" />
+      <mvcSiteMapNode title="$resources:MvcSitemap,Sysop_8" action="Query" controller="SqlLog" />
+    </mvcSiteMapNode>
+  </mvcSiteMapNode>
+</mvcSiteMap>

@@ -1,0 +1,46 @@
+﻿
+@{
+
+}
+@section buttons {
+    <script>
+        toolBar.add({
+            type: 'button',
+            text: '存檔',
+            click: function () {
+                frmBuilder.saveForm();
+            }
+        });
+        toolBar.add({
+            type: 'button',
+            text: '重設',
+            click: function () {
+                frmBuilder.resetForm();
+            }
+        });
+    </script>
+}
+@section forms {
+}
+@using (Ajax.BeginForm("Update", "eForm", null, new AjaxOptions
+{
+    OnSuccess = "alertSuccess",
+    OnFailure = "alertMessage"
+}, new { id = "frmUpdate" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("FORM_ID", "")
+    @Html.Hidden("FILL_ID", (string)ViewBag.fillId)
+    @Html.Hidden("FILL_DATA", "")
+}
+@section scripts {
+    <script>
+        function alertSuccess(result) {
+            alertMessage(result, function () {
+                parent.location.reload();
+            });
+        }
+        var frmBuilder = $('#frmUpdate').buildForm();
+    </script>
+}
+

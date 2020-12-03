@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="robots" content="noindex,nofollow" />
+	<title>@i18N.Message.P02</title>
+	<link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
+	@Styles.Render("~/Content/themes/base/jquery")
+	@Styles.Render("~/Content/bootstrap")
+	@Styles.Render("~/Content/styles/kendo")
+	@Styles.Render("~/Content/basic")
+	<link rel="stylesheet" id="colorCSS" href="@Url.Content(string.Format("~/Content/SDObasic/SDObasic-{0}.css", string.IsNullOrWhiteSpace(ViewBag.GetCookie("colorCSS")) ? "blue" : ViewBag.GetCookie("colorCSS")))" />
+	@Scripts.Render("~/bundles/jquery")
+	@*@Scripts.Render("~/bundles/modernizr")*@
+	@Scripts.Render("~/bundles/jqueryval")
+	@Scripts.Render("~/bundles/bootstrap")
+	@Scripts.Render("~/bundles/kendo")
+	<script src="@Url.Content(string.Format("~/Scripts/KENDO/js/cultures/kendo.culture.{0}.min.js", string.IsNullOrWhiteSpace(ViewBag.GetCookie("i18N")) ? "zh-TW" : ViewBag.GetCookie("i18N")))"></script>
+	<script src="@Url.Content(string.Format("~/Scripts/KENDO/js/messages/kendo.messages.{0}.min.js", string.IsNullOrWhiteSpace(ViewBag.GetCookie("i18N")) ? "zh-TW" : ViewBag.GetCookie("i18N")))"></script>
+	<script>
+        var pageConfig = {
+            rootPath: '@Url.Content("~/")',
+            cookiePath: '',
+            i18N: '@(string.IsNullOrWhiteSpace(ViewBag.GetCookie("i18N")) ? "zh-TW" : ViewBag.GetCookie("i18N"))'
+        };
+        if (top.location != self.location)
+            top.location.replace('@FormsAuthentication.LoginUrl');
+	</script>
+	@Scripts.Render("~/bundles/sdo")
+	<script>
+        //alert message
+		function showMessage(msg, callback, timeout) {
+			var timer;
+            var dlgDiv = $('<div />').appendTo($('body'));
+            var dlgAlert = dlgDiv.kendoAlert({
+                title: false,
+                content: msg.length > 0 ? msg : '@i18N.Message.R01',
+                actions: [{
+                    text: '確定',
+					action: function (e) {
+						if (timer) {
+							// 避免按下確定後繼續執行 setTimeout，清除setTimeout
+							clearTimeout(timer);
+						}
+						if (callback && $.isFunction(callback))
+                            callback();
+                    }
+                }]
+            }).data('kendoAlert');
+            if (timeout && $.isNumeric(timeout)) {
+				timer = setTimeout(function (){
+                    dlgAlert.close();
+                    if (callback && $.isFunction(callback))
+                        callback();
+                }, timeout);
+            }
+        }
+        //confirm message
+        function showConfirm(msg, callbackYes, callbackNo) {
+            if (msg.length <= 0)
+                showMessage(msg);
+            else {
+                var dlgDiv = $('<div />').appendTo($('body'));
+                dlgDiv.kendoConfirm({
+                    title: false,
+                    content: msg,
+                    messages: {
+                        okText: '確定',
+                        cancel: '取消'
+                    }
+                }).data('kendoConfirm').result.done(function () {
+                    if (callbackYes && $.isFunction(callbackYes))
+                        callbackYes();
+                }).fail(function () {
+                    if (callbackNo && $.isFunction(callbackNo))
+                        callbackNo();
+                });
+            }
+        }
+	</script>
+</head>
+<body>
+	<form id="__AjaxAntiForgeryForm" action="#" method="post">@Html.AntiForgeryToken()</form>
+	<div id="dlgProgress">
+		<img src="~/Images/loading.gif" title="系統執行中...." />
+	</div>
+	<script>
+		var dlgProgress = $('#dlgProgress').kendoDialog({
+			title: false,
+			closable: false,
+			visible: false,
+			open: function () {
+				$('#dlgProgress').parent().css('min-width:50px');
+			}
+		}).data('kendoDialog');
+	</script>
+	<header>
+		<!--BANNER-->
+		<img src="~/Images/logo.png" title="@i18N.Message.P02" /><span><a href="@Url.Content("~/")">@i18N.Message.P02</a></span>
+		<ul id="userInfo">
+			@if (User.Identity.IsAuthenticated)
+			{
+				using (Html.BeginForm("SetAgent", "System", FormMethod.Post, new { ID = "frmAgent" }))
+				{
+					@Html.AntiForgeryToken()
+					<li>
+						<button type="button" style="background-color:#446296;height:1.5em;padding:2px 5px;" onclick="setCSSColor('blue')"></button>
+						<button type="button" style="background-color:#377f8b;height:1.5em;padding:2px 5px;" onclick="setCSSColor('green')"></button>
+						<button type="button" style="background-color:#b7aac4;height:1.5em;padding:2px 5px;" onclick="setCSSColor('purple')"></button>
+					</li>
+					<li>
+						@Html.DropDownList("USER_ID", (SelectList)ViewBag.GetLoginUser().GetEmpAgents(), ((EmpUserModel)ViewBag.GetLoginUser()).USER_DISPLAY)
+					</li>
+					<li>
+						<button type="button" onclick="logout()">登出</button>
+					</li>
+				}
+			}
+			else
+			{
+				using (Ajax.BeginForm("Login", "System", new AjaxOptions
+				{
+					OnSuccess = "login",
+					OnFailure = "alertMessage"
+				}, new { id = "frmLogin" }))
+				{
+					@Html.AntiForgeryToken()
+					<li>
+						<select id="i18N">
+							<option value="zh-TW">繁體中文</option>
+							<option value="en-US">English</option>
+						</select>
+					</li>
+					<li>
+						<button type="button" onclick="$('#loginPanel').slideToggle()">登入</button>
+						<div id="loginPanel" style="display:none;">
+							<table>
+								<tr>
+									<th @(((new string[] { "1", "2" }).Contains((string)ViewBag.GetSysParam("SystemConfig", "AuthType"))) ? "" : HttpUtility.HtmlEncode("style=\"display:none;\""))>使用者帳號</th>
+									<td>
+										@Html.TextBox("LOGIN_ID")
+									</td>
+								</tr>
+								<tr>
+									<th>使用者密碼</th>
+									<td>
+										@Html.Password("LOGIN_PWD")
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" align="right">
+										@if ((new string[] { "3" }).Contains((string)ViewBag.GetSysParam("SystemConfig", "AuthType")))
+										{
+											<button type="button" onclick="window.open('https://gpkiapi.nat.gov.tw/HiPKILocalSignServer/downloadMain.html')">跨平台網頁元件</button>
+										}
+										<button type="button" onclick="checkLogin()">登入</button>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</li>
+				}
+			}
+		</ul>
+		<script>
+            if ($('#USER_ID'))
+                $('#USER_ID').kendoDropDownList({
+                    filter: 'contains',
+                    change: function (e) {
+                        if (this.value() != '' && this.value() != '@(((EmpUserModel)ViewBag.GetLoginUser()).USER_ID)')
+                            $('#frmAgent').submit();
+                    }
+                });
+            function setCSSColor(color)
+            {
+                color = color ? color : 'blue';
+                $.post('@Url.Action("Cookie", "System")', {
+                    'key': 'colorCSS',
+                    'value': color,
+                    'expires': new Date(new Date().getFullYear() + 1, 12, 31)
+                }, function () {
+                    $('#colorCSS').attr('href', '@Url.Content("~/Content/SDObasic/")SDObasic-' + color + '.css');
+                    $.each(top.$.find('iframe'), function () {
+                        $(this).contents().find('#colorCSS').attr('href', '@Url.Content("~/Content/SDObasic/")SDObasic-' + color + '.css');
+                    });
+                });
+            }
+            function logout() {
+                confirmMessage('確定要登出系統嗎？', function () {
+                    top.location.replace('@Url.Action("Logout", "System")');
+                });
+            }
+            if ($("#i18N"))
+                $("#i18N").kendoDropDownList({
+                    value: pageConfig.i18N,
+                    change: function (e) {
+                        $.post('@Url.Action("Cookie", "System")', {
+                            'key': 'i18N',
+                            'value': $("#i18N").val(),
+                            'expires': new Date(new Date().getFullYear() + 1, 12, 31)
+                        }, function () {
+                            top.location.reload();
+                        });
+                    }
+                });
+            function checkLogin() {
+                if (!$('#LOGIN_ID').is(":visible"))
+                    certLogin($('#LOGIN_PWD').val());
+                else
+                    $('#frmLogin').submit();
+            }
+            function login(data) {
+                if (data.success)
+                    top.location.replace(data.result);
+                else
+                    alertMessage(data);
+            }
+		</script>
+	</header>
+	<div id="container" class="navOpen">
+		@RenderBody()
+	</div>
+	<footer>
+		@i18N.Message.P01&copy;@DateTime.Now.Year
+	</footer>
+	@RenderSection("scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,129 @@
+﻿@using System.Configuration;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="robots" content="noindex,nofollow" />
+    <title>@ViewBag.Title</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/favicon.ico" />
+    @Styles.Render("~/Content/themes/base/jquery")
+    @Styles.Render("~/Content/bootstrap")
+    @Styles.Render("~/Content/styles/kendo")
+    @Styles.Render("~/Content/basic")
+    <link rel="stylesheet" id="colorCSS" href="@Url.Content(string.Format("~/Content/SDObasic/SDObasic-{0}.css", string.IsNullOrWhiteSpace(ViewBag.GetCookie("colorCSS")) ? "blue" : ViewBag.GetCookie("colorCSS")))" />
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/kendo")
+    <script src="@Url.Content(string.Format("~/Scripts/KENDO/js/cultures/kendo.culture.{0}.min.js", string.IsNullOrWhiteSpace(ViewBag.GetCookie("i18N")) ? "zh-TW" : ViewBag.GetCookie("i18N")))"></script>
+    <script src="@Url.Content(string.Format("~/Scripts/KENDO/js/messages/kendo.messages.{0}.min.js", string.IsNullOrWhiteSpace(ViewBag.GetCookie("i18N")) ? "zh-TW" : ViewBag.GetCookie("i18N")))"></script>
+    <script>
+        var pageConfig = {
+            rootPath: '@Url.Content("~/")',
+            cookiePath: '@Request.Path@@',
+            i18N: '@(string.IsNullOrWhiteSpace(ViewBag.GetCookie("i18N")) ? "zh-TW" : ViewBag.GetCookie("i18N"))'
+        };
+        function resizeGrid() {
+            $('div[id^="grid"]').each(function () {
+                var grid = $(this).data('kendoGrid');
+                if (grid) {
+                    grid.setOptions({
+                        height: parseInt($(window).height() - $('#floatMenu').height() - 7)
+                    });
+                    grid.refresh();
+                }
+            });
+            if (winWork) {
+                winWork.setOptions({
+                    height: parseInt($(window).height() * 0.9),
+                    width: parseInt($(window).width() * 0.9)
+                });
+                setTimeout(function () {
+                    winWork.center()
+                }, 10);
+            }
+        }
+        $(window).resize(function () {
+            resizeGrid();
+        });
+    </script>
+    @Scripts.Render("~/bundles/sdo")
+</head>
+<body>
+    <div id="winWork"></div>
+    <script>
+        var winWork = $('#winWork').kendoWindow({
+            actions: ['Maximize', 'Close'],
+            iframe: true,
+            modal: true,
+            refresh: function () {
+                winWork.open();
+            },
+            activate: function () {
+                setTimeout(function () {
+                    winWork.center()
+                }, 10);
+            }
+        }).data('kendoWindow').close();
+        function setWinWork(url, title) {
+            if (top.dlgProgress)
+                top.dlgProgress.open();
+            winWork.title(title ? '@ViewBag.Title-' + title : '@ViewBag.Title')
+            winWork.setOptions({
+                position: { top: 0, left: 0 },
+                height: parseInt($(window).height() * 0.9),
+                width: parseInt($(window).width() * 0.9)
+            });
+            winWork.refresh(url);
+            setTimeout(function () {
+                if (top.dlgProgress)
+                    top.dlgProgress.close();
+            }, 10000);
+        }
+    </script>
+	<div id="floatMenu">
+		@if (Html.MvcSiteMap().SiteMap.CurrentNode != default(MvcSiteMapProvider.ISiteMapNode))
+		{
+			<div class="fn-path">@Html.MvcSiteMap().SiteMapPath()</div>
+		}
+		<div class="fn-buttons"></div>
+		<script>
+			var toolBar = $('.fn-buttons').kendoToolBar({
+				items: [{
+					type: 'button',
+					id: 'menuToggle',
+					icon: 'menu',
+					overflow: 'never',
+					click: function () {
+						$('.fn-form').slideToggle('slow', function () {
+							resizeGrid();
+						});
+					}
+				}]
+			}).data('kendoToolBar');
+		</script>
+		@RenderSection("buttons", required: false)
+		<div class="fn-form">
+			@RenderSection("forms", required: false)
+		</div>
+	</div>
+    @RenderBody()
+    @RenderSection("scripts", required: false)
+    <script>
+            function fixToolbar() {
+                $('#floatMenu').css('position', 'fixed').css('top', 0).css('z-index', 99).css('background-color', 'inherit').width($(window).width());
+                $('body').css('margin-top', parseInt($('#floatMenu').height()));
+            }
+            $(function () {
+                setTimeout(function () {
+                    if ($('.fn-form').text().trim().length === 0)
+                        toolBar.remove($('#menuToggle'));
+                    if ($('.fn-buttons').children('a').length === 0)
+                        $('.fn-buttons').hide();
+                    resizeGrid();
+                }, 10);
+            });
+    </script>
+</body>
+</html>

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TestDBModelStoreContainer" CdmEntityContainer="TestDBEntities1">
+    <EntitySetMapping Name="Vendor_D">
+      <EntityTypeMapping TypeName="TestDBModel.Vendor_D">
+        <MappingFragment StoreEntitySet="Vendor_D">
+          <ScalarProperty Name="SupId" ColumnName="SupId" />
+          <ScalarProperty Name="FirmNo" ColumnName="FirmNo" />
+          <ScalarProperty Name="FirmName" ColumnName="FirmName" />
+          <ScalarProperty Name="FirmShortNo" ColumnName="FirmShortNo" />
+          <ScalarProperty Name="MapType" ColumnName="MapType" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+          <ScalarProperty Name="ArrivalDays" ColumnName="ArrivalDays" />
+          <ScalarProperty Name="FirmType" ColumnName="FirmType" />
+          <ScalarProperty Name="VendorCreatDate" ColumnName="VendorCreatDate" />
+          <ScalarProperty Name="DataPeriod_S" ColumnName="DataPeriod_S" />
+          <ScalarProperty Name="DataPeriod_E" ColumnName="DataPeriod_E" />
+          <ScalarProperty Name="ContactDate_S" ColumnName="ContactDate_S" />
+          <ScalarProperty Name="ContactDate_E" ColumnName="ContactDate_E" />
+          <ScalarProperty Name="SettleType" ColumnName="SettleType" />
+          <ScalarProperty Name="PayType" ColumnName="PayType" />
+          <ScalarProperty Name="BankCode" ColumnName="BankCode" />
+          <ScalarProperty Name="RemitAcno" ColumnName="RemitAcno" />
+          <ScalarProperty Name="PayArea" ColumnName="PayArea" />
+          <ScalarProperty Name="CheckDays" ColumnName="CheckDays" />
+          <ScalarProperty Name="RefundType" ColumnName="RefundType" />
+          <ScalarProperty Name="InvoiceType" ColumnName="InvoiceType" />
+          <ScalarProperty Name="AddressDist" ColumnName="AddressDist" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="DFLG" ColumnName="DFLG" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="DataDate" ColumnName="DataDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vendor_M">
+      <EntityTypeMapping TypeName="TestDBModel.Vendor_M">
+        <MappingFragment StoreEntitySet="Vendor_M">
+          <ScalarProperty Name="SupId" ColumnName="SupId" />
+          <ScalarProperty Name="SupName" ColumnName="SupName" />
+          <ScalarProperty Name="SupShortName" ColumnName="SupShortName" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="ShipType" ColumnName="ShipType" />
+          <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Tel" ColumnName="Tel" />
+          <ScalarProperty Name="Fax" ColumnName="Fax" />
+          <ScalarProperty Name="VendorCreatDate" ColumnName="VendorCreatDate" />
+          <ScalarProperty Name="IST_Date" ColumnName="IST_Date" />
+          <ScalarProperty Name="IEN_Date" ColumnName="IEN_Date" />
+          <ScalarProperty Name="StopTranDate_S" ColumnName="StopTranDate_S" />
+          <ScalarProperty Name="StopTranDate_E" ColumnName="StopTranDate_E" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="DataDate" ColumnName="DataDate" />
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

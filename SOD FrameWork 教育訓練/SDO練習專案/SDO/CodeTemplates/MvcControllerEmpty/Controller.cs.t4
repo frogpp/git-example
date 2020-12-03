@@ -1,0 +1,149 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ output extension="cs" #>
+<#@ parameter type="System.String" name="ControllerName" #>
+<#@ parameter type="System.String" name="ControllerRootName" #>
+<#@ parameter type="System.String" name="Namespace" #>
+<#@ parameter type="System.String" name="AreaName" #>
+<#
+string routePrefix;
+if (String.IsNullOrEmpty(AreaName)) 
+{
+    routePrefix = ControllerRootName;
+}
+else
+{
+    routePrefix = AreaName + "/" + ControllerRootName;
+}
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using SDO.Dacs;
+using SDO.Models;
+
+namespace SDO.Controllers
+{
+	/// <summary>
+    /// TODO：請填入功能名稱, 如：藥商普查作業啟動
+    /// </summary>
+    /// <remarks>
+    ///     TODO：請填入開發者資訊, 如：Created by Steven Tsai at 2017/08/04
+    /// </remarks>
+	[Authorize]
+	[SessionState(System.Web.SessionState.SessionStateBehavior.ReadOnly)]
+    public class <#= ControllerName #> : _Controller
+    {
+        /// <summary>
+        /// 顯示功能主畫面
+        /// </summary>
+        /// <returns>功能主畫面</returns>
+        public ActionResult Query() 
+        {
+            return View(); 
+        }
+
+		/// <summary>
+        /// 查詢
+        /// </summary>
+        /// <param name="model">查詢條件</param>
+        /// <returns>查詢結果</returns>
+		[HttpPost, ValidateAntiForgeryToken]
+		public JsonResult Query(<#=ControllerRootName#>Model.QueryView model)
+		{
+			using (<#=ControllerRootName#>Dac dac = new <#=ControllerRootName#>Dac(GetLoginUser())) {
+				return Json();
+			}				
+		}
+
+		/// <summary> 
+        /// 顯示新增畫面
+        /// </summary> 
+        /// <returns>新增畫面</returns> 
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+		/// <summary>
+        /// 新增
+        /// </summary>
+        /// <param name="model">資料編輯模型</param>
+        /// <returns>新增結果</returns>
+        [HttpPost, ValidateAntiForgeryToken]
+        public JsonResult Create(<#=ControllerRootName#>Model.EditView model)
+        {
+            using (<#=ControllerRootName#>Dac dac = new <#=ControllerRootName#>Dac(GetLoginUser()))
+            {
+                return Json(dac.Create(model));
+            }
+        }
+
+		/// <summary>
+        /// 顯示修改畫面
+        /// </summary>
+        /// <param name="id">識別值</param>
+        /// <returns>修改畫面</returns>
+        public ActionResult Update(string id) 
+        {
+            // 如果沒帶入識別值, 即跳轉至新增畫面
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return RedirectToAction("Create", "<#=ControllerRootName#>");
+            }
+
+            using (<#=ControllerRootName#>Dac dac = new <#=ControllerRootName#>Dac(GetLoginUser()))
+            {
+                return View(dac.Read(id));
+            }
+        }
+
+		/// <summary>
+        /// 修改
+        /// </summary>
+        /// <param name="model">資料編輯模型</param>
+        /// <returns>修改結果</returns>
+        [HttpPost, ValidateAntiForgeryToken]
+        public JsonResult Update(<#=ControllerRootName#>Model.EditView model)
+        {
+            using (<#=ControllerRootName#>Dac dac = new <#=ControllerRootName#>Dac(GetLoginUser()))
+            {
+                return Json(dac.Update(model));
+            }
+        }
+
+        /// <summary> 
+        ///  顯示檢視畫面
+        /// </summary> 
+        /// <param name="id">識別值</param>
+        /// <returns>檢視畫面</returns> 
+        public ActionResult Read(string id)
+        {
+            // 如果沒帶入編號, 即跳轉至新增畫面
+            if (string.IsNullOrWhiteSpace(id))
+            {
+                return RedirectToAction("Create", "<#=ControllerRootName#>");
+            }
+
+            using (<#=ControllerRootName#>Dac dac = new <#=ControllerRootName#>Dac(GetLoginUser()))
+            {
+                return View(dac.Read(id));
+            }
+        }
+		
+        /// <summary> 
+        /// 刪除
+        /// </summary> 
+        /// <param name="id">識別值</param>
+        /// <returns>刪除結果</returns> 
+        [HttpPost, ValidateAntiForgeryToken] 
+        public JsonResult Delete(string id) 
+        {
+            using (<#=ControllerRootName#>Dac dac = new <#=ControllerRootName#>Dac(GetLoginUser()))
+            {
+                return Json(dac.Delete(id));
+            }
+        }
+    }
+}

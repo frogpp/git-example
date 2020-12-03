@@ -1,0 +1,231 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TestDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="TestDBModelStoreContainer">
+          <EntitySet Name="Vendor_D" EntityType="TestDBModel.Store.Vendor_D" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Vendor_M" EntityType="TestDBModel.Store.Vendor_M" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="Vendor_D">
+          <Key>
+            <PropertyRef Name="FirmNo" />
+            <PropertyRef Name="DataPeriod_S" />
+            <PropertyRef Name="DFLG" />
+            <PropertyRef Name="DataDate" />
+          </Key>
+          <Property Name="SupId" Type="char" Nullable="false" MaxLength="8" />
+          <Property Name="FirmNo" Type="char" Nullable="false" MaxLength="10" />
+          <Property Name="FirmName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FirmShortNo" Type="char" MaxLength="6" />
+          <Property Name="MapType" Type="char" MaxLength="1" />
+          <Property Name="ContactPerson" Type="nvarchar" MaxLength="50" />
+          <Property Name="OrderType" Type="char" MaxLength="1" />
+          <Property Name="ArrivalDays" Type="char" MaxLength="1" />
+          <Property Name="FirmType" Type="char" MaxLength="1" />
+          <Property Name="VendorCreatDate" Type="char" MaxLength="10" />
+          <Property Name="DataPeriod_S" Type="char" Nullable="false" MaxLength="10" />
+          <Property Name="DataPeriod_E" Type="char" MaxLength="10" />
+          <Property Name="ContactDate_S" Type="char" MaxLength="10" />
+          <Property Name="ContactDate_E" Type="char" MaxLength="10" />
+          <Property Name="SettleType" Type="char" MaxLength="1" />
+          <Property Name="PayType" Type="char" MaxLength="1" />
+          <Property Name="BankCode" Type="char" MaxLength="3" />
+          <Property Name="RemitAcno" Type="nvarchar" MaxLength="16" />
+          <Property Name="PayArea" Type="char" MaxLength="1" />
+          <Property Name="CheckDays" Type="char" MaxLength="3" />
+          <Property Name="RefundType" Type="char" MaxLength="1" />
+          <Property Name="InvoiceType" Type="char" MaxLength="1" />
+          <Property Name="AddressDist" Type="char" MaxLength="10" />
+          <Property Name="ZipCode" Type="char" MaxLength="5" />
+          <Property Name="Address" Type="nvarchar" MaxLength="80" />
+          <Property Name="Tel" Type="char" MaxLength="14" />
+          <Property Name="Fax" Type="char" MaxLength="14" />
+          <Property Name="DFLG" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="DataDate" Type="datetime" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Vendor_M">
+          <Key>
+            <PropertyRef Name="SupId" />
+          </Key>
+          <Property Name="SupId" Type="char" Nullable="false" MaxLength="8" />
+          <Property Name="SupName" Type="nvarchar" MaxLength="50" />
+          <Property Name="SupShortName" Type="nvarchar" MaxLength="25" />
+          <Property Name="ContactPerson" Type="nvarchar" MaxLength="50" />
+          <Property Name="ShipType" Type="char" MaxLength="1" />
+          <Property Name="ZipCode" Type="char" MaxLength="5" />
+          <Property Name="Address" Type="nvarchar" MaxLength="80" />
+          <Property Name="Tel" Type="char" MaxLength="14" />
+          <Property Name="Fax" Type="char" MaxLength="14" />
+          <Property Name="VendorCreatDate" Type="char" MaxLength="10" />
+          <Property Name="IST_Date" Type="char" MaxLength="10" />
+          <Property Name="IEN_Date" Type="char" MaxLength="10" />
+          <Property Name="StopTranDate_S" Type="char" MaxLength="10" />
+          <Property Name="StopTranDate_E" Type="char" MaxLength="10" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="DataDate" Type="datetime" Nullable="false" />
+          <Property Name="UserID" Type="nvarchar" MaxLength="10" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TestDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TestDBEntities1" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Vendor_D" EntityType="TestDBModel.Vendor_D" />
+          <EntitySet Name="Vendor_M" EntityType="TestDBModel.Vendor_M" />
+        </EntityContainer>
+        <EntityType Name="Vendor_D">
+          <Key>
+            <PropertyRef Name="FirmNo" />
+            <PropertyRef Name="DataPeriod_S" />
+            <PropertyRef Name="DFLG" />
+            <PropertyRef Name="DataDate" />
+          </Key>
+          <Property Name="SupId" Type="String" Nullable="false" MaxLength="8" Unicode="false" FixedLength="true" />
+          <Property Name="FirmNo" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="FirmName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="FirmShortNo" Type="String" MaxLength="6" Unicode="false" FixedLength="true" />
+          <Property Name="MapType" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="ContactPerson" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="OrderType" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="ArrivalDays" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="FirmType" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="VendorCreatDate" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="DataPeriod_S" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="DataPeriod_E" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="ContactDate_S" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="ContactDate_E" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="SettleType" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="PayType" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="BankCode" Type="String" MaxLength="3" Unicode="false" FixedLength="true" />
+          <Property Name="RemitAcno" Type="String" MaxLength="16" Unicode="true" FixedLength="false" />
+          <Property Name="PayArea" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="CheckDays" Type="String" MaxLength="3" Unicode="false" FixedLength="true" />
+          <Property Name="RefundType" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="InvoiceType" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="AddressDist" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="5" Unicode="false" FixedLength="true" />
+          <Property Name="Address" Type="String" MaxLength="80" Unicode="true" FixedLength="false" />
+          <Property Name="Tel" Type="String" MaxLength="14" Unicode="false" FixedLength="true" />
+          <Property Name="Fax" Type="String" MaxLength="14" Unicode="false" FixedLength="true" />
+          <Property Name="DFLG" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserID" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Vendor_M">
+          <Key>
+            <PropertyRef Name="SupId" />
+          </Key>
+          <Property Name="SupId" Type="String" Nullable="false" MaxLength="8" Unicode="false" FixedLength="true" />
+          <Property Name="SupName" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="SupShortName" Type="String" MaxLength="25" Unicode="true" FixedLength="false" />
+          <Property Name="ContactPerson" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="ShipType" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="5" Unicode="false" FixedLength="true" />
+          <Property Name="Address" Type="String" MaxLength="80" Unicode="true" FixedLength="false" />
+          <Property Name="Tel" Type="String" MaxLength="14" Unicode="false" FixedLength="true" />
+          <Property Name="Fax" Type="String" MaxLength="14" Unicode="false" FixedLength="true" />
+          <Property Name="VendorCreatDate" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="IST_Date" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="IEN_Date" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="StopTranDate_S" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="StopTranDate_E" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="DataDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UserID" Type="String" MaxLength="10" Unicode="true" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TestDBModelStoreContainer" CdmEntityContainer="TestDBEntities1">
+          <EntitySetMapping Name="Vendor_D">
+            <EntityTypeMapping TypeName="TestDBModel.Vendor_D">
+              <MappingFragment StoreEntitySet="Vendor_D">
+                <ScalarProperty Name="SupId" ColumnName="SupId" />
+                <ScalarProperty Name="FirmNo" ColumnName="FirmNo" />
+                <ScalarProperty Name="FirmName" ColumnName="FirmName" />
+                <ScalarProperty Name="FirmShortNo" ColumnName="FirmShortNo" />
+                <ScalarProperty Name="MapType" ColumnName="MapType" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="OrderType" ColumnName="OrderType" />
+                <ScalarProperty Name="ArrivalDays" ColumnName="ArrivalDays" />
+                <ScalarProperty Name="FirmType" ColumnName="FirmType" />
+                <ScalarProperty Name="VendorCreatDate" ColumnName="VendorCreatDate" />
+                <ScalarProperty Name="DataPeriod_S" ColumnName="DataPeriod_S" />
+                <ScalarProperty Name="DataPeriod_E" ColumnName="DataPeriod_E" />
+                <ScalarProperty Name="ContactDate_S" ColumnName="ContactDate_S" />
+                <ScalarProperty Name="ContactDate_E" ColumnName="ContactDate_E" />
+                <ScalarProperty Name="SettleType" ColumnName="SettleType" />
+                <ScalarProperty Name="PayType" ColumnName="PayType" />
+                <ScalarProperty Name="BankCode" ColumnName="BankCode" />
+                <ScalarProperty Name="RemitAcno" ColumnName="RemitAcno" />
+                <ScalarProperty Name="PayArea" ColumnName="PayArea" />
+                <ScalarProperty Name="CheckDays" ColumnName="CheckDays" />
+                <ScalarProperty Name="RefundType" ColumnName="RefundType" />
+                <ScalarProperty Name="InvoiceType" ColumnName="InvoiceType" />
+                <ScalarProperty Name="AddressDist" ColumnName="AddressDist" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="DFLG" ColumnName="DFLG" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="DataDate" ColumnName="DataDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Vendor_M">
+            <EntityTypeMapping TypeName="TestDBModel.Vendor_M">
+              <MappingFragment StoreEntitySet="Vendor_M">
+                <ScalarProperty Name="SupId" ColumnName="SupId" />
+                <ScalarProperty Name="SupName" ColumnName="SupName" />
+                <ScalarProperty Name="SupShortName" ColumnName="SupShortName" />
+                <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+                <ScalarProperty Name="ShipType" ColumnName="ShipType" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Tel" ColumnName="Tel" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="VendorCreatDate" ColumnName="VendorCreatDate" />
+                <ScalarProperty Name="IST_Date" ColumnName="IST_Date" />
+                <ScalarProperty Name="IEN_Date" ColumnName="IEN_Date" />
+                <ScalarProperty Name="StopTranDate_S" ColumnName="StopTranDate_S" />
+                <ScalarProperty Name="StopTranDate_E" ColumnName="StopTranDate_E" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="DataDate" ColumnName="DataDate" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

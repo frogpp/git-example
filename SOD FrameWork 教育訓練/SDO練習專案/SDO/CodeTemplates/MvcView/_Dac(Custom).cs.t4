@@ -1,0 +1,120 @@
+﻿<#@ template hostspecific="true" language="C#" #>
+<#@ include file="Imports.include.t4" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+using SDO.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Transactions;
+
+namespace SDO.Dacs
+{
+	/// <summary>
+    /// TODO：請填入功能名稱, 如：藥商普查作業啟動資料存取
+    /// </summary>
+    /// <remarks>
+    ///     TODO：請填入開發者資訊, 如：Created by Steven Tsai at 2017/08/04
+    /// </remarks>
+    public class <#= ViewName #> : _Dac
+    {
+        /// <summary>
+        /// 建構函式
+        /// </summary>
+        /// <param name="loginUser">登入使用者資訊</param>
+        public <#= ViewName #>(EmpUserModel loginUser) : base(loginUser) { }
+
+        /// <summary>
+        /// 取得特定資料
+        /// </summary>
+        /// <param name="ID">索引欄位</param>
+        /// <returns>特定資料</returns>
+        public <#= ViewDataTypeShortName #>.DTO Read(string ID)
+        {
+            strSql = @"";
+            return ExecuteQuery<<#= ViewDataTypeShortName #>.DTO>(strSql, new { }).SingleOrDefault();
+        }
+
+        /// <summary>
+        /// 取得資料清單
+        /// </summary>
+        /// <param name="model">查詢條件</param>
+        /// <returns>取得資料清單</returns>
+        public IList<<#= ViewDataTypeShortName #>.DTO> Read(<#= ViewDataTypeShortName #>.QueryView model)
+        {
+            strSql = @"";
+            return ExecuteQuery<<#= ViewDataTypeShortName #>.DTO>(strSql, new { });
+        }
+
+        /// <summary>
+        /// 新增資料
+        /// </summary>
+        /// <param name="model">資料編輯模型</param>
+        /// <returns>新增資料結果</returns>
+        public RtnResultModel Create(<#= ViewDataTypeShortName #>.EditView model)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    strSql = @"";
+                    ExecuteCommand(strSql, new { });
+                    scope.Complete();
+                    return new RtnResultModel(true, i18N.Message.R04);
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 修改資料
+        /// </summary>
+        /// <param name="model">資料編輯模型</param>
+        /// <returns>修改資料結果</returns>
+        public RtnResultModel Update(<#= ViewDataTypeShortName #>.EditView model)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    strSql = @" ";
+                    ExecuteCommand(strSql, new { });
+                    scope.Complete();
+                    return new RtnResultModel(true, i18N.Message.R05);
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 刪除資料
+        /// </summary>
+        /// <param name="ID">索引欄位</param>
+        /// <returns>刪除資料結果</returns>
+        public RtnResultModel Delete(string ID)
+        {
+            try
+            {
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    strSql = @" ";
+                    ExecuteCommand(strSql, new { });
+                    scope.Complete();
+                    return new RtnResultModel(true, i18N.Message.R06);
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+    }
+}

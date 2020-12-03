@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = Resources.MvcSitemap.Spec_4;
+}
+@section buttons {
+
+}
+@section forms{
+
+}
+<h4>_Layout</h4>
+<pre>
+<i>
+@@{
+    //頁面宣告區塊
+    ViewBag.Title = {};
+}
+@@section buttons(required: false) {
+    //功能按鈕區塊(<a href="@Url.Action("SampleJS", "Demo")">JS reference online</a>) 
+    @Html.Raw(HttpUtility.HtmlEncode("<script>"))
+    toolBar.add({
+        id: '{button ID}',
+        type: 'button',
+        text: '{button name}',
+        click: function () {
+            //button click event
+        }
+    });
+    @Html.Raw(HttpUtility.HtmlEncode("</script>"))
+}
+@@section forms(required: false) {
+    //查詢表單(form)內容區塊    
+}
+    //網頁內容區塊
+@@section scripts(required: false) {
+    //網頁Script內容區塊
+    @Html.Raw(HttpUtility.HtmlEncode("<script>"))
+        $(function () {
+        });
+    @Html.Raw(HttpUtility.HtmlEncode("</script>"))
+}
+</i>
+</pre>
+@section scripts {
+
+}
+

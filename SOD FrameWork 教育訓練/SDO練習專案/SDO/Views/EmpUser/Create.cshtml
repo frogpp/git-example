@@ -1,0 +1,69 @@
+﻿@model SDO.Models.EmpUserModel
+@{
+
+}
+@section buttons {
+	<script>
+		toolBar.add({
+			type: 'button',
+			text: '存檔',
+			click: function () {
+				$('#frmCreate').submit();
+			}
+		});
+		toolBar.add({
+			type: 'button',
+			text: '重設',
+			click: function () {
+				$('#frmCreate').resetForm();
+			}
+		});
+	</script>
+}
+@using (Ajax.BeginForm("Create", "EmpUser", null, new AjaxOptions
+{
+	OnSuccess = "alertSuccess",
+	OnFailure = "alertMessage"
+}, new { id = "frmCreate" }))
+{
+	@Html.AntiForgeryToken()
+	<table>
+		<tr>
+			<th>@Html.LabelFor(m => m.USER_ID)</th>
+			<td>@Html.TextBoxFor(m => m.USER_ID)@Html.ValidationMessageFor(m => m.USER_ID)</td>
+		</tr>
+		<tr>
+			<th>@Html.LabelFor(m => m.USER_NAME)</th>
+			<td>@Html.TextBoxFor(m => m.USER_NAME)@Html.ValidationMessageFor(m => m.USER_NAME)</td>
+		</tr>
+		<tr>
+			<th>@Html.LabelFor(m => m.USER_EMAIL)</th>
+			<td>@Html.EditorFor(m => m.USER_EMAIL)@Html.ValidationMessageFor(m => m.USER_EMAIL)</td>
+		</tr>
+		<tr>
+			<th>@Html.LabelFor(m => m.USER_PWD)</th>
+			<td>@Html.EditorFor(m => m.USER_PWD)</td>
+		</tr>
+		<tr>
+			<th>@Html.LabelFor(m => m.CONFIRM_USER_PWD)</th>
+			<td>@Html.EditorFor(m => m.CONFIRM_USER_PWD)@Html.ValidationMessageFor(m => m.CONFIRM_USER_PWD)</td>
+		</tr>
+		<tr>
+			<th>@i18N.Label.EmpUser_MAP_DimRole</th>
+			<td>
+				@Html.ListBox("ROLES", (IList<SelectListItem>)ViewBag.EmpUserRoles)
+				@Html.Partial("_ListSelector", new ViewDataDictionary { { "ID", "ROLES" }, { "FROM", ViewBag.DimRoles } })
+			</td>
+		</tr>
+	</table>
+}
+@section scripts {
+	<script>
+		function alertSuccess(result) {
+			alertMessage(result, function () {
+				parent.location.reload();
+			});
+		}
+	</script>
+}
+

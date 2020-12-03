@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Demo2";
+}
+
+<h2>使用 Module 定義 Controller</h2>
+
+<ol>
+    <li>
+    建立 Module<br />
+    var myApp = angular.module("exampleApp", []);
+    </li>
+    <li>
+    建立 Controller<br />
+    <pre>
+...
+
+myApp.controller("dayCtrl", function ($scope) {
+    // controller statements will go here
+});
+
+...
+    </pre>
+    </li>
+    <li>說明：<br />
+AngularJS 會識別 Controller 的參數名稱，使用相依性注入技術，將所需要的服務傳入<br />
+此例中 AngularJS 識別出存放資料Model的服務 $scope，會自動傳入該服務<br />
+$scope 扮演 MVC 中的 Model 角色，用在 View 與 Controller 之間的資料傳遞
+    </li>
+</ol>
+
+<h2>實例如下：</h2>
+<div ng-app="exampleApp" ng-controller="dayCtrl" class="demo">
+    exampleApp 的 dayCtrl 作用範圍<br />
+    今天是 {{day || "(未知)"}}
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        var myApp = angular.module("exampleApp", []);
+
+        myApp.controller("dayCtrl", function ($scope) {
+            var dayNames = ["星期日", "星期一", "星期二", "星期三",
+                "星期四", "星期五", "星期六"];
+            $scope.day = dayNames[new Date().getDay()];
+        });
+    </script>
+}

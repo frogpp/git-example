@@ -1,0 +1,76 @@
+﻿@model SDO.Models.AnnouncementModel
+@{
+    ViewBag.Title = Resources.MvcSitemap.Announce_1;
+}
+@section buttons {
+    <script type="text/javascript">
+        toolBar.add({
+            id: 'btnQuery',
+            type: 'button',
+            text: '@i18N.Button.B04',
+            click: function () {
+                $('#frmQuery').submit();
+            }
+        });
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B05',
+            click: function () {
+                setWinWork('@Url.Action("Create", "Announcement")', '@i18N.Button.B05');
+            }
+        });
+    </script>
+}
+@section forms {
+    @using (Ajax.BeginForm("Query", "Announcement", new AjaxOptions
+    {
+        OnSuccess = "setGrid",
+        OnFailure = "alertMessage"
+    }, new { id = "frmQuery" }))
+    {
+        @Html.AntiForgeryToken()
+    }
+
+    @using (Ajax.BeginForm("Delete", "Announcement", new AjaxOptions
+    {
+        OnSuccess = "deleteSuccess",
+        OnFailure = "alertMessage"
+    }, new { id = "frmDelete" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("IDS")
+    }
+}
+<div id="grid"></div>
+<script type="text/javascript" title="init">
+    var grid = $('#grid').kendoGrid({
+        columns: [
+            { template: '<div class="icon_edit" title="@i18N.Button.B06" onclick="setWinWork(\'@Url.Action("Update", "Announcement")/#: SID #\',\'@i18N.Button.B06\')"><span class="k-icon k-i-edit"></span></div>', width: 30 },
+            { template: '<div class="icon_delete" title="@i18N.Button.B07" onclick="deleteSubmit(\'#: SID #\')"><span class="k-icon k-i-close"></span></div>', width: 30 },
+            { template: '#: EFFECTIVE_TWDATE # ~ #: EXPIRE_TWDATE #', title: '@i18N.Label.Announcement_DATE', },
+            { field: 'TITLE', title: '@i18N.Label.Announcement_TITLE', },
+        ],
+    }).data('kendoGrid');
+    function setGrid(result) {
+        grid.genGrid(result);
+    }
+</script>
+@section scripts {
+    <script type="text/javascript">
+        function deleteSubmit(id) {
+            confirmMessage('@i18N.Message.C04', function () {
+                $('#frmDelete').find('#IDS').val(id);
+                $('#frmDelete').submit();
+            });
+        }
+        function deleteSuccess(result) {
+            alertMessage(result, function () {
+                $('#btnQuery').click();
+            });
+        }
+        $(function () {
+            $('#btnQuery').click();
+        });
+    </script>
+}
+

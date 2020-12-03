@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = Resources.MvcSitemap.Spec_6;
+}
+@section buttons {
+
+}
+@section forms{
+
+}
+<h4>MVCSiteMApProvider.MVC5(<a href="https://github.com/maartenba/MvcSiteMapProvider/wiki" target="_blank">reference online</a>)</h4>
+<pre>
+    Mvc.sitemap
+<i>
+@Html.Raw(HttpUtility.HtmlEncode("<mvcSiteMapNode title=\"$resources:MvcSitemap,Home\" action=\"Index\" controller=\"Home\" clickable=\"false\">"))
+    @Html.Raw(HttpUtility.HtmlEncode("<mvcSiteMapNode title=\"$resources:MvcSitemap,About\" action=\"About\" controller=\"Home\" />"))
+@Html.Raw(HttpUtility.HtmlEncode("</mvcSiteMapNode>"))
+</i>
+</pre>
+@section scripts {
+
+}
+

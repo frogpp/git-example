@@ -1,0 +1,3 @@
+一、在本機安裝SQL Server 2016引擎並開啟服務，認證方法使用混合模式，SA帳號密碼frog-jump，並且設定防火牆 1433 Port，允許區域網路登入。
+二、安裝並使用SSMS（Sql Sever Management Studio）還原範例資料庫，並新增使用者frog帳號密碼1qazxdr5，並設定擁有的結構描述。
+三、寫一組預存程序～宣告TempTable變數，執行資料關聯及排序，並且將結果寫入至另一個新的暫存資料表。

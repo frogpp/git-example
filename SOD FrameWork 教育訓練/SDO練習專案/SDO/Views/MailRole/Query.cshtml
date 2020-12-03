@@ -1,0 +1,166 @@
+﻿@{
+    ViewBag.Title = Resources.MvcSitemap.MailModule_2;
+}
+
+<!-- 郵件角色資料清單（Grid） -->
+<div id="grid"></div>
+
+<!-- 按鈕列 -->
+@section buttons {
+    <script type="text/javascript">
+
+        // 加入「查詢」按鈕
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B04',
+            click: function () {
+                mailRoleController.Query();
+            }
+        });
+
+        // 加入「新增」按鈕
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B05',
+            click: function () {
+                setWinWork('@Url.Action("Create", "MailRole")', '@i18N.Button.B05');
+            }
+        });
+
+    </script>
+}
+
+<!-- 表單集合 -->
+@section forms {
+
+    <!-- 查詢 -->
+    @using (Ajax.BeginForm("Query", "MailRole", null, new AjaxOptions
+    {
+        OnSuccess = "mailRoleController.SetGridDataSouce",
+        OnFailure = "alertMessage"
+    }, new { id = "frmQuery" }))
+    {
+        @Html.AntiForgeryToken()
+    }
+
+    <!-- 刪除 -->
+    @using (Ajax.BeginForm("Delete", "MailRole", null, new AjaxOptions
+    {
+        OnSuccess = "mailRoleController.DeleteSuccess",
+        OnFailure = "alertMessage"
+    }, new { id = "frmDelete" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("roleID")
+    }
+
+}
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        /*
+			類別：郵件角色設定
+		    作者：Steven Tsai
+		*/
+        function MailRoleJS() {
+
+            var self = this;
+
+            /*
+		        函數：初始化 Grid 資料清單
+		        參數：無
+		        備註：無
+	        */
+            this.InitGrid = function () {
+                $('#grid').kendoGrid({
+                    columns: [
+                        { template: '<div class="icon_edit" title="@i18N.Button.B06" onclick="mailRoleController.Update(\'#: ROLE_ID #\')"><span class="k-icon k-i-edit"></span></div>', width: 30 },
+                        { template: '<div class="icon_delete" title="@i18N.Button.B07" onclick="mailRoleController.Delete(\'#: ROLE_ID #\')"><span class="k-icon k-i-close"></span></div>', width: 30 },
+                        { field: 'ROLE_ID', title: '@i18N.Label.MailRole_ROLE_ID', },
+                        { field: 'ROLE_NAME', title: '@i18N.Label.MailRole_ROLE_NAME', },
+                        { field: 'USER_COUNT', title: '@i18N.Label.MailRole_USER_COUNT', },
+                    ],
+                });
+            }
+
+            /*
+		        函數：設定 Grid 的資料來源
+		        參數：
+                    dataSource => 資料來源
+		        備註：無
+	        */
+            this.SetGridDataSouce = function (dataSource) {
+                $('#grid').data('kendoGrid').genGrid(dataSource);
+            }
+
+            /*
+		        函數：查詢
+		        參數：無
+		        備註：執行查詢動作
+	        */
+            this.Query = function () {
+                $('#frmQuery').submit();
+            }
+
+            /*
+		        函數：修改
+		        參數：
+                    roleID => 角色代碼
+		        備註：顯示修改視窗
+	        */
+            this.Update = function (roleID) {
+                // 呼叫底層顯示視窗共用函式
+                setWinWork('@Url.Action("Update", "MailRole")/' + roleID, '@i18N.Button.B06')
+            }
+
+            /*
+		        函數：刪除
+		        參數：
+                    roleID => 角色代碼
+		        備註：執行刪除動作
+	        */
+            this.Delete = function (roleID) {
+
+                // 確認是否執行刪除動作
+                confirmMessage('@i18N.Message.C04', function () {
+                    $('#frmDelete').find('#roleID').val(roleID);
+                    $('#frmDelete').submit();
+                });
+
+            }
+
+            /*
+		        函數：刪除成功
+		        參數：無
+		        備註：執行刪除成功 Callback 動作
+	        */
+            this.DeleteSuccess = function (response) {
+                alertMessage(response, function () {
+                    self.Query();
+                });
+            }
+
+        }
+
+        // 郵件角色設定 JS 控制器
+        var mailRoleController = new MailRoleJS();
+
+        /*
+			函數：載入初始化
+			參數：無
+			備註：於功能畫面載入完畢時執行
+		*/
+        $(function () {
+
+            // 初始化 Grid 資料清單
+            mailRoleController.InitGrid();
+
+            // 觸發查詢事件
+            mailRoleController.Query();
+
+        });
+
+    </script>
+}

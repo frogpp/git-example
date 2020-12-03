@@ -1,0 +1,210 @@
+﻿@model SDO.Models.eFormSetModel.QueryView
+
+@{
+    ViewBag.Title = Resources.MvcSitemap.eFormModule_1;
+}
+
+<!-- 表單設定資料清單（Grid） -->
+<div id="grid"></div>
+
+<!-- 按鈕列 -->
+@section buttons {
+    <script type="text/javascript">
+
+        // 加入「查詢」按鈕
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B04',
+            click: function () {
+                formSetController.Query();
+            }
+        });
+
+        // 加入「新增」按鈕
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B05',
+            click: function () {
+                setWinWork('@Url.Action("Create", "eFormSet")', '@i18N.Button.B05');
+            }
+        });
+
+    </script>
+}
+
+<!-- 表單集合 -->
+@section forms {
+
+    <!-- 查詢 -->
+    @using (Ajax.BeginForm("Query", "eFormSet", null, new AjaxOptions
+    {
+        OnBegin = "formSetController.CacheQueryConditions",
+        OnSuccess = "formSetController.SetGridDataSouce",
+        OnFailure = "alertMessage"
+    }, new { id = "frmQuery" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <table>
+            <tr>
+                <th>@Html.LabelFor(m => m.FORM_TYPE)</th>
+                <td>@Html.DropDownListFor(m => m.FORM_TYPE, (SelectList)ViewBag.eFormTypeList, "全部")</td>
+                <th>@Html.LabelFor(m => m.EFFECTIVE_DATE)</th>
+                <td>
+                    @Html.TextBoxFor(m => m.EFFECTIVE_DATE, new { @Value = Model == null || Model.EFFECTIVE_DATE == null ? string.Empty : ((DateTime)Model.EFFECTIVE_DATE).ToString("yyyy/MM/dd") })
+                    @Html.Partial("_TWDatetime", new ViewDataDictionary { { "ID", Html.NameFor(m => m.EFFECTIVE_DATE).ToString() }, { "DISPLAYTIME", false } })
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.LabelFor(m => m.MAP_ORG)</th>
+                <td colspan="3">
+                    @Html.DropDownListFor(m => m.MAP_ORG, new List<SelectListItem>())
+                    @Html.Partial("_OrgSelector", new ViewDataDictionary {
+                            { "ID", Html.NameFor(m => m.MAP_ORG).ToString() },
+                            { "MULTISELECT", true }
+                    })
+                </td>
+            </tr>
+        </table>
+    }
+
+    <!-- 刪除 -->
+    @using (Ajax.BeginForm("Delete", "eFormSet", null, new AjaxOptions
+    {
+        OnSuccess = "formSetController.DeleteSuccess",
+        OnFailure = "alertMessage"
+    }, new { id = "frmDelete" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("formID")
+    }
+
+}
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        /*
+			類別：表單設定
+		    作者：Steven Tsai
+		*/
+        function FormSetJS() {
+
+            var self = this;
+
+            /*
+		        函數：初始化 Grid 資料清單
+		        參數：無
+		        備註：無
+	        */
+            this.InitGrid = function () {
+                $('#grid').kendoGrid({
+                    columns: [
+                        { template: '<div class="icon_edit" title="@i18N.Button.B06" onclick="formSetController.Update(\'#: FORM_ID #\')"><span class="k-icon k-i-edit"></span></div>', width: 30 },
+                        { template: '<div class="icon_delete" title="@i18N.Button.B07" onclick="formSetController.Delete(\'#: FORM_ID #\')"><span class="k-icon k-i-close"></span></div>', width: 30 },
+                        { field: 'FORM_TYPE_NAME', title: '@i18N.Label.eForm_FLOW_TYPE', },
+                        { field: 'FORM_NAME', title: '@i18N.Label.eForm_FORM_NAME', },
+                        { title: '@i18N.Label.eForm_EFFECTIVE_DATE', template: "#: formSetController.ParseJsonDateToROCDate(EFFECTIVE_DATE) # ~ #: formSetController.ParseJsonDateToROCDate(EXPIRE_DATE) #" },
+                    ],
+                });
+            }
+
+            /*
+		        函數：設定 Grid 的資料來源
+		        參數：
+                    dataSource => 資料來源
+		        備註：無
+	        */
+            this.SetGridDataSouce = function (dataSource) {
+                $('#grid').data('kendoGrid').genGrid(dataSource);
+            }
+
+            /*
+		        函數：解析 Json 格式的日期為民國年格式的日期
+		        參數：
+                    jsonDate => Json 格式的日期
+		        備註：無
+	        */
+            this.ParseJsonDateToROCDate = function(jsonDate) {
+                return parseTWDate(new Date(parseInt(jsonDate.substr(6))));
+            }
+
+            /*
+		        函數：暫存查詢條件
+		        參數：無
+		        備註：執行查詢前, 需暫存查詢條件, 功能畫面重新整理時可自動重新帶入
+	        */
+            this.CacheQueryConditions = function () {
+                $('#frmQuery').cacheForm()
+            }
+
+            /*
+		        函數：查詢
+		        參數：無
+		        備註：執行查詢動作
+	        */
+            this.Query = function () {
+                $('#frmQuery').submit();
+            }
+
+            /*
+		        函數：修改
+		        參數：
+                    formID => 表單代碼
+		        備註：顯示修改視窗
+	        */
+            this.Update = function (formID) {
+                // 呼叫底層顯示視窗共用函式
+                setWinWork('@Url.Action("Update", "eFormSet")/' + formID, '@i18N.Button.B06')
+            }
+
+            /*
+		        函數：刪除
+		        參數：
+                    formID => 表單代碼
+		        備註：執行刪除動作
+	        */
+            this.Delete = function (formID) {
+
+                // 確認是否執行刪除動作
+                confirmMessage('@i18N.Message.C04', function () {
+                    $('#frmDelete').find('#formID').val(formID);
+                    $('#frmDelete').submit();
+                });
+
+            }
+
+            /*
+		        函數：刪除成功
+		        參數：無
+		        備註：執行刪除成功 Callback 動作
+	        */
+            this.DeleteSuccess = function (response) {
+                alertMessage(response, function () {
+                    self.Query();
+                });
+            }
+
+        }
+
+        // 表單設定 JS 控制器
+        var formSetController = new FormSetJS();
+
+        /*
+			函數：載入初始化
+			參數：無
+			備註：於功能畫面載入完畢時執行
+		*/
+        $(function () {
+            // 初始化 Grid 資料清單
+            formSetController.InitGrid();
+            // 自動重新帶入暫存的查詢條件
+            $.when($('#frmQuery').restoreForm()).then(function () {
+                //觸發查詢事件
+                formSetController.Query();
+            });
+        });
+
+    </script>
+}

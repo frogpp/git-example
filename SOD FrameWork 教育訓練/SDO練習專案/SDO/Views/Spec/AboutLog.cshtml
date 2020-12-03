@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = Resources.MvcSitemap.Spec_3;
+}
+@section buttons {
+
+}
+@section forms{
+
+}
+<ul>
+    <li>實作Controller OnException Log日誌，在Controller內呼叫function中使用try...catch...請throw exception，確保系統可以正確紀錄日誌與顯示錯誤訊息頁面</li>
+    <li>實作SQL操作流水帳Log日誌，請至Web.config內的KeepSqlLogTrace設定</li>
+    <li>
+        程式內可以直接呼叫操作Log日誌
+        <ul>
+            <li>LogSet.LogDebug(string message)</li>
+            <li>LogSet.LogError(string message)</li>
+            <li>LogSet.LogInfo(string message)</li>
+        </ul>
+    </li>
+    <li>Log日誌預設每個月初將上個月Logs目錄內的Log檔案進行壓縮封存；【SQL_TRACE】內也會將上個月同步備份成【SQL_TRACE_BAK{YYYYMM}】</li>
+    <li>Log日誌目錄安全性請針對Logs目錄將"iis apppool\{app name}"的權線開放可以進行修改即可順利進行系統壓縮備份</li>
+</ul>
+@section scripts {
+
+}
+

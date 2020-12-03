@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SDO", "SDO\SDO.csproj", "{356FAD2F-4B4B-4318-B36A-F7FA7EF0837A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "i18N", "i18N\i18N.csproj", "{41381A3D-4CCC-47D8-B932-F4344FA6E4CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{356FAD2F-4B4B-4318-B36A-F7FA7EF0837A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{356FAD2F-4B4B-4318-B36A-F7FA7EF0837A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{356FAD2F-4B4B-4318-B36A-F7FA7EF0837A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{356FAD2F-4B4B-4318-B36A-F7FA7EF0837A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41381A3D-4CCC-47D8-B932-F4344FA6E4CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41381A3D-4CCC-47D8-B932-F4344FA6E4CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41381A3D-4CCC-47D8-B932-F4344FA6E4CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41381A3D-4CCC-47D8-B932-F4344FA6E4CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		RESX_NeutralResourcesLanguage = zh-TW
+		RESX_ExcelExportMode = SingleSheet
+	EndGlobalSection
+EndGlobal

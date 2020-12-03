@@ -1,0 +1,77 @@
+﻿@model SDO.Models.EmpAgentModel
+@{
+    ViewBag.Title = Resources.MvcSitemap.Sysop_5;
+}
+@section buttons {
+    <script>
+        toolBar.add({
+            id: 'btnQuery',
+            type: 'button',
+            text: '@i18N.Button.B04',
+            click: function () {
+                $('#frmQuery').submit();
+            }
+        });
+        toolBar.add({
+            type: "separator"
+        });
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B05',
+            click: function () {
+                setWinWork('@Url.Action("Create", "EmpAgent")', '@i18N.Button.B05');
+            }
+        });
+    </script>
+}
+@section forms {
+    @using (Ajax.BeginForm("Query", "EmpAgent", null, new AjaxOptions
+    {
+        OnSuccess = "setGrid",
+        OnFailure = "alertMessage"
+    }, new { id = "frmQuery" }))
+    {
+        @Html.AntiForgeryToken()
+    }
+    @using (Ajax.BeginForm("Delete", "EmpAgent", null, new AjaxOptions
+    {
+        OnSuccess = "deleteSuccess",
+        OnFailure = "alertMessage"
+    }, new { id = "frmDelete" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("IDS")
+    }
+}
+<div id="grid"></div>
+<script type="text/javascript" title="init">
+    var grid = $('#grid').kendoGrid({
+        columns: [
+             { template: '<div class="icon_delete" title="@i18N.Button.B07" onclick="deleteSubmit(\'#: SID #\')"><span class="k-icon k-i-close"></span></div>', width: 30 },
+             { field: 'AGENT_NAME', title: '@i18N.Label.EmpAgent_AGENT_NAME', },
+             { field: 'AGENT_DATE', title: '@i18N.Label.EmpAgent_AGENT_DATE', template: '#: AGENT_FROM_TWDATE # ~ #: AGENT_TO_TWDATE #' },
+        ],
+    }).data('kendoGrid');
+    function setGrid(result) {
+        grid.genGrid(result);
+    }
+</script>
+@section scripts {
+    <script>
+        function deleteSubmit(id) {
+            confirmMessage('@i18N.Message.C04', function () {
+                $('#frmDelete').find('#IDS').val(id);
+                $('#frmDelete').submit();
+            });
+        }
+        function deleteSuccess(result) {
+            alertMessage(result, function () {
+                $('#btnQuery').click();
+            });
+        }
+        $(function () {
+            $('#btnQuery').click();
+        });
+    </script>
+}
+

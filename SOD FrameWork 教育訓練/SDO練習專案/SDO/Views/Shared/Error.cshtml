@@ -1,0 +1,10 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{
+    Layout = null;
+}
+@if (Model != null && HttpContext.Current.IsDebuggingEnabled)
+{
+    <h3>
+        @Model.Exception.Message
+    </h3>
+}

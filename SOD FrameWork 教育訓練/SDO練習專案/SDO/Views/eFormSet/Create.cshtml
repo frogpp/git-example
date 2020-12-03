@@ -1,0 +1,172 @@
+﻿@model SDO.Models.eFormSetModel.EditView
+@{
+
+}
+<!-- 按鈕列 -->
+@section buttons {
+    <script type="text/javascript">
+
+        // 加入「存檔」按鈕
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B09',
+            click: function () {
+                formSetCreateController.Save();
+            }
+        });
+
+        // 加入「重設」按鈕
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B10',
+            click: function () {
+                $('#frmCreate').resetForm();
+            }
+        });
+
+    </script>
+}
+
+<!-- 新增表單 -->
+@using (Ajax.BeginForm("Create", "eFormSet", null, new AjaxOptions
+{
+    OnSuccess = "formSetCreateController.SaveSuccess",
+    OnFailure = "alertMessage"
+}, new { id = "frmCreate" }))
+{
+    @Html.AntiForgeryToken()
+    <table>
+        <tr>
+            <th>@Html.LabelFor(m => m.FORM_TYPE)</th>
+            <td>
+                @Html.DropDownListFor(m => m.FORM_TYPE, (SelectList)ViewBag.eFormTypeList, i18N.Message.R12)
+                @Html.ValidationMessageFor(m => m.FORM_TYPE)
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(m => m.FORM_ID)</th>
+            <td>
+                @Html.TextBoxFor(m => m.FORM_ID)
+                @Html.ValidationMessageFor(m => m.FORM_ID)
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(m => m.FORM_NAME)</th>
+            <td>
+                @Html.TextBoxFor(m => m.FORM_NAME)
+                @Html.ValidationMessageFor(m => m.FORM_NAME)
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(m => m.EFFECTIVE_DATE)</th>
+            <td>
+                <div style="float: left;">
+                    @Html.TextBoxFor(m => m.EFFECTIVE_DATE, new { @Value = Model == null || Model.EFFECTIVE_DATE == null ? string.Empty : ((DateTime)Model.EFFECTIVE_DATE).ToString("yyyy/MM/dd") })
+                    @Html.Partial("_TWDatetime", new ViewDataDictionary { { "ID", Html.NameFor(m => m.EFFECTIVE_DATE).ToString() }, { "DISPLAYTIME", false } })
+                    @Html.ValidationMessageFor(m => m.EFFECTIVE_DATE)
+                </div>
+                <div style="float: left; line-height: 1.65em; margin: 0 5px;">
+                    ~
+                </div>
+                <div style="float: left;">
+                    @Html.TextBoxFor(m => m.EXPIRE_DATE, new { @Value = Model == null || Model.EXPIRE_DATE == null ? string.Empty : ((DateTime)Model.EXPIRE_DATE).ToString("yyyy/MM/dd") })
+                    @Html.Partial("_TWDatetime", new ViewDataDictionary { { "ID", Html.NameFor(m => m.EXPIRE_DATE).ToString() }, { "DISPLAYTIME", false }, { "CASCADEFROM", Html.NameFor(m => m.EFFECTIVE_DATE).ToString() } })
+                    @Html.ValidationMessageFor(m => m.EXPIRE_DATE)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(m => m.MAP_FLOW)</th>
+            <td>
+                @Html.DropDownListFor(m => m.MAP_FLOW, (SelectList)ViewBag.flowSetList, i18N.Message.R12)
+                @Html.ValidationMessageFor(m => m.MAP_FLOW)
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(m => m.MAP_ORG)
+            <td>
+                @Html.DropDownListFor(m => m.MAP_ORG, new List<SelectListItem>())
+                @Html.Partial("_OrgSelector", new ViewDataDictionary {
+                        { "ID", Html.NameFor(m => m.MAP_ORG).ToString() },
+                        { "MULTISELECT", true }
+                })
+                @Html.ValidationMessageFor(m => m.MAP_ORG)
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(m => m.MEMO)</th>
+            <td>
+                @Html.TextAreaFor(m => m.MEMO, new { @rows = 3, @style = "width: 480px; margin: 5px 0;" })
+                @Html.ValidationMessageFor(m => m.MEMO)
+            </td>
+        </tr>
+    </table>
+}
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        // 表單驗證器初始設定
+        $.validator.setDefaults({ ignore: [] });
+
+        /*
+            類別：表單設定新增
+            作者：Steven Tsai
+        */
+        function FormSetCreateJS() {
+
+            /*
+                函數：存檔
+                參數：無
+                備註：執行存檔送出動作
+            */
+            this.Save = function () {
+
+                // 表單是否驗證通過
+                if (!$('#frmCreate').valid()) {
+                    return false;
+                }
+
+                $('#frmCreate').submit();
+
+            }
+
+            /*
+                函數：存檔成功
+                參數：無
+                備註：執行存檔成功 Callback 動作
+            */
+            this.SaveSuccess = function (response) {
+                alertMessage(response, function () {
+                    if (response.success) {
+                        parent.location.reload();
+                    }
+                });
+            }
+        }
+
+        // 表單設定新增 JS 控制器
+        var formSetCreateController = new FormSetCreateJS();
+
+        /*
+            函數：載入初始化
+            參數：無
+            備註：於功能畫面載入完畢時執行
+        */
+        $(function () {
+
+            // 綁定有效日觸發到期日重設值的事件
+            $('#_EFFECTIVE_DATE').data('kendoDatePicker').bind('change', function () {
+                var current = this.value() ? this.value().getTime() : null;
+                var target = $('#EXPIRE_DATE').val() ? Date.parse($('#EXPIRE_DATE').val()) : null;
+                if (current && target && current > target) {
+                    $('#_EXPIRE_DATE').data('kendoDatePicker').value('');
+                    $('#_EXPIRE_DATE').trigger('change');
+                }
+            });
+
+        });
+
+    </script>
+}

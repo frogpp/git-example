@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = Resources.MvcSitemap.Sample_6;
+}
+@section buttons {
+
+}
+@section forms {
+    <ul>
+        <li>Controller請繼承<b>_Controller</b></li>
+        <li>實作OnException處理，如有使用Try/Catch請將exception throw回controller層</li>
+    </ul>
+}
+<h3>Controller</h3>
+<h4>GetLoginUser()</h4>
+<h4>@@ViewBag.GetLoginUser()</h4>
+<pre>
+    return 目前系統使用者資訊(<b>EmpUSerModel</b>)
+</pre>
+<h3>CookieSet - 設定取用cookie</h3>
+<h4>CookieSet.SetCookie(string key, string value)</h4>
+<pre>
+<i>
+    name => cookie name
+    value => cookie value
+</i>
+</pre>
+<h4>CookieSet.GetCookie(string key)</h4>
+<pre>
+<i>
+    name =>cookie name
+    return cookievalue
+</i>
+</pre>
+<h3>LogSet - 設定Log日誌</h3>
+<h4>LogSet.LogDebug(string message)</h4>
+<h4>LogSet.LogError(string message)</h4>
+<h4>LogSet.LogInfo(string message)</h4>
+<pre>
+<i>
+    message =>待記錄之字串
+    log type => DEBUG、ERROR、INFO
+</i>
+</pre>
+@section scripts {
+
+}

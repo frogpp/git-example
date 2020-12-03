@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = Resources.MvcSitemap.Spec_2;
+}
+@section buttons {
+    <script>
+        toolBar.add({
+            type: 'button',
+            text: '開啟 Session 倒數對話框',
+            click: function () {
+                if (top.dlgCountdown) {
+                    top.dlgCountdown.open();
+                }
+            }
+        });
+    </script>
+}
+@section forms{
+  
+}
+<ul>
+    <li>Session Timeout時間請參考Web.config內的sessionState設定</li>
+    <li>系統預設Session Timeout時間剩下15分鐘時，將會開啟Session倒數對話框</li>
+    <li>開啟對話框後使用者可以選擇登出或繼續使用系統</li>
+</ul>
+@section scripts {
+
+}

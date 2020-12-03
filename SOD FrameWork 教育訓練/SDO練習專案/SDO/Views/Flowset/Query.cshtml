@@ -1,0 +1,176 @@
+﻿@{
+    ViewBag.Title = Resources.MvcSitemap.FlowModule_3;
+}
+
+<!-- 流程設定資料清單（Grid） -->
+<div id="grid"></div>
+
+<!-- 按鈕列 -->
+@section buttons {
+    <script type="text/javascript">
+
+        // 加入「查詢」按鈕
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B04',
+            click: function () {
+                flowSetController.Query();
+            }
+        });
+
+        // 加入「新增」按鈕
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B05',
+            click: function () {
+                setWinWork('@Url.Action("Create", "FlowSet")', '@i18N.Button.B05');
+            }
+        });
+
+    </script>
+}
+
+<!-- 表單集合 -->
+@section forms {
+
+    <!-- 查詢 -->
+    @using (Ajax.BeginForm("Query", "FlowSet", null, new AjaxOptions
+    {
+        OnSuccess = "flowSetController.SetGridDataSouce",
+        OnFailure = "alertMessage"
+    }, new { id = "frmQuery" }))
+    {
+        @Html.AntiForgeryToken()
+    }
+
+    <!-- 刪除 -->
+    @using (Ajax.BeginForm("Delete", "FlowSet", null, new AjaxOptions
+    {
+        OnSuccess = "flowSetController.DeleteSuccess",
+        OnFailure = "alertMessage"
+    }, new { id = "frmDelete" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("flowID")
+    }
+
+}
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        /*
+			類別：流程設定
+		    作者：Steven Tsai
+		*/
+        function FlowSetJS() {
+
+            var self = this;
+
+            /*
+		        函數：初始化 Grid 資料清單
+		        參數：無
+		        備註：無
+	        */
+            this.InitGrid = function () {
+                $('#grid').kendoGrid({
+                    columns: [
+                        { template: '<div class="icon_edit" title="@i18N.Button.B06" onclick="flowSetController.Update(\'#: FLOW_ID #\')"><span class="k-icon k-i-edit"></span></div>', width: 30 },
+                        { template: '<div class="icon_delete" title="@i18N.Button.B07" onclick="flowSetController.Delete(\'#: FLOW_ID #\')"><span class="k-icon k-i-close"></span></div>', width: 30 },
+                        { field: 'FLOW_NAME', title: '@i18N.Label.FlowSet_FLOW_NAME', },
+                        { field: 'MEMO', title: '@i18N.Label.FlowSet_MEMO', },
+                        { field: 'ENABLE_FLG', title: '@i18N.Label.FlowSet_ENABLE_FLG', template: "#= ENABLE_FLG ? '啟用' : '停用'  #  " },
+                        { field: 'FORM_COUNT', title: '@i18N.Label.FlowSet_FORM_COUNT', },
+                    ],
+                });
+            }
+
+            /*
+		        函數：設定 Grid 的資料來源
+		        參數：
+                    dataSource => 資料來源
+		        備註：無
+	        */
+            this.SetGridDataSouce = function (dataSource) {
+                $('#grid').data('kendoGrid').genGrid(dataSource);
+            }
+
+            /*
+		        函數：解析 Json 格式的日期為民國年格式的日期
+		        參數：
+                    jsonDate => Json 格式的日期
+		        備註：無
+	        */
+            this.ParseJsonDateToROCDate = function (jsonDate) {
+                return parseTWDate(new Date(parseInt(jsonDate.substr(6))));
+            }
+
+            /*
+		        函數：查詢
+		        參數：無
+		        備註：執行查詢動作
+	        */
+            this.Query = function () {
+                $('#frmQuery').submit();
+            }
+
+            /*
+		        函數：修改
+		        參數：
+                    flowID => 流程代碼
+		        備註：顯示修改視窗
+	        */
+            this.Update = function (flowID) {
+                // 呼叫底層顯示視窗共用函式
+                setWinWork('@Url.Action("Update", "FlowSet")/' + flowID, '@i18N.Button.B06')
+            }
+
+            /*
+		        函數：刪除
+		        參數：
+                    flowID => 流程代碼
+		        備註：執行刪除動作
+	        */
+            this.Delete = function (flowID) {
+
+                // 確認是否執行刪除動作
+                confirmMessage('@i18N.Message.C04', function () {
+                    $('#frmDelete').find('#flowID').val(flowID);
+                    $('#frmDelete').submit();
+                });
+
+            }
+
+            /*
+		        函數：刪除成功
+		        參數：無
+		        備註：執行刪除成功 Callback 動作
+	        */
+            this.DeleteSuccess = function (response) {
+                alertMessage(response, function () {
+                    self.Query();
+                });
+            }
+
+        }
+
+        // 流程設定 JS 控制器
+        var flowSetController = new FlowSetJS();
+
+        /*
+			函數：載入初始化
+			參數：無
+			備註：於功能畫面載入完畢時執行
+		*/
+        $(function () {
+
+            // 初始化 Grid 資料清單
+            flowSetController.InitGrid();
+
+            // 觸發查詢事件
+            flowSetController.Query();
+        });
+
+    </script>
+}

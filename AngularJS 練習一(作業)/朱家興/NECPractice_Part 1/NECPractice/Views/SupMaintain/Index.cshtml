@@ -1,0 +1,71 @@
+﻿@model Vendor_M
+
+@{
+    ViewBag.Title = "供應商主檔維護 - 查詢";
+}
+
+<div>
+    <h2>供應商主檔維護 - 查詢</h2>
+    <form>
+        <table class="form-table">
+            <tr>
+                <th>供應商統一編號</th>
+                <td>@Html.TextBoxFor(x=>x.SupId)</td>
+            </tr>
+            <tr>
+                <th>供應商名稱</th>
+                <td>@Html.TextBoxFor(x=>x.SupName)</td>
+            </tr>
+            <tr>
+                <th>查詢資料範圍</th>
+                <td>@Html.DropDownList("DataRange",
+                new List<SelectListItem>(){
+                    new SelectListItem{Text="現在", Value="0"},
+                    new SelectListItem{Text="最近一週", Value="-7"},
+                    new SelectListItem{Text="最近一月", Value="-30"}
+                })
+                </td>
+            </tr>
+        </table>
+        <p>
+            <button type="button">查詢</button>
+            <input type="reset" value="清除重來" />
+            <button type="button">新增資料</button>
+            <button type="button">匯出Excel</button>
+        </p>
+    </form>
+
+    <table class="list-table">
+        <thead>
+            <tr>
+                <th>統一編號</th>
+                <th>供應商名稱</th>
+                <th>廠商性質</th>
+                <th>適用開始日期</th>
+                <th>適用結束日期</th>
+                <th>異動人員</th>
+                <th>異動日期</th>
+                <th>功能</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>a</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <a href="#">瀏覽</a>
+                    <a href="#">修改</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div>
+    
+</div>

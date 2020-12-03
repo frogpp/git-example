@@ -1,0 +1,120 @@
+﻿@model SDO.Models.FlowRoleModel.EditView
+@{
+
+}
+<!-- 按鈕列 -->
+@section buttons {
+    <script type="text/javascript">
+
+        // 加入「存檔」按鈕
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B09',
+            click: function () {
+                FlowRoleUpdateController.Save();
+            }
+        });
+
+        // 加入「重設」按鈕
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B10',
+            click: function () {
+                $('#frmUpdate').resetForm();
+            }
+        });
+
+    </script>
+}
+
+<!-- 修改表單 -->
+@using (Ajax.BeginForm("Update", "FlowRole", null, new AjaxOptions
+{
+    OnSuccess = "FlowRoleUpdateController.SaveSuccess",
+    OnFailure = "alertMessage"
+}, new { id = "frmUpdate" }))
+{
+    @Html.AntiForgeryToken()
+    <table>
+        <tr>
+            <th>@Html.LabelFor(m => m.ROLE_ID)</th>
+            <td>
+                @Html.TextBoxFor(m => m.ROLE_ID, new { @readonly = "readonly" })
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(m => m.ROLE_NAME)</th>
+            <td>
+                @Html.TextBoxFor(m => m.ROLE_NAME)
+                @Html.ValidationMessageFor(m => m.ROLE_NAME)
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(m => m.MAP_USER)
+            <td>
+                @Html.ListBox(Html.NameFor(m => m.MAP_USER).ToString(), Model.DEFAULT_MAP_USER)
+                @Html.Partial("_OrgUserSelector", new ViewDataDictionary
+                {
+                    { "ID", Html.NameFor(m => m.MAP_USER).ToString() }
+                })
+            </td>
+        </tr>
+    </table>
+}
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        /*
+			類別：流程角色修改
+		    作者：Steven Tsai
+		*/
+        function FlowRoleUpdateJS() {
+
+            /*
+		        函數：存檔
+		        參數：無
+		        備註：執行存檔送出動作
+	        */
+            this.Save = function () {
+
+                // 表單是否驗證通過
+                if (!$('#frmUpdate').valid()) {
+                    return false;
+                }
+
+                // 顯示確認訊息
+                confirmMessage('@i18N.Message.C03', function () {
+                    $('#frmUpdate').submit();
+                });
+            }
+
+            /*
+		        函數：存檔成功
+		        參數：無
+		        備註：執行存檔成功 Callback 動作
+	        */
+            this.SaveSuccess = function (response) {
+                alertMessage(response, function () {
+                    if (response.success) {
+                        parent.location.reload();
+                    }
+                });
+            }
+        }
+
+        // 流程角色修改 JS 控制器
+        var FlowRoleUpdateController = new FlowRoleUpdateJS();
+
+        /*
+			函數：載入初始化
+			參數：無
+			備註：於功能畫面載入完畢時執行
+		*/
+        $(function () {
+
+        });
+
+    </script>
+}

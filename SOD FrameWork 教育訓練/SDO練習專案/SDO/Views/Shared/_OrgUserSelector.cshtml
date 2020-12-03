@@ -1,0 +1,87 @@
+﻿@Html.DropDownList("orgUser_" + ViewData["ID"], new List<SelectListItem>())
+<div id="dlgOrgTree_orgUser_@ViewData["ID"]"><div id="orgTree_orgUser_@ViewData["ID"]" style="height:300px;"></div></div>
+@Html.ListBox("orgUserSrc_" + ViewData["ID"], new List<SelectListItem>())
+<script>
+    $('#orgUser_@ViewData["ID"]').css('float', 'left').after($('<div />').css('clear', 'both')).before($('<button />').attr('type', 'button').text('選擇單位').kendoButton({
+        click: function () {
+            openOrgTreeDialog('orgUser_@ViewData["ID"]');
+        }
+    })).kendoMultiSelect({
+        maxSelectedItems: 1,
+        dataValueField: 'ORG_ID',
+        dataTextField: 'ORG_DISPLAY'
+        }).data('kendoMultiSelect').readonly(true);
+    $('#orgTree_orgUser_@ViewData["ID"]').data('hasCheckbox', false).kendoTreeView({
+        dataSource: new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: function(opt) {
+                    $.get('@Url.Action("QueryEmpOrgs", "EmpOrg")', { ORG_ID: opt.data.ORG_ID ? opt.data.ORG_ID : '' }, function (result) {
+                        opt.success(result);
+                    }).fail(function (result) {
+                        opt.error(result);
+                    });
+                }
+            },
+            schema: {
+                model: {
+                    id: 'ORG_ID',
+                    hasChildren: 'HASCHILDREN'
+                }
+            }
+        }),
+        dataTextField: 'ORG_DISPLAY',
+        dataBound: function (e) {
+            setChkTreeNodes('orgUser_@ViewData["ID"]');
+        }
+    });
+    $('#dlgOrgTree_orgUser_@ViewData["ID"]').kendoDialog({
+        title: false,
+        closable: false,
+        visible: false,
+        actions: [{
+            text: '確定',
+            action: function (e) {
+                var aryChecked = [],
+                    orgTree = $('#orgTree_orgUser_@ViewData["ID"]').data('kendoTreeView'),
+                    orgSelector = $('#orgUser_@ViewData["ID"]').data('kendoMultiSelect');
+                if (orgTree.dataItem(orgTree.select()))
+                    aryChecked.push(orgTree.dataItem(orgTree.select()));
+                orgSelector.setDataSource(new kendo.data.DataSource({
+                    data: aryChecked
+                }));
+                orgSelector.value($.map(orgSelector.dataSource.data(), function (o) {
+                    return o.ORG_ID;
+                }));
+                orgSelector.trigger('change');
+                $.post('@Url.Action("QueryOrgUsers", "EmpOrg")', { orgId: orgSelector.value() }, function (result) {
+                    $('#orgUserSrc_@ViewData["ID"]').data('kendoListBox').setDataSource(
+                        new kendo.data.DataSource({
+                            data: $.grep(result, function (o) {
+                                return $.inArray(o.USER_ID, $.map($('#@ViewData["ID"]').data('kendoListBox').dataItems(), function (o) {
+                                    return o.value;
+                                })) < 0;
+                            })
+                        }));
+                });
+            }
+        },
+        { text: '取消' }]
+    });
+    $('#@ViewData["ID"]').insertAfter($('#orgUserSrc_@ViewData["ID"]')).kendoListBox({
+        dataValueField: 'USER_ID',
+        dataTextField: 'USER_DISPLAY',
+        connectWith: 'orgUserSrc_@ViewData["ID"]',
+        draggable: true,
+        dropSources: ['orgUserSrc_@ViewData["ID"]']
+    });
+    $('#orgUserSrc_@ViewData["ID"]').kendoListBox({
+        dataValueField: 'USER_ID',
+        dataTextField: 'USER_DISPLAY',
+        connectWith: '@ViewData["ID"]',
+        toolbar: {
+            tools: ["transferTo", "transferFrom", "transferAllTo", "transferAllFrom"]
+        },
+        draggable: true,
+        dropSources: ['@ViewData["ID"]']
+    });
+</script>

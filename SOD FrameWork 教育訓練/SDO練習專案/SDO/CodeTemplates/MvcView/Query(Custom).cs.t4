@@ -1,0 +1,194 @@
+﻿<#@ template language="C#" HostSpecific="true" #>
+<#@ output extension=".cshtml" #>
+<#@ include file="Imports.include.t4" #>
+<#@ include file="View.include.t4" #>
+<# 
+    // QueryView Model for Query
+    string currentNestedQueryModelName = "QueryView"; 
+    Type currentNestedModelType = Type.GetType(String.Format("{0}+{1}, {2}", ViewDataTypeName, currentNestedQueryModelName, assemblySDO.FullName));
+    
+    // DTO Model for Grid
+    string currentNestedGridModelName = "DTO"; 
+    Type currentNestedGridModelType = Type.GetType(String.Format("{0}+{1}, {2}", ViewDataTypeName, currentNestedGridModelName, assemblySDO.FullName));
+#>
+@model <#= String.Format("{0}.{1}", ViewDataTypeName, currentNestedQueryModelName) #>
+@{
+    ViewBag.Title = "TODO => 請填入 MvcSitemap 名稱設定, 如：Resources.MvcSitemap.G1" ;
+}
+
+@section buttons {
+    <script>
+
+        // 加入「查詢」按鈕
+        toolBar.add({
+            id: 'btnQuery',
+            type: 'button',
+            text: '@i18N.Button.B04',
+            click: function () {
+                Query();
+            }
+        });
+
+        // 加入「新增」按鈕
+        toolBar.add({
+            id: 'btnCreate',
+            type: 'button',
+            text: '@i18N.Button.B05',
+            click: function () {
+                setWinWork('@Url.Action("Create", "<#= controllerName #>")', '@i18N.Button.B05');
+            }
+        });
+
+    </script>
+}
+
+@section forms {
+
+    <!-- 查詢 -->
+    @using (Ajax.BeginForm("<#= ViewName #>", "<#= controllerName #>", null, new AjaxOptions
+    {
+        OnSuccess = "SetGridDataSouce",
+        OnFailure = "alertMessage"
+    }, new { id = "frmQuery" }))
+    {
+        @Html.AntiForgeryToken()
+<# if(currentNestedModelType != null) { #>
+        <table style="width: 100%">
+<#
+    foreach (PropertyInfo property in currentNestedModelType.GetProperties()) {
+#>
+            <tr> 
+		        <th> 
+                    @Html.LabelFor(m => m.<#= property.Name #>)
+		        </th> 
+		        <td>	
+                    @Html.TextBoxFor(m => m.<#= property.Name #>)
+                    @Html.ValidationMessageFor(m => m.<#= property.Name #>)
+                </td> 
+	        </tr>
+<#
+    }
+#>
+        </table>
+<# } #>
+    }
+
+    <!-- 刪除 -->
+    @using (Ajax.BeginForm("Delete", "<#= controllerName #>", null, new AjaxOptions
+    {
+        OnSuccess = "DeleteSuccess",
+        OnFailure = "alertMessage"
+    }, new { id = "frmDelete" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("id")
+    }
+
+}
+
+<div id="grid"></div>
+
+@section scripts {
+
+    <script type="text/javascript">
+
+        /*
+            函數：初始化 Grid 資料清單
+            參數：無
+            備註：無
+        */
+        function InitGrid() {
+            $('#grid').kendoGrid({
+<# if(currentNestedGridModelType != null) { #>
+                columns: [
+<# 
+        bool isSettingOperateBtn = false;
+        foreach (PropertyInfo property in currentNestedGridModelType.GetProperties()) {
+            var keyAttribute = Attribute.GetCustomAttribute(property, typeof(KeyAttribute)) as KeyAttribute;
+            if(keyAttribute == null) {
+                continue;
+            } 
+#>
+                    { template: '<div class="icon_edit" title="@i18N.Button.B06" onclick="setWinWork(\'@Url.Action("Update","<#= controllerName #>")/#: <#= property.Name #> #\', \'@i18N.Button.B06\')"><span class="k-icon k-i-edit"></span></div>', width: 30 },
+                    { template: '<div class="icon_view" title="@i18N.Button.B08" onclick="setWinWork(\'@Url.Action("Read", "<#= controllerName #>")/#: <#= property.Name #> #\', \'@i18N.Button.B08\')"><span class="k-icon k-i-zoom"></span></div>', width: 30 },
+                    { template: '<div class="icon_delete" title="@i18N.Button.B07" onclick="Delete(\'#: <#= property.Name #> #\')"><span class="k-icon k-i-close"></span></div>', width: 30 },
+<#          
+            isSettingOperateBtn = true; 
+            break; } 
+#>
+<#          if(!isSettingOperateBtn) { #>
+                    { template: '<div class="icon_edit" title="@i18N.Button.B06" onclick="setWinWork(\'@Url.Action("Update","<#= controllerName #>")/#: TODO：請填入識別欄位 #\', \'@i18N.Button.B06\')"><span class="k-icon k-i-edit"></span></div>', width: 30 },
+                    { template: '<div class="icon_view" title="@i18N.Button.B08" onclick="setWinWork(\'@Url.Action("Read", "<#= controllerName #>")/#: TODO：請填入識別欄位 #\', \'@i18N.Button.B08\')"><span class="k-icon k-i-zoom"></span></div>', width: 30 },
+                    { template: '<div class="icon_delete" title="@i18N.Button.B07" onclick="Delete(\'#: TODO：請填入識別欄位 #\')"><span class="k-icon k-i-close"></span></div>', width: 30 },                 
+<#          } #>
+<#      foreach (PropertyInfo property in currentNestedGridModelType.GetProperties()) { #>
+                    { field: '<#= property.Name #>', title: '<#= property.Name #>' },
+<#      } #>
+                ],
+
+<# } #>
+            });
+        }
+
+        /*
+		    函數：查詢
+		    參數：無
+		    備註：執行查詢動作
+	    */
+        function Query() {
+            $('#frmQuery').submit();
+        }
+
+        /*
+		    函數：設定 Grid 的資料來源
+		    參數：
+                dataSource => 資料來源
+		    備註：無
+	    */
+        function SetGridDataSouce(dataSource) {
+            $('#grid').data('kendoGrid').genGrid(dataSource);
+        }
+
+        /*
+            函數：刪除
+            參數：
+                ID => 識別值
+            備註：執行刪除動作
+        */
+        function Delete(id) {
+
+            // 確認是否執行刪除動作
+            confirmMessage('@i18N.Message.C04', function () {
+                $('#frmDelete').find('#id').val(id);
+                $('#frmDelete').submit();
+            });
+
+        }
+
+        /*
+		    函數：刪除成功
+		    參數：無
+		    備註：執行刪除成功 Callback 動作
+	    */
+        function DeleteSuccess(response) {
+            alertMessage(response, Query);
+        }
+
+        /*
+			函數：載入初始化
+			參數：無
+			備註：於功能畫面載入完畢時執行
+		*/
+        $(function () {
+
+            // 初始化 Grid 資料清單
+            InitGrid();
+
+            // 觸發查詢事件
+            Query();
+
+        });
+
+    </script>
+
+}

@@ -1,0 +1,19 @@
+﻿<ul class="checkboxList">
+    @{ foreach (SelectListItem item in (IList<SelectListItem>)ViewData["VALUE"])
+        {
+            if (item.Value == "_GROUP")
+            {
+                <li>@Html.Label(item.Text, new { style = "border-bottom:1px solid darkgray;min-width:240px;margin: 2px 0 5px 0;" })</li>
+            }
+            else
+            {
+                <li style="color:@(item.Disabled ? "lightgray" : "");display:inline;white-space:nowrap;">
+                    <span style="white-space:nowrap;">
+                        <input type="checkbox" name="@ViewData["ID"].ToString()" value="@item.Value" checked="@item.Selected" @(item.Disabled ? "disabled=disabled" : "") style="vertical-align:middle;" />
+                        @item.Text
+                    </span>
+                </li>
+            }
+        }
+    }
+</ul>

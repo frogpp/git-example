@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = Resources.MvcSitemap.Sample_4;
+}
+@section buttons {
+
+}
+@section forms {
+    <a href="http://docs.telerik.com/kendo-ui/api/javascript/ui/grid" target="_blank">KendoUI grid reference online</a>
+}
+<pre>
+<i>
+    @Html.Raw(HttpUtility.HtmlEncode("<div id=\"grid\"></div>"))
+
+    var grid = $('#grid').kendoGrid({
+        columns: [
+            \\修改按鈕宣告
+            { template: '@Html.Raw(HttpUtility.HtmlEncode("<div class=\"icon_edit\" title=\"@i18N.Button.B06\" onclick=\"{javascript function}\"><span class=\"k-icon k-i-edit\"></span></div>"))', width: 30 },
+            \\刪除按鈕宣告
+            { template: '@Html.Raw(HttpUtility.HtmlEncode("<div class=\"icon_delete\" title=\"@i18N.Button.B07\" onclick=\"{javascript function}\"><span class=\"k-icon k-i-close\"></span></div>"))', width: 30 },
+            \\檢視按鈕宣告
+            { template: '@Html.Raw(HttpUtility.HtmlEncode("<div class=\"icon_text\" title=\"@i18N.Button.B08\" onclick=\"{javascript function}\"><span class=\"k-icon k-i-zoom\"></span></div>"))', width: 30 },
+            \\一般欄位宣告
+            { field: 'DEMO_ID', title: '代碼' },
+            \\處理欄位內容過長的宣告
+            { field: 'DEMO_VAL', title: '數值', template: '@Html.Raw(HttpUtility.HtmlEncode("<div class=\"tooltipoverflow\"><div class=\"post-title\">#: DEMO_VAL #</div><span class=\"tooltiptext\">#: DEMO_VAL #</span></div>"))' },
+        ]
+    }).data('kendoGrid');
+</i>
+</pre>
+<h4>grid.genGrid(gridData)&nbsp;<button id="demo1">Demo</button></h4>
+<pre>
+將Gird建立起來
+<i>
+    gridData => JSON type data array 
+    gridData(By Ajax) => {
+            url: '資料讀取分頁處理網址',
+            data: {傳入查詢值}
+        }
+    //可參考SqlLog/QueryPageable
+</i>
+</pre>
+<h4>grid.genChkboxGrid(gridData, keyCol)&nbsp;<button id="demo2">Demo</button></h4>
+<pre>
+將Gird with checkbox建立起來
+<i>
+    gridData => JSON type data array 
+    keyCol => data key column name (optional)
+</i>
+</pre>
+<div id="dialog">
+    <button id='demo3'>取得check值</button>
+    <div id="grid"></div>
+</div>
+<script>
+    var dlg = $('#dialog').kendoDialog({
+        title: false,
+        visible: false,
+        minWidth: parseInt($(window).width() * 0.8)
+    }).data('kendoDialog');
+    var grid = $('#grid').kendoGrid({
+        columns: [
+            { template: '<div class="icon_edit" title="@i18N.Button.B06" onclick="alertMessage(\'@i18N.Button.B06：#: DEMO_ID #\')"><span class="k-icon k-i-edit"></span></div>', width: 30 },
+            { template: '<div class="icon_delete" title="@i18N.Button.B07" onclick="alertMessage(\'@i18N.Button.B07：#: DEMO_ID #\')"><span class="k-icon k-i-close"></span></div>', width: 30 },
+            { template: '<div class="icon_text" title="@i18N.Button.B08" onclick="alertMessage(\'@i18N.Button.B08：#: DEMO_ID #\')"><span class="k-icon k-i-zoom"></span></div>', width: 30 },
+            { field: 'DEMO_ID', title: '代碼', width:200 },
+            { field: 'DEMO_VAL', title: '功能名稱', template: '<div class="tooltiptext" title="#: DEMO_VAL #">#: DEMO_VAL #<span class="tiptext">#: DEMO_VAL #</span></div>', width:100 },
+        ]
+    }).data('kendoGrid');
+</script>
+@section scripts {
+    <script>
+        function genData() {
+            var data = [];
+            for (var i = 1; i <= 20; i++) {
+                data.push({
+                    DEMO_ID: '代碼' + i.toString().padLeft(3, '0'),
+                    DEMO_VAL: Math.floor((Math.random() * 1000000000) + 1).toString().padLeft(10, '0').padRight(50, '*')
+                });
+            }
+            return data;
+        }
+        $(function () {
+            $('#demo1').kendoButton({
+                click: function (e) {
+                    dlg.open();
+                    setTimeout(function () {
+                        grid.genGrid(genData()).setOptions({
+                            height: parseInt($(window).height() * 0.5)
+                        });
+                    }, 10);
+                }
+            });
+            $('#demo2').kendoButton({
+                click: function (e) {
+                    dlg.open();
+                    setTimeout(function () {
+                        grid.genChkboxGrid(genData()).setOptions({
+                            height: parseInt($(window).height() * 0.5)
+                        });
+                    }, 10);
+                }
+            });
+            $('#demo3').kendoButton({
+                click: function (e) {
+                    alertMessage(JSON.stringify(grid.getSelect()));
+                }
+            });
+        });
+    </script>
+}
+

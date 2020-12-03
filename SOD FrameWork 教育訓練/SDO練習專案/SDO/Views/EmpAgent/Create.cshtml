@@ -1,0 +1,67 @@
+﻿@model SDO.Models.EmpAgentModel
+@{
+
+}
+@section buttons {
+	<script>
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B09',
+            click: function () {
+                $('#frmCreate').submit();
+            }
+        });
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B10',
+            click: function () {
+                $('#frmCreate').resetForm();
+            }
+        });
+	</script>
+}
+@section forms {
+
+}
+@using (Ajax.BeginForm("Create", "EmpAgent", null, new AjaxOptions
+{
+	OnSuccess = "alertSuccess",
+	OnFailure = "alertMessage"
+}, new { id = "frmCreate" }))
+{
+	@Html.AntiForgeryToken()
+	@Html.Hidden("USER_ID", ((EmpUserModel)ViewBag.GetLoginUser()).USER_ID)
+	<table>
+		<tr>
+			<th>@Html.LabelFor(m => m.AGENT_ID)</th>
+			<td>@Html.DropDownListFor(m => m.AGENT_ID, (SelectList)ViewBag.OrgEmpUsers)@Html.ValidationMessageFor(m => m.AGENT_ID)</td>
+		</tr>
+		<tr>
+			<th>@Html.LabelFor(m => m.AGENT_FROM)</th>
+			<td>
+				@Html.TextBoxFor(m => m.AGENT_FROM, new { @Value = DateTime.Now.ToString("yyyy/MM/dd 09:00") })
+				@Html.Partial("_TWDatetime", new ViewDataDictionary { { "ID", "AGENT_FROM" }, { "DISPLAYTIME", true } })
+				@Html.ValidationMessageFor(m => m.AGENT_FROM)
+			</td>
+		</tr>
+		<tr>
+			<th>@Html.LabelFor(m => m.AGENT_TO)</th>
+			<td>
+				@Html.TextBoxFor(m => m.AGENT_TO, new { @Value = DateTime.Now.AddDays(1).ToString("yyyy/MM/dd 18:00") })
+				@Html.Partial("_TWDatetime", new ViewDataDictionary { { "ID", "AGENT_TO" }, { "DISPLAYTIME", true } })
+				@Html.ValidationMessageFor(m => m.AGENT_TO)
+			</td>
+		</tr>
+	</table>
+}
+@section scripts {
+	<script>
+		function alertSuccess(result) {
+			alertMessage(result, function () {
+				parent.winWork.close();
+				parent.location.reload();
+			});
+		}
+	</script>
+}
+

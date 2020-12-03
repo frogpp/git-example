@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "AngularJS Filter 練習";
+}
+
+<h2>AngularJS Filter 練習</h2>
+
+<p>請於本頁進行以下的 Filter練習</p>
+<ol>
+    <li>請練習每個對單一資料進行格式化的 Filter</li>
+    <li>請練習每個對資料集合進行處理的 Filter</li>
+</ol>
+
+<div ng-app="example" ng-controller="textCtrl">
+    @*日期*@
+    <h3>date:{{day}} -> <span>{{day | date:"yyyy/MM/dd"}}</span></h3>
+    @*換小寫*@
+    <h3>string:{{str}} -> <span>{{str | uppercase}}</span></h3>
+    @*控制小數*@
+    <h3>number:{{num}} -> <span>{{num | number:1}}</span></h3>
+    <p>&nbsp;</p>
+    @*控制資料堆裡限定資料*@
+    <h3><span ng-repeat="item in items">{{item}}, </span>&nbsp;</h3>
+    <h3>filter:'b' -> <span ng-repeat="item in items | filter:'b'">{{item}}</span>&nbsp;</h3>
+    @*金額*@
+    <h3>money:{{num}} -> <span>{{num | currency:"f"}}</span></h3>
+    @*json*@
+    <h3><span>{{items | json}}</span></h3>
+    @*排序*@
+    <h3><span ng-repeat="item in items">{{item}}, </span>&nbsp;</h3>
+    <h3>orderBy:'-' -> <span ng-repeat="item in items | orderBy:'-'">{{item}}</span>&nbsp;</h3>
+</div>
+<script src="angular-locale_fr-fr.js"></script>
+<script>
+    var myApp = angular.module("example", []);
+    myApp.controller("textCtrl", function ($scope) {
+        $scope.day = "1432075948123";
+        $scope.str = "abcd";
+        $scope.num = 1234;
+        $scope.items = ['aaaa', 'bbbb', 'cccc'];
+    })
+</script>

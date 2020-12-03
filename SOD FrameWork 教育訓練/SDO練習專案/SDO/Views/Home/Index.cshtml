@@ -1,0 +1,163 @@
+﻿@using System.Configuration;
+@{
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+<img id="imgKeepSession" style="display:none;" />
+<div id="dlgCountdown" style="text-align:center;">
+    <h4>@i18N.Message.P04<span id="timer"></span></h4>
+</div>
+<script>
+    var cdTimer = @Session.Timeout * 60;
+    var dlgCountdown = $('#dlgCountdown').kendoDialog({
+        title: false,
+        closable: false,
+        visible: false,
+        actions: [{
+            text: '登出',
+            action: function (e) {
+                top.location.replace('@Url.Action("logout", "system")');
+            }
+        },{
+            text: '繼續使用',
+            action: function(e){
+                resetCountdown();
+            }
+        }]
+    }).data('kendoDialog');
+    function setCountdown() {
+        cdTimer--;
+        $('#timer').text(Math.floor(cdTimer / 60).toString().padLeft(2, '0') + ':' + (cdTimer % 60).toString().padLeft(2, '0'));
+        if (cdTimer <= 0) {
+            top.location.replace('@Url.Action("logout", "system")');
+        }
+        else if (cdTimer <= 15 * 60)
+            dlgCountdown.open();
+    }
+    function resetCountdown() {
+        $('#imgKeepSession').attr('src', '@Url.Action("KeepSession", "System")?t=' + new Date().toUTCString());
+        cdTimer = @Session.Timeout * 60;
+        dlgCountdown.close();
+    }
+</script>
+<nav>
+    <button id="navCollapse"></button>
+    <ul id="accordion"></ul>
+</nav>
+<script>
+    $('#navCollapse').kendoButton({
+        icon: 'menu',
+        click: function () {
+            $('#accordion').toggle('slow', function () {
+                $('#container').toggleClass('navOpen');
+            });
+        }
+    });
+    function appendMenu(obj, data, pid) {
+        var grepData = $.grep(data, function (o) {
+            return o.PARENT_ID === (pid ? pid : '');
+        }).sort(function (a, b) {
+            return a.SORT_ID - b.SORT_ID;
+            });
+        var promises = [];
+        $.each(grepData, function (i, o) {
+            var dfd = new $.Deferred();
+            var item = $('<li />').attr('title', o.FUNCTION_DISPLAY).appendTo(obj)
+            if (o.PARENT_ID === '')
+                $('<label />').text(o.FUNCTION_NAME).appendTo(item);
+            else
+                $('<a />').attr('href', '#').text(o.FUNCTION_NAME).on('click', function () {
+                    if ($.trim(o.FUNCTION_URL).length > 0)
+                        addTab(o.FUNCTION_ID, o.FUNCTION_NAME, o.FUNCTION_URL);
+                    return false;
+                }).appendTo(item);
+            if ($.grep(data, function (m) {
+                return m.PARENT_ID === o.FUNCTION_ID;
+            }).length > 0)
+                appendMenu($('<ul />').appendTo(item), data, o.FUNCTION_ID);
+            dfd.resolve();
+            promises.push(dfd);
+        });
+        return $.when.apply(undefined, promises).promise();
+    }
+    $.post('@Url.Action("QueryUser", "SetFunction")', { 'USER_ID': '@User.Identity.Name' }, function (result) {
+        appendMenu($('#accordion'), result).done(function () {
+            $('#accordion ul').kendoMenu({
+                orientation: 'vertical',
+                open: function (e) {
+                    setTimeout(function () {
+                        $('.k-animation-container', $(e.item)).css('top', $(e.item).position().top);
+                    }, 10);
+                }
+            });
+            $('#accordion').kendoPanelBar({
+                expandMode: 'single'
+            });
+        });
+    });
+</script>
+<div id="main">
+    <div id="tabs"></div>
+</div>
+<script type="text/javascript" title="Initial">
+    var tabStrip = $('#tabs').kendoTabStrip({
+        activate: function (e) {
+            $(e.contentElement).find('iframe').height(parseInt($('#container').height() - $('#tabs ul').height() - ($(e.contentElement).outerHeight() - $(e.contentElement).find('iframe').height())));
+        }
+    }).data('kendoTabStrip');
+    function addTab(id, name, url) {
+        dlgProgress.open();
+        var activeIdx = -1;
+        $(tabStrip.items()).each(function (idx, obj) {
+            if ($(obj).data('tabId') == 'tab_' + id) {
+                activeIdx = idx
+                if (tabStrip.select().data('tabId') != 'tab_' + id)
+                    tabStrip.select(idx);
+                dlgProgress.close();
+                return false;
+            }
+        });
+        if (activeIdx < 0) {
+            tabStrip.append({
+                text: name,
+                content: '<iframe src="#{url}" style="border:none;width:100%" sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals"></iframe>'.replace(/#\{url\}/g, url),
+            });
+            $(tabStrip.items()).last().data('tabId','tab_' + id);
+            if (tabStrip.items().length>1) {
+                @if (bool.Parse(ViewBag.GetSysParam("SystemConfig", "TabsDisplay")))    
+                {
+                    @Html.Raw("$(tabStrip.items()).last().append(\"<span data-type='remove' class='k-link'><span class='k-icon k-font-icon k-i-x'></span></span>\");");
+                }
+                else
+                {
+                    @Html.Raw("tabStrip.remove(0);");
+                }
+            }
+            tabStrip.select(tabStrip.tabGroup.children().length - 1);
+        }
+    }
+    tabStrip.tabGroup.delegate('[data-type=remove]', 'click', function () {
+        var removeTab = $(this).closest('.k-item'),
+            selectTab = $(removeTab).next().length ? $(removeTab).next() : $(removeTab).prev();
+        $.post('@Url.Action("RemoveCookie", "System")', {
+            'key': $('#tabs').find('iframe').eq(removeTab.index()).get(0).contentWindow.pageConfig.cookiePath
+        }, function () {
+            tabStrip.remove(removeTab);
+            setTimeout(function () {
+                tabStrip.select(selectTab);
+            }, 500);
+            });
+    });
+</script>
+@section scripts {
+    <script type="text/javascript" title="Initial">
+        $(window).resize(function () {
+            tabStrip.activateTab(tabStrip.select());
+        });
+        $(function () {
+            setInterval(function () {
+                setCountdown();
+            }, 1000);
+            addTab('about', '關於', '@Url.Action("About", "Home")');
+        });
+    </script>
+}

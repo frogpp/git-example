@@ -1,0 +1,30 @@
+﻿<!--公告事項-->
+<div class="news-row">
+    <div class="news-bg">
+        <div class="news-head">公告事項</div>
+        <div class="news" id="announceList"></div>
+    </div>
+</div>
+<script>
+    $.post('@Url.Action("QueryDisplay", "Announcement")', {}, function (result) {
+        $.each(result, function (idx, obj) {
+            var item = $('<div />').addClass('news-group').appendTo($('#announceList'));
+
+            var iHeading = $('<div />').addClass('news-heading').appendTo(item);
+            if (obj.ATTACH_NAME.length > 0) {
+                $('<div />').addClass('news-download').on('click', function (e) {
+                    e.preventDefault();
+                    top.location.replace(encodeURI('@Url.Action("GetAttachment", "Announcement")/' + obj.SID));
+                }).append($('<span />').addClass('k-icon k-i-download')).appendTo(iHeading)
+            }
+            var iTitle = $('<a />').addClass('news-toggle').attr('data-toggle', 'collapse').attr('data-parent', '#announceList').attr('href', '#collapse' + obj.SID).appendTo(iHeading);
+            if (obj.COMMENT.length > 0)
+                $('<span />').addClass('k-icon k-i-plus').appendTo(iTitle);
+            $('<span />').text(obj.TITLE).appendTo(iTitle);
+            $('<br />').appendTo(iTitle);
+            $('<span />').addClass('date').text(obj.EFFECTIVE_TWDATE).appendTo(iTitle);
+
+            $('<div />').attr('id', 'collapse' + obj.SID).addClass('news-body collapse').append($('<div />').addClass('news-inner').html(sanitizeHtml(obj.COMMENT))).appendTo(item);
+        });
+    });
+</script>

@@ -1,0 +1,128 @@
+﻿<#@ template language="C#" HostSpecific="True" #>
+<#@ output extension=".cshtml" #>
+<#@ include file="Imports.include.t4" #>
+<#@ include file="View.include.t4" #>
+<# 
+    // EditView Model
+    string currentNestedModelName = "EditView"; 
+    Type currentNestedModelType = Type.GetType(String.Format("{0}+{1}, {2}", ViewDataTypeName, currentNestedModelName, assemblySDO.FullName));
+#>
+@model <#= String.Format("{0}.{1}", ViewDataTypeName, currentNestedModelName) #>
+@{
+    ViewBag.Title = "TODO => 請填入 MvcSitemap 名稱設定, 如：Resources.MvcSitemap.G1" ;
+}
+
+<!-- 按鈕列 -->
+@section buttons {
+    <script type="text/javascript">
+
+        // 加入「存檔」按鈕
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B09',
+            click: function () {
+
+                // 表單是否驗證通過
+                if (!$('#frmUpdate').valid()) {
+                    return false;
+                }
+
+                // 顯示確認訊息
+                confirmMessage('@i18N.Message.C03', function () {
+                    $('#frmUpdate').submit();
+                });
+
+            }
+        });
+
+        // 加入「重設」按鈕
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B10',
+            click: function () {
+                $('#frmUpdate').resetForm();
+            }
+        });
+
+    </script>
+}
+
+@section forms {
+    @using (Ajax.BeginForm("<#= ViewName #>", "<#= controllerName #>", null, new AjaxOptions
+    {
+        OnSuccess = "SaveSuccess",
+        OnFailure = "alertMessage"
+    }, new { id = "frmUpdate" }))
+    {
+        @Html.AntiForgeryToken()
+<# if(currentNestedModelType != null) { #>
+<#
+        foreach (PropertyInfo property in currentNestedModelType.GetProperties()) {
+            var keyAttribute = Attribute.GetCustomAttribute(property, typeof(KeyAttribute)) as KeyAttribute;
+            if(keyAttribute == null) {
+                continue;
+            }
+#>
+        @Html.HiddenFor(m => m.<#= property.Name #>)
+<#
+        }
+#>
+        <table style="width: 100%">
+<#
+        foreach (PropertyInfo property in currentNestedModelType.GetProperties()) {
+            var keyAttribute = Attribute.GetCustomAttribute(property, typeof(KeyAttribute)) as KeyAttribute;
+            if(keyAttribute != null) {
+                continue;
+            }
+#>
+            <tr> 
+		        <th> 
+                    @Html.LabelFor(m => m.<#= property.Name #>)
+		        </th> 
+		        <td>	
+                    @Html.TextBoxFor(m => m.<#= property.Name #>)
+<#  
+            var requiredAttribute = Attribute.GetCustomAttribute(property, typeof(RequiredAttribute)) as RequiredAttribute;
+            if(requiredAttribute != null) {
+#>
+                    @Html.ValidationMessageFor(m => m.<#= property.Name #>)
+<#
+            }
+#>
+                </td> 
+	        </tr>
+<#
+        }
+#>
+        </table>
+<# } #>
+    }
+}
+
+@section scripts {
+    <script type="text/javascript">
+
+       /*
+		    函數：存檔成功
+		    參數：無
+		    備註：執行存檔成功 Callback 動作
+	    */
+        function SaveSuccess(response) {
+            alertMessage(response, function () {
+                if (response.success) {
+                    parent.location.reload();
+                }
+            });
+        }
+
+        /*
+            函數：載入初始化
+            參數：無
+            備註：於功能畫面載入完畢時執行
+        */
+        $(function () {
+
+        });
+
+    </script>
+}

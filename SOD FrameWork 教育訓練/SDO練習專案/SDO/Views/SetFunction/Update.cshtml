@@ -1,0 +1,65 @@
+﻿@model SDO.Models.SetFunctionModel
+@{
+
+}
+@section buttons {
+	<script>
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B09',
+            click: function () {
+                $('#frmUpdate').submit();
+            }
+        });
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B10',
+            click: function () {
+                $('#frmUpdate').resetForm();
+            }
+        });
+	</script>
+}
+@using (Ajax.BeginForm("Update", "SetFunction", null, new AjaxOptions
+{
+	OnSuccess = "alertSuccess",
+	OnFailure = "alertMessage"
+}, new { id = "frmUpdate" }))
+{
+	@Html.AntiForgeryToken()
+	<table>
+		@if (((SelectList)ViewBag.GroupFunctions).Count() > 0)
+		{
+			<tr>
+				<th>@Html.LabelFor(m => m.PARENT_ID)</th>
+				<td>@Html.DropDownListFor(m => m.PARENT_ID, (SelectList)ViewBag.GroupFunctions, new { @readonly = "readonly" })</td>
+			</tr>
+		}
+		<tr>
+			<th>@Html.LabelFor(m => m.FUNCTION_ID)</th>
+			<td>@Html.TextBoxFor(m => m.FUNCTION_ID, new { @readonly = "readonly" })@Html.ValidationMessageFor(m => m.FUNCTION_ID)</td>
+		</tr>
+		<tr>
+			<th>@Html.LabelFor(m => m.FUNCTION_NAME)</th>
+			<td>@Html.TextBoxFor(m => m.FUNCTION_NAME)@Html.ValidationMessageFor(m => m.FUNCTION_NAME)</td>
+		</tr>
+		@if (((SelectList)ViewBag.GroupFunctions).Count() > 0)
+		{
+			<tr>
+				<th>@Html.LabelFor(m => m.FUNCTION_URL)</th>
+				<td>@Html.TextBoxFor(m => m.FUNCTION_URL)@Html.ValidationMessageFor(m => m.FUNCTION_URL)</td>
+			</tr>
+		}
+	</table>
+}
+@section scripts {
+	<script>
+		function alertSuccess(result) {
+			alertMessage(result, function () {
+				parent.winWork.close();
+				parent.location.reload();
+			});
+		}
+	</script>
+}
+

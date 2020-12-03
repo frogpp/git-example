@@ -1,0 +1,115 @@
+﻿@{
+    ViewBag.Title = "AngularJS Ajax Request 練習";
+}
+
+<h2>AngularJS Ajax Request 練習</h2>
+<p>請於本頁進行以下的 Ajax 練習</p>
+<ol>
+    <li>以 get 方式從 server端 取得資料</li>
+    <li>以 post 方式將資料送至 server端，並取得回應資料</li>
+</ol>
+
+<div ng-app="exampleApp" ng-controller="demoCtrl" class="demo">
+    exampleApp 的 demoCtrl 作用範圍
+    <br />
+
+    <button type="button" ng-click="getData1()">使用 $http 服務，並接收回覆資料</button>
+    <button type="button" ng-click="getData2()">預處理 response 資料</button>
+    <button type="button" ng-click="getData3()">使用 $http 服務</button>
+
+    <table class="list-table">
+        <thead>
+            <tr>
+                <th>id</th>
+                <th>name</th>
+                <th>amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="item in items">
+                <td ng-bind="item.id"></td>
+                <td>{{item.name}}</td>
+                <td>{{item.amount}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+
+        var myApp = angular.module("exampleApp", []);
+        //使用 $http 服務，並以其 get、post、delete、put 或 head 方法產生不同類型的 Ajax request
+        myApp.controller("demoCtrl", function ($scope, $http) {
+            // 在 $scope 上設定供畫面相關事件使用
+            $scope.getData1 = function () {
+                $http
+                    .get('@Url.Action("GetItems2", "Ajax")')
+                    //使用 success 只會取得資料，使用 then 可以取得更多的回應詳細資料(data、status、headers、config)
+                    .success(function (data) {
+                        //接收 Ajax request 的回覆資料
+                        $scope.items = data;
+                    });
+            };
+
+            //處理非 JSON 格式的資料
+            $scope.getData2 = function () {
+                //
+                var config = {
+                    transformResponse: function (data, headers) {
+                        var result;
+
+                        if (headers("content-type").substr(0, 15) == "application/xml"
+                            && angular.isString(data)) {
+
+                            // 在此將 XML 資料轉換成所需要的資料格式(自訂處理)
+                            // 只是說明用法，所以不寫轉換xml的部分，直接產生假資料
+                            var mockData = [
+                                { id: 1, name: 'item4', amount: 999 },
+                                { id: 2, name: 'item5', amount: 99999 }
+                            ];
+
+                            result = mockData;
+                        } else {
+                            // angularJS 會依據 response 的 content-type 處理資料
+                            // 此處為 application/xml，所以傳入的 data 為字串格式，而非物件
+                            // 因此回傳時再將 json 字串轉回物件
+                            result = angular.fromJson(data);
+                        }
+
+                        return result;
+                    }
+                };
+
+                $http
+                    .get('@Url.Action("GetXMLItems", "Ajax")', config)
+                    .success(function (data) {
+                        $scope.items = data;
+                    });
+            };
+
+            $scope.getData3 = function () {
+                var data = { id: 1, name: '使用post修改', amount: 99999 }
+                var config = {
+                    headers: {
+                        "Content- Type": "application/ x - www - form - urlencoded"
+                    }
+                }
+                //var config = {
+
+                //}
+                $http
+                    .post('@Url.Action("GetItems3", "Ajax")', data)
+                    //使用 success 只會取得資料，使用 then 可以取得更多的回應詳細資料(data、status、headers、config)
+                    .success(function (data) {
+                        //接收 Ajax request 的回覆資料
+                        $scope.items = data;
+
+                    });
+
+
+            };
+        });
+    </script>
+}

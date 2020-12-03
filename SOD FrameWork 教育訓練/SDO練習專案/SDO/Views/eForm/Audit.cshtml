@@ -1,0 +1,159 @@
+﻿
+@{
+
+}
+@section buttons {
+    <script>       
+        if ($.trim(parent.auditData.SUB_FLOW_CODE).length <= 0) {
+            toolBar.add({
+                type: 'button',
+                text: '同意',
+                click: function () {
+                    $('#frmAudit').attr('action', '@Url.Action("SetFlowAccept", "ActiveFlow")');
+                    flowData[0].flow_decision === 1 ? $('#flowDecision', '#frmAudit').show() : $('#flowDecision', '#frmAudit').hide();
+                    dlgAudit.title('簽核同意');
+                    dlgAudit.open();
+                }
+            });
+            toolBar.add({
+                type: 'button',
+                text: '退回',
+                click: function () {
+                    $('#frmAudit').attr('action', $.trim(parent.auditData.SUB_FLOW_CODE).length <= 0 ? '@Url.Action("SetFlowReject", "ActiveFlow")' : '@Url.Action("SetFlowAccept", "ActiveFlow")');
+                    $('#flowDecision', '#frmAudit').hide();
+                    dlgAudit.title('簽核退回');
+                    dlgAudit.open();
+                }
+            });
+            toolBar.add({
+                type: "separator"
+            });
+            toolBar.add({
+                type: 'button',
+                text: '分會',
+                click: function () {
+                    $('#FLOW_CODE', '#frmSetSub').val(parent.auditData.FLOW_CODE);
+                    dlgSubFlow.open();
+                }
+            });
+        }
+        else
+            toolBar.add({
+                type: 'button',
+                text: '提供意見',
+                click: function () {
+                    $('#frmAudit').attr('action', '@Url.Action("SetFlowAccept", "ActiveFlow")');
+                    $('#flowDecision', '#frmAudit').hide();
+                    dlgAudit.title('提供意見');
+                    dlgAudit.open();
+                }
+            });
+    </script>
+}
+@section forms {
+}
+@using (Ajax.BeginForm("Update", "eForm", null, new AjaxOptions
+{
+    OnSuccess = "alertSuccess",
+    OnFailure = "alertMessage"
+}, new { id = "frmUpdate" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("FORM_ID", "")
+    @Html.Hidden("FILL_ID", (string)ViewBag.fillId)
+    @Html.Hidden("FILL_DATA", "")
+}
+<div id="dlgAudit">
+    @using (Ajax.BeginForm("QueryFlowLvInfo", "ActiveFlow", null, new AjaxOptions
+    {
+        OnSuccess = "alertSuccess",
+        OnFailure = "alertMessage"
+    }, new { id = "frmAudit" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("FLOW_CODE")
+        @Html.Hidden("IS_SUBFLOW")
+        <textarea id="MEMO" name="MEMO" rows="5" style="width:420px" data-val="true" data-val-required="請填寫簽核意見"></textarea>
+        <span class="field-validation-valid" data-valmsg-replace="true" data-valmsg-for="MEMO"></span>
+        <div id="flowDecision" style="text-align:right;"><input type="checkbox" id="SIGNED_DECISION" name="SIGNED_DECISION" value="true" />是否決行</div>
+    }
+</div>
+<div id="dlgSubFlow" style="width:560px;">
+    @using (Ajax.BeginForm("SetSubFlowActive", "ActiveFlow", null, new AjaxOptions
+    {
+        OnSuccess = "alertSuccess",
+        OnFailure = "alertMessage"
+    }, new { id = "frmSetSub" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("FLOW_CODE")
+        @Html.ListBox("SUB_USERS", new List<SelectListItem>())
+        @Html.Partial("_OrgUserSelector", new ViewDataDictionary { { "ID", "SUB_USERS" } })
+    }
+</div>
+
+@section scripts {
+    <script>
+        var dlgAudit = $('#dlgAudit').kendoDialog({
+            closable: false,
+            visible: false,
+            actions: [{
+                text: '確定',
+                action: function (e) {
+                    $('#frmAudit').resetValid();
+                    if ($('#frmAudit').valid())
+                        $('#frmAudit').submit();
+                    else
+                        return false;
+                }
+            }, {
+                text: '取消',
+                action: function (e) {
+                    $('#frmAudit').resetForm();
+                    dlgAudit.close();
+                }
+                }]
+        }).data('kendoDialog');
+        var dlgSubFlow = $('#dlgSubFlow').kendoDialog({
+            title: false,
+            closable: false,
+            visible: false,
+            actions: [{
+                text: '確定',
+                action: function (e) {
+                    if ($('#SUB_USERS', '#frmSetSub').val().length > 0)
+                        $('#frmSetSub').submit();
+                    else
+                        return false;
+                }
+            }, {
+                text: '取消',
+                action: function (e) {
+                    $('#frmSetSub').resetForm();
+                    dlgSubFlow.close();
+                }
+            }]
+        }).data('kendoDialog');
+        function alertSuccess(result) {
+            alertMessage(result, function () {
+                if (result.success)
+                    parent.location.reload();
+            });
+        }
+        var flowData, frmBuilder = $('#frmUpdate').buildForm(true);
+        $(function () {
+            setTimeout(function () {
+                fixToolbar();
+                $('#FLOW_CODE', '#frmAudit').val($.trim(parent.auditData.SUB_FLOW_CODE).length <= 0 ? parent.auditData.FLOW_CODE : parent.auditData.SUB_FLOW_CODE);
+                $('#IS_SUBFLOW', '#frmAudit').val($.trim(parent.auditData.SUB_FLOW_CODE).length > 0);
+            }, 10);
+            $.post('@Url.Action("QueryFlowLvInfo", "ActiveFlow")', {
+                FLOW_CODE: $.trim(parent.auditData.SUB_FLOW_CODE).length <= 0 ? parent.auditData.FLOW_CODE : parent.auditData.FLOW_CODE,
+                IS_SUBFLOW: $.trim(parent.auditData.SUB_FLOW_CODE).length > 0
+            }, function (result) {
+                flowData = result;
+            });
+        });
+    </script>
+}
+

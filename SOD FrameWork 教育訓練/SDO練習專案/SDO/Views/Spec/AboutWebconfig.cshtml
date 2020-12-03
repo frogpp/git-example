@@ -1,0 +1,46 @@
+﻿@{
+    ViewBag.Title = Resources.MvcSitemap.Spec_1;
+}
+@section buttons {
+
+}
+@section forms{
+
+}
+<h4>connectionStrings</h4>
+<pre>
+<i>@Html.Raw(HttpUtility.HtmlEncode("<add name=\"MainDBConnection\" providerName=\"System.Data.SqlClient\" "))
+        @Html.Raw(HttpUtility.HtmlEncode("connectionString=\"Data Source={SQL Server};Initial Catalog={Database Name};User ID={SQL Login ID};Password={SQL Login Password}\" />"))</i>
+    系統預設只使用一個connection連線設定。
+</pre>
+<h4>appSettings</h4>
+<pre>
+<i>@Html.Raw(HttpUtility.HtmlEncode("<add key=\"MvcSiteMapProvider_IncludeAssembliesForScan\" value=\"{專案名稱}\" />"))</i>
+    搭配麵包屑(MvcSiteMap)實作使用
+</pre>
+<h4>system.web</h4>
+<pre>
+<i>@Html.Raw(HttpUtility.HtmlEncode("<compilation debug=\"true\" targetFramework=\"4.6.2\" />"))</i>
+    預設為true；將debug設為false，可以增進正式系統執行效能
+
+<i>@Html.Raw(HttpUtility.HtmlEncode("<authentication mode=\"Forms\">"))</i>
+<i>@Html.Raw(HttpUtility.HtmlEncode("   <forms loginUrl=\"{帳密登入頁面位置}\" defaultUrl=\"{預設首頁位置}\" cookieless=\"UseUri\" timeout=\"30\" requireSSL=\"false\" />"))</i>
+<i>@Html.Raw(HttpUtility.HtmlEncode("</authentication>"))</i>
+    表單驗證，timeout預設為30分鐘；請儘量設定與Session Timeout一致
+    requireSSL預設為false；使用https通訊協定請設為true
+    slidingExpiration設為false不會自動延展cookie登入時間，增強登入票證驗證有效
+
+<i>@Html.Raw(HttpUtility.HtmlEncode("<httpCookies httpOnlyCookies=\"true\" requireSSL=\"false\" />"))</i>
+    requireSSL預設為false；使用https通訊協定請設為true
+
+<i>@Html.Raw(HttpUtility.HtmlEncode("<sessionState cookieless=\"true\" timeout=\"30\" />"))</i>
+    timeout預設為30分鐘；請儘量設定與authentication Timeout一致
+</pre>
+<h4>requestFiltering</h4>
+<pre>
+<i>@Html.Raw(HttpUtility.HtmlEncode("<requestLimits maxAllowedContentLength=\"10485760\" />"))</i>
+    上傳檔案流量大小限制，預設為10(Mb)*1024*1024 = 10485760 
+</pre>
+@section scripts {
+
+}

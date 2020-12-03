@@ -1,0 +1,27 @@
+﻿<input type="file" id="uploader_@ViewData["ID"].ToString()" name="uploader" />
+<h5 style="color:red;">@i18N.Message.P05</h5>
+<script>
+    $('#@ViewData["ID"].ToString()').hide();
+    $.post('@Url.Action("GetUploads", "Upload")', { 'fileNames': $('#@ViewData["ID"].ToString()').val().split(',') }, function (result) {
+        $('#uploader_@ViewData["ID"].ToString()').kendoUpload({
+            async: {
+                chunkSize: parseInt(524288), //0.5Mb * 1024 * 1024
+                saveUrl: '@Url.Action("ChunkSave", "Upload")',
+                removeUrl: '@Url.Action("Remove", "Upload")',
+                autoUpload: true
+            },
+            validation: { maxFileSize: 10485760, }, //10Mb*1024*1024
+            multiple: @ViewData["MULTIPLE"].ToString().ToLower(),
+            files: result,
+            success: function (e) {
+                setTimeout(function () {
+                    $('#@ViewData["ID"].ToString()').val($.map($.grep($('#uploader_@(ViewData["ID"].ToString())').data('kendoUpload').getFiles(), function (o) {
+                        return !o.validationErrors
+                    }), function (o) {
+                        return o.name
+                    }));
+                }, 10);
+            }
+        });
+    });
+</script>

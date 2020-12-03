@@ -1,0 +1,74 @@
+﻿
+@{ 
+    ViewBag.Title = Resources.MvcSitemap.FlowModule_1;
+}
+@section buttons {
+    <script>
+        toolBar.add({
+            id: 'btnQuery',
+            type: 'button',
+            text: '查詢',
+            overflow: 'never',
+            click: function () {
+                $('#frmQuery').submit();
+            }
+        });
+    </script>
+}
+@section forms {
+    @using (Ajax.BeginForm("Query", "ActiveFlow", null, new AjaxOptions
+    {
+        OnSuccess = "setGrid",
+        OnFailure = "alertMessage"
+    }, new { id = "frmQuery" }))
+    {
+        @Html.AntiForgeryToken()
+        <table>
+            <tr>
+                <th>@Html.Label("流程代碼")</th>
+                <td colspan="3">@Html.TextBox("qryFLOW_CODE")</td>
+            </tr>
+        </table>
+    }
+}
+<div id="grid"></div>
+<script type="text/javascript" title="init">
+    var grid = $('#grid').kendoGrid({
+        columns: [
+            {
+                command: [
+                    {
+                        name: 'queryFlowDetail', text: '', iconClass: 'k-icon k-i-grid-layout', title: '流程日誌', click: function (e) {
+                            e.preventDefault();
+                            var data = this.dataItem($(e.target).closest("tr"));
+                            setWinWork(encodeURI('@Url.Action("QueryDetail", "ActiveFlow")/' + data.FLOW_CODE), '流程關卡');
+                        }
+                    }
+                ]
+            },
+            { field: 'FLOW_CODE', title: '流程代碼' },
+            {
+                template: function (e) {
+                    var spanTip = (e.ORG_ID ? e.ORG_ID + '_' + e.ORG_NAME + ' ' : '') + (e.ROLE_ID ? '(' + e.ROLE_ID + '_' + e.ROLE_NAME + ') ' : '') + (e.USER_ID ? e.USER_ID + '_' + e.USER_NAME : ''),
+                        spanTxt = (e.ORG_ID ? e.ORG_NAME + ' ' : '') + (e.ROLE_ID ? '(' + e.ROLE_NAME + ') ' : '') + (e.USER_ID ? e.USER_NAME : '');
+                    return $('<span />').attr('title', spanTip).text(spanTxt).prop('outerHTML');
+                }, title: '目前流程關卡'
+            },
+            {
+                template: function (e) {
+                    return $('<div />').text(parseTWDatetime(e.MDF_DATE)).prop('outerHTML');
+                }, title: '最新簽核時間', width: 150
+            }
+        ]
+    }).data('kendoGrid');
+    function setGrid(result) {
+        grid.genGrid(result);
+    }
+</script>
+@section scripts {
+    <script>
+        $(function () {
+            $('#btnQuery').click();
+        });
+    </script>
+}

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="TestDBModelStoreContainer">
+    <EntitySet Name="Vendor_D" EntityType="TestDBModel.Store.Vendor_D" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Vendor_M" EntityType="TestDBModel.Store.Vendor_M" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="Vendor_D">
+    <Key>
+      <PropertyRef Name="FirmNo" />
+      <PropertyRef Name="DataPeriod_S" />
+      <PropertyRef Name="DFLG" />
+      <PropertyRef Name="DataDate" />
+    </Key>
+    <Property Name="SupId" Type="char" Nullable="false" MaxLength="8" />
+    <Property Name="FirmNo" Type="char" Nullable="false" MaxLength="10" />
+    <Property Name="FirmName" Type="nvarchar" MaxLength="50" />
+    <Property Name="FirmShortNo" Type="char" MaxLength="6" />
+    <Property Name="MapType" Type="char" MaxLength="1" />
+    <Property Name="ContactPerson" Type="nvarchar" MaxLength="50" />
+    <Property Name="OrderType" Type="char" MaxLength="1" />
+    <Property Name="ArrivalDays" Type="char" MaxLength="1" />
+    <Property Name="FirmType" Type="char" MaxLength="1" />
+    <Property Name="VendorCreatDate" Type="char" MaxLength="10" />
+    <Property Name="DataPeriod_S" Type="char" Nullable="false" MaxLength="10" />
+    <Property Name="DataPeriod_E" Type="char" MaxLength="10" />
+    <Property Name="ContactDate_S" Type="char" MaxLength="10" />
+    <Property Name="ContactDate_E" Type="char" MaxLength="10" />
+    <Property Name="SettleType" Type="char" MaxLength="1" />
+    <Property Name="PayType" Type="char" MaxLength="1" />
+    <Property Name="BankCode" Type="char" MaxLength="3" />
+    <Property Name="RemitAcno" Type="nvarchar" MaxLength="16" />
+    <Property Name="PayArea" Type="char" MaxLength="1" />
+    <Property Name="CheckDays" Type="char" MaxLength="3" />
+    <Property Name="RefundType" Type="char" MaxLength="1" />
+    <Property Name="InvoiceType" Type="char" MaxLength="1" />
+    <Property Name="AddressDist" Type="char" MaxLength="10" />
+    <Property Name="ZipCode" Type="char" MaxLength="5" />
+    <Property Name="Address" Type="nvarchar" MaxLength="80" />
+    <Property Name="Tel" Type="char" MaxLength="14" />
+    <Property Name="Fax" Type="char" MaxLength="14" />
+    <Property Name="DFLG" Type="char" Nullable="false" MaxLength="1" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="DataDate" Type="datetime" Nullable="false" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Vendor_M">
+    <Key>
+      <PropertyRef Name="SupId" />
+    </Key>
+    <Property Name="SupId" Type="char" Nullable="false" MaxLength="8" />
+    <Property Name="SupName" Type="nvarchar" MaxLength="50" />
+    <Property Name="SupShortName" Type="nvarchar" MaxLength="25" />
+    <Property Name="ContactPerson" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShipType" Type="char" MaxLength="1" />
+    <Property Name="ZipCode" Type="char" MaxLength="5" />
+    <Property Name="Address" Type="nvarchar" MaxLength="80" />
+    <Property Name="Tel" Type="char" MaxLength="14" />
+    <Property Name="Fax" Type="char" MaxLength="14" />
+    <Property Name="VendorCreatDate" Type="char" MaxLength="10" />
+    <Property Name="IST_Date" Type="char" MaxLength="10" />
+    <Property Name="IEN_Date" Type="char" MaxLength="10" />
+    <Property Name="StopTranDate_S" Type="char" MaxLength="10" />
+    <Property Name="StopTranDate_E" Type="char" MaxLength="10" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="DataDate" Type="datetime" Nullable="false" />
+    <Property Name="UserID" Type="nvarchar" MaxLength="10" />
+  </EntityType>
+</Schema>

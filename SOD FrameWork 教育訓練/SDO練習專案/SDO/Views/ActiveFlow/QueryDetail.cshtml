@@ -1,0 +1,167 @@
+﻿
+@{
+    ViewBag.Title = Resources.MvcSitemap.W1;
+}
+@section buttons {
+
+}
+@section forms {
+    @using (Ajax.BeginForm("QueryDetail", "ActiveFlow", null, new AjaxOptions
+    {
+        OnSuccess = "setGrid",
+        OnFailure = "alertMessage"
+    }, new { id = "frmQuery" }))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Hidden("FLOW_CODE", (string)ViewBag.FLOW_CODE)
+    }
+}
+<div id="grid"></div>
+<script type="text/javascript" title="init">
+    var grid = $('#grid').kendoGrid({
+        columns: [
+            {
+                command: [
+                    {
+                        name: 'cancelFlow', text: '', iconClass: 'k-icon k-i-delete', title: '取消流程', click: function (e) {
+                            e.preventDefault();
+                            var data = this.dataItem($(e.target).closest("tr"));
+                            confirmMessage('確定要取消此流程嗎？', function () {
+                                $.post('@Url.Action("CancelFlow", "ActiveFlow")', { 'flowCode': data.FLOW_CODE }, function (result) {
+                                    alertMessage(result, function () {
+                                        if (result.success) {
+                                            $('#frmQuery').submit();
+                                        }
+                                    });
+                                });
+                            });
+                        }, visible: function (e) {
+                            return (!e.HAS_SIGNED && e.STATUS === 1) && ('true' === '@((bool)ViewBag.isAdmin?"true":"false")');
+                        }
+                    },
+                    {
+                        name: 'resetFlow', text: '', iconClass: 'k-icon k-i-reset', title: '重啟流程', click: function (e) {
+                            e.preventDefault();
+                            var data = this.dataItem($(e.target).closest("tr"));
+                            confirmMessage('確定要重啟此流程嗎？', function () {
+                                $.post('@Url.Action("resetFlow", "ActiveFlow")', { 'flowCode': data.FLOW_CODE }, function (result) {
+                                    alertMessage(result, function () {
+                                        if (result.success) {
+                                            $('#frmQuery').submit();
+                                        }
+                                    });
+                                });
+                            });
+                        }, visible: function (e) {
+                            return (!e.HAS_SIGNED && e.STATUS === 1) && ('true' === '@((bool)ViewBag.isAdmin?"true":"false")');
+                        }
+                    }
+                ]
+            },
+            { field: 'FLOW_CODE', title: '流程代碼' },
+            {
+                template: function (e) {
+                    var spanTip = (e.ORG_ID ? e.ORG_ID + '_' + e.ORG_NAME + ' ' : '') + (e.ROLE_ID ? '(' + e.ROLE_ID + '_' + e.ROLE_NAME + ') ' : '') + (e.USER_ID ? e.USER_ID + '_' + e.USER_NAME : ''),
+                        spanTxt = (e.ORG_ID ? e.ORG_NAME + ' ' : '') + (e.ROLE_ID ? '(' + e.ROLE_NAME + ') ' : '') + (e.USER_ID ? e.USER_NAME : '');
+                    return $('<span />').attr('title', spanTip).text(spanTxt).prop('outerHTML');
+                }, title: '流程關卡'
+            },
+            {
+                template: function (e) {
+                    return $('<span />').attr('title', $.trim(e.MEMO).length > 0 ? '簽核意見：' + e.MEMO : null).text(e.STATUS_NAME).prop('outerHTML');
+                }, title: '簽核狀態'
+            },
+            {
+                template: function (e) {
+                    return $('<div />').text(e.HAS_SIGNED ? parseTWDatetime(e.MDF_DATE) : '').prop('outerHTML');
+                }, title: '簽核時間', width: 150
+            }
+        ],
+        detailInit: function (e) {
+            if (e.data.HAS_SUBFLOW) {
+                $.post('@Url.Action("QuerySubDetail", "ActiveFlow")', { flowCode: e.data.FLOW_CODE, signedOdr: e.data.BASE_ODR }, function (result) {
+                    $.each(result, function () {
+                        var subResult = JSON.parse(this);
+                        var subDetailGrid = $("<div />").appendTo(e.detailCell).kendoGrid({
+                            columns: [
+                                {
+                                    command: [
+                                        {
+                                            name: 'cancelSubflow', text: '', iconClass: 'k-icon k-i-delete', title: '取消分會流程', click: function (e) {
+                                                e.preventDefault();
+                                                var data = this.dataItem($(e.target).closest("tr"));
+                                                confirmMessage('確定要取消此分會流程嗎？', function () {
+                                                    $.post('@Url.Action("CancelSubflow", "ActiveFlow")', { 'flowCode': data.FLOW_CODE }, function (result) {
+                                                        alertMessage(result, function () {
+                                                            if (result.success) {
+                                                                $('#frmQuery').submit();
+                                                            }
+                                                        });
+                                                    });
+                                                });
+                                            }, visible: function (e) {
+                                                return (!e.HAS_SIGNED && e.STATUS === 1) && ('true' === '@((bool)ViewBag.isAdmin?"true":"false")');
+                                            }
+                                        }
+                                    ]
+                                },
+                                { field: 'FLOW_CODE', title: '分會流程代碼' },
+                                {
+                                    template: function (e) {
+                                        var spanTip = (e.ORG_ID ? e.ORG_ID + '_' + e.ORG_NAME + ' ' : '') + (e.ROLE_ID ? '(' + e.ROLE_ID + '_' + e.ROLE_NAME + ') ' : '') + (e.USER_ID ? e.USER_ID + '_' + e.USER_NAME : ''),
+                                            spanTxt = (e.ORG_ID ? e.ORG_NAME + ' ' : '') + (e.ROLE_ID ? '(' + e.ROLE_NAME + ') ' : '') + (e.USER_ID ? e.USER_NAME : '');
+                                        return $('<span />').attr('title', spanTip).text(spanTxt).prop('outerHTML');
+                                    }, title: '分會流程關卡'
+                                },
+                                {
+                                    template: function (e) {
+                                        return $('<span />').attr('title', $.trim(e.MEMO).length > 0 ? '簽核意見：' + e.MEMO : null).text(e.STATUS_NAME).prop('outerHTML');
+                                    }, title: '分會簽核狀態'
+                                },
+                                {
+                                    template: function (e) {
+                                        return $('<div />').text(e.HAS_SIGNED ? parseTWDatetime(e.MDF_DATE) : '').prop('outerHTML');
+                                    }, title: '分會簽核時間', width: 150
+                                }
+                            ],
+                            dataBound: function (e) {
+                                $.each($(e.sender.tbody).find('tr'), function () {
+                                    var data = e.sender.dataItem($(this));
+                                    if (data.HAS_SIGNED)
+                                        $(this).css('color', 'lightgray');
+                                });
+                            }
+                        }).data('kendoGrid');
+                        subDetailGrid.genGrid(subResult).setOptions({
+                            pageable: false
+                        });
+                        subDetailGrid.dataSource.pageSize(subResult.length);
+                        $("<div />").css('margin-bottom', '5px').appendTo(e.detailCell)
+                    });
+                });
+            }
+        },
+        dataBound: function (e) {
+            $.each($(e.sender.tbody).find('.k-hierarchy-cell'), function () {
+                var data = e.sender.dataItem($(this).closest("tr"));
+                if (data.HAS_SIGNED)
+                    $(this).closest("tr").css('color', 'lightgray');
+                if (!data.HAS_SUBFLOW)
+                    $(this).find('a').hide();
+            });
+        }
+    }).data('kendoGrid');
+    function setGrid(result) {
+        grid.genGrid(result).setOptions({
+            pageable: false
+        });
+        grid.dataSource.pageSize(result.length);
+    }
+</script>
+@section scripts {
+    <script>
+        $(function () {
+            $('#frmQuery').submit();
+        });
+    </script>
+}

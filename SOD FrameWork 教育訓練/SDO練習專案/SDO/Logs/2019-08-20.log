@@ -1,0 +1,9 @@
+2019-08-20 15:15:36.7623
+SYSOP(::1)
+System.Web.Mvc.HttpAntiForgeryException (0x80004005): 提供的反仿冒語彙基元是針對使用者 ""，但是目前的使用者是 "SYSOP"。
+   於 System.Web.Helpers.AntiXsrf.TokenValidator.ValidateTokens(HttpContextBase httpContext, IIdentity identity, AntiForgeryToken sessionToken, AntiForgeryToken fieldToken)
+   於 System.Web.Helpers.AntiXsrf.AntiForgeryWorker.Validate(HttpContextBase httpContext)
+   於 System.Web.Helpers.AntiForgery.Validate()
+   於 System.Web.Mvc.ValidateAntiForgeryTokenAttribute.OnAuthorization(AuthorizationContext filterContext)
+   於 System.Web.Mvc.ControllerActionInvoker.InvokeAuthorizationFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor)
+   於 System.Web.Mvc.Async.AsyncControllerActionInvoker.<>c__DisplayClass3_1.<BeginInvokeAction>b__0(AsyncCallback asyncCallback, Object asyncState)

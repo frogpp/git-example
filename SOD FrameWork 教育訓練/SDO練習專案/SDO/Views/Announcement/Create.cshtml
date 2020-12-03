@@ -1,0 +1,80 @@
+﻿@model SDO.Models.AnnouncementModel
+@{
+
+}
+@section buttons {
+    <script type="text/javascript">
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B09',
+            click: function () {
+                $.post('@Url.Action("SaveUploads", "Upload")',
+                    { fileNames: $('#ATTACH_NAME', '#frmCreate').val().split(',') },
+                    function (result) {
+                        $('#ATTACH_NAME', '#frmCreate').val(result);
+                        $('#frmCreate').submit();
+                });
+            }
+        });
+    </script>
+}
+@section forms {
+}
+@using (Ajax.BeginForm("Create", "Announcement", null, new AjaxOptions
+{
+    OnSuccess = "alertSuccess",
+    OnFailure = "alertMessage"
+}, new { id = "frmCreate" }))
+{
+    @Html.AntiForgeryToken()
+    <table>
+        <tr>
+            <th>@Html.LabelFor(m => m.TITLE)</th>
+            <td>
+                @Html.TextBoxFor(m => m.TITLE)
+                @Html.ValidationMessageFor(m => m.TITLE)
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(m => m.EFFECTIVE_DATE)</th>
+            <td>
+                @Html.TextBoxFor(m => m.EFFECTIVE_DATE, new { @Value = DateTime.Now.ToString("yyyy/MM/dd") })
+                @Html.Partial("_TWDatetime", new ViewDataDictionary { { "ID", "EFFECTIVE_DATE" }, { "DISPLAYTIME", false } })
+                ~
+                @Html.TextBoxFor(m => m.EXPIRE_DATE, new { @Value = DateTime.Now.ToString("yyyy/12/31") })
+                @Html.Partial("_TWDatetime", new ViewDataDictionary { { "ID", "EXPIRE_DATE" }, { "DISPLAYTIME", false }, { "CASCADEFROM", "EFFECTIVE_DATE" } })
+                @Html.ValidationMessageFor(m => m.EFFECTIVE_DATE)
+                @Html.ValidationMessageFor(m => m.EXPIRE_DATE)
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(m => m.COMMENT)</th>
+            <td>
+                @Html.TextAreaFor(m => m.COMMENT)
+                @Html.ValidationMessageFor(m => m.COMMENT)
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(m => m.ATTACH_NAME)</th>
+            <td>
+                @Html.HiddenFor(m => m.ATTACH_NAME)
+                @Html.Partial("_FileUploader", new ViewDataDictionary { { "ID", "ATTACH_NAME" }, { "MULTIPLE", true } })
+            </td>
+        </tr>
+    </table>
+}
+@section scripts {
+    <script type="text/javascript">
+        function alertSuccess(result) {
+            alertMessage(result, function () {
+                parent.location.reload();
+            });
+        }
+        $(function () {
+            $("#COMMENT").kendoEditor({
+                tools: ["bold", "italic", "underline", "strikethrough", "justifyLeft", "justifyCenter", "justifyRight", "justifyFull", "insertUnorderedList", "insertOrderedList", "indent", "outdent", "createLink", "unlink", "insertImage", "insertFile", "subscript", "superscript", "tableWizard", "createTable", "addRowAbove", "addRowBelow", "addColumnLeft", "addColumnRight", "deleteRow", "deleteColumn", "viewHtml", "formatting", "cleanFormatting", "fontName", "fontSize", "foreColor", "backColor", "print"]
+            });
+        });
+    </script>
+}
+

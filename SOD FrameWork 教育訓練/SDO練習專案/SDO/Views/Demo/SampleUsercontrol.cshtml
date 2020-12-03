@@ -1,0 +1,128 @@
+﻿@{
+    ViewBag.Title = Resources.MvcSitemap.Sample_3;
+}
+@section buttons {
+
+}
+@section forms {
+
+}
+<h4>_CheckboxList</h4>
+@Html.Partial("_CheckboxList", new ViewDataDictionary { { "ID", "CHECKBOX" }, { "VALUE", ViewBag.demoList } })
+<pre>
+<i>
+    Html.Partial("_CheckboxList", new ViewDataDictionary
+    {
+        { "ID", control ID },
+        { "VALUE", ILIST< SelectListItem >
+            [{
+                Text: (node Text),
+                Value: (node Value | _GROUP),
+                Disabled: (true | false)
+            },...]
+    })
+</i>
+</pre>
+<h4>_RadioList</h4>
+@Html.Partial("_RadioList", new ViewDataDictionary { { "ID", "RADIO" }, { "VALUE", ViewBag.demoList } })
+<pre>
+<i>
+    Html.Partial("_RadioList", new ViewDataDictionary
+    {
+        { "ID", control ID },
+        { "VALUE", ILIST< SelectListItem >
+            [{
+                Text: (node Text),
+                Value: (node Value | _GROUP),
+                Disabled: (true | false)
+            },...]
+    })
+</i>
+</pre>
+<h4>_Orgselector</h4>
+@Html.DropDownList("ORG1", new List<SelectListItem>())
+@Html.Partial("_OrgSelector", new ViewDataDictionary {
+    { "ID", "ORG1" },
+    { "PARENT_NODEID", "" },
+    { "MULTISELECT", false }
+})
+<br />
+@Html.DropDownList("ORG2", (IList<SelectListItem>)ViewBag.demoOrg)
+@Html.Partial("_OrgSelector", new ViewDataDictionary {
+    { "ID", "ORG2" },
+    { "PARENT_NODEID", "SDOBG" },
+    { "MULTISELECT", true }
+})
+<pre>
+<i>
+    Html.DropDownList({Control ID}, new List< SelectListItem >())
+    Html.Partial("_OrgSelector", new ViewDataDictionary
+    {
+        {"ID", {Control ID} },
+        { "PARENT_NODEID", {指定OrgID為起點 | 空白預設} },
+        { "MULTISELECT", {true | false} }
+
+    })
+</i>
+</pre>
+<h4>_ListSelector</h4>
+@Html.ListBox("LIST", (IList<SelectListItem>)ViewBag.demoListSel)
+@Html.Partial("_ListSelector", new ViewDataDictionary{
+    { "ID", "LIST" },
+    { "FROM", ViewBag.demoListAll }
+})
+<pre>
+<i>
+    Html.ListBox({Control ID}, LIST < SelectListItem >)
+    Html.Partial("_ListSelector", new ViewDataDictionary
+    {
+        { "ID", {Control ID} },
+        { "FROM", ILIST < SelectListItem > data from }
+    })
+</i>
+</pre>
+<h4>_OrgUserSelector</h4>
+@Html.ListBox("ORGUSER", new List<SelectListItem>())
+@Html.Partial("_OrgUserSelector", new ViewDataDictionary { { "ID", "ORGUSER" } })
+<pre>
+<i>
+    Html.ListBox({Control ID}, List < SelectListItem >)
+    Html.Partial("_OrgUserSelector", new ViewDataDictionary
+    {
+        { "ID", {Control ID} }
+    })
+</i>
+</pre>
+<h4>_TWDatetime</h4>
+@Html.TextBox("TWDATE", DateTime.Now.ToString("yyyy/MM/dd"))
+@Html.Partial("_TWDatetime", new ViewDataDictionary { { "ID", "TWDATE" }, { "DISPLAYTIME", false } })
+@Html.TextBox("TWDATETIME", DateTime.Now.ToString("yyyy/MM/dd 09:00"))
+@Html.Partial("_TWDatetime", new ViewDataDictionary { { "ID", "TWDATETIME" }, { "DISPLAYTIME", true }, { "CASCADEFROM", "TWDATE" } })
+<pre>
+<i>
+    Html.TextBox({textbox ID}, {value})
+    Html.Partial("_TWDatetime", new ViewDataDictionary()
+    {
+        { "ID", "{對應control ID}" },
+        { DISPLAYTIME, {true | false}},
+        { CASCADEFROM , {對應連動的control ID}} 
+    })
+</i>
+</pre>
+<h4>_FileUploader</h4>
+@Html.TextBox("ATTFILE", "")
+@Html.Partial("_FileUploader", new ViewDataDictionary { { "ID", "ATTFILE" }, { "MULTIPLE", true } })
+<pre>
+<i>
+    Html.TextBox({Control ID}, {Files})
+    Html.Partial("_FileUploader", new ViewDataDictionary
+    {
+        { "ID", {Control ID} },
+        { "MULTIPLE", {true | false}},
+    })
+</i>
+</pre>
+@section scripts {
+
+}
+

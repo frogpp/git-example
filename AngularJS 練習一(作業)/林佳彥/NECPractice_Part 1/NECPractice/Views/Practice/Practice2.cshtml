@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "AngularJS Template Directive 練習";
+}
+
+<h2>AngularJS Template Directive 練習</h2>
+
+<p>請於本頁練習以下的Template Directive</p>
+<ol>
+    <li>請練習 ng-repeat</li>
+    <li>請使用 ng-include 載入HTML文件</li>
+</ol>
+
+<div ng-app="example" ng-controller="textCtrl">
+    <ul>
+        <li ng-repeat="item in items">{{item}}</li>
+    </ul>
+    <h2>########## ng-include:Practice1 ###########</h2>
+    <div ng-include="'Practice1'"></div>
+    <h2>########## ng-include:Practice1 ###########</h2>
+    
+</div>
+
+<script>
+    var myApp = angular.module("example", []);
+    myApp.controller("textCtrl", function ($scope) {
+        $scope.items = ['aaaa', 'bbbb', 'cccc'];
+        $scope.Name = '';
+        //$scope.tmp = '';
+        $scope.Number = 0;
+        $scope.Add = function () {
+            $scope.Number++;
+        }
+    });
+    
+</script>

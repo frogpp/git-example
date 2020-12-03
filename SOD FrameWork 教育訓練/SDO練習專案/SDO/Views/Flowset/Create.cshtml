@@ -1,0 +1,648 @@
+﻿@model SDO.Models.FlowSetModel.EditView
+@{
+
+}
+<!-- 按鈕列 -->
+@section buttons {
+    <script type="text/javascript">
+
+        // 加入「存檔」按鈕
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B09',
+            click: function() { flowSetCreateController.Save() }
+        });
+
+        // 加入「重設」按鈕
+        toolBar.add({
+            type: 'button',
+            text: '@i18N.Button.B10',
+            click: function() { flowSetCreateController.ResetForm() }
+        });
+
+    </script>
+}
+
+<!-- 新增表單 -->
+@using (Ajax.BeginForm("Create", "FlowSet", null, new AjaxOptions
+{
+    OnSuccess = "flowSetCreateController.SaveSuccess",
+    OnFailure = "alertMessage"
+}, new { id = "frmCreate" }))
+{
+    @Html.AntiForgeryToken()
+    <table>
+        <tr>
+            <th>@Html.LabelFor(m => m.FLOW_ID)</th>
+            <td>
+                @Html.TextBoxFor(m => m.FLOW_ID)
+                @Html.ValidationMessageFor(m => m.FLOW_ID)
+            </td>
+            <th>@Html.LabelFor(m => m.FLOW_NAME)</th>
+            <td>
+                @Html.TextBoxFor(m => m.FLOW_NAME)
+                @Html.ValidationMessageFor(m => m.FLOW_NAME)
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(m => m.MEMO)</th>
+            <td colspan="3">
+                @Html.TextAreaFor(m => m.MEMO, new { @rows = 3, @style = "margin: 5px 0;" })
+                @Html.ValidationMessageFor(m => m.MEMO)
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.LabelFor(m => m.EFFECTIVE_DATE)</th>
+            <td colspan="3">
+                <div style="float: left;">
+                    @Html.TextBoxFor(m => m.EFFECTIVE_DATE, new { @Value = Model == null || Model.EFFECTIVE_DATE == null ? string.Empty : ((DateTime)Model.EFFECTIVE_DATE).ToString("yyyy/MM/dd") })
+                    @Html.Partial("_TWDatetime", new ViewDataDictionary { { "ID", Html.NameFor(m => m.EFFECTIVE_DATE).ToString() }, { "DISPLAYTIME", false } })
+                    @Html.ValidationMessageFor(m => m.EFFECTIVE_DATE)
+                </div>
+                <div style="float: left; line-height: 1.65em; margin: 0 5px;">
+                    ~
+                </div>
+                <div style="float: left;">
+                    @Html.TextBoxFor(m => m.EXPIRE_DATE, new { @Value = Model == null || Model.EXPIRE_DATE == null ? string.Empty : ((DateTime)Model.EXPIRE_DATE).ToString("yyyy/MM/dd") })
+                    @Html.Partial("_TWDatetime", new ViewDataDictionary { { "ID", Html.NameFor(m => m.EXPIRE_DATE).ToString() }, { "DISPLAYTIME", false }, { "CASCADEFROM", Html.NameFor(m => m.EFFECTIVE_DATE).ToString() } })
+                    @Html.ValidationMessageFor(m => m.EXPIRE_DATE)
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <th>@i18N.Label.FlowSetDetail_STAGE_SETTING</th>
+            <td colspan="3">
+                <div id="grid" style="height: 300px;"></div>
+            </td>
+        </tr>
+
+    </table>
+
+}
+
+@section scripts {
+
+    <style type="text/css">
+        .set-options {
+            float: left;
+        }
+
+            .set-options:first-child {
+                margin: 10px 5px 10px 0;
+            }
+
+            .set-options:not(:first-child) {
+                margin: 10px 5px;
+            }
+
+        .k-radio-label .k-checkbox-label {
+            margin-left: 3px;
+        }
+
+        #frmEditStage th {
+            width: 100px !important;
+        }
+    </style>
+
+    <!-- 樣版：關卡編輯視窗內容 -->
+    <script id="editStageWindowContent" type="text/x-kendo-template">
+        <form id="frmEditStage">
+            <div class="k-toolbar">
+                <button type="button" class="k-button " onclick="flowSetCreateController.SaveStage()">@i18N.Button.B09</button>
+            </div>
+            <input type="hidden" data-bind="value: SET_ODR" />
+            <table style="width: 100%; margin: 10px 5px;">
+                <tr>
+                    <th>
+                        <input id="stageTypeRole" type="radio" class="k-radio" value="role" data-bind="checked: STAGE, events: { change: StageTypeChange }" />
+                        <label class="k-radio-label" for="stageTypeRole">@i18N.Label.FlowSetDetail_SET_ROLE_ID</label>
+                    </th>
+                    <td>
+                        <div style="float: left;">
+                            <input name="setOrgID" type="text" data-bind="value: SET_ORG_ID, enabled: IsStageTypeRoleEnabled" />
+                        </div>
+                        <div style="float: left; margin-left: 5px;">
+                            <input name="setRoleID" type="text" data-bind="value: SET_ROLE_ID, enabled: IsStageTypeRoleEnabled" data-field-name="@i18N.Label.FlowSetDetail_SET_ROLE_ID" required />
+                            <div style="margin: 5px 0;">
+                                <span data-for='setRoleID' class='k-invalid-msg'></span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <input id="stageTypeUser" type="radio" class="k-radio" value="user" data-bind="checked: STAGE, events: { change: StageTypeChange }" required />
+                        <label class="k-radio-label" for="stageTypeUser">@i18N.Label.FlowSetDetail_SET_USER_ID</label>
+                    </th>
+                    <td>
+                        <input name="setUserID" type="text" data-bind="value: SET_USER_ID, enabled: IsStageTypeUserEnabled" data-field-name="@i18N.Label.FlowSetDetail_SET_USER_ID" required />
+                        <div style="margin: 5px 0;">
+                            <span data-for='setUserID' class='k-invalid-msg'></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        <input id="stageTypeFlow" type="radio" class="k-radio" value="flow" data-bind="checked: STAGE, events: { change: StageTypeChange }" />
+                        <label class="k-radio-label" for="stageTypeFlow">@i18N.Label.FlowSetDetail_SET_FLOW_ID</label>
+                    </th>
+                    <td>
+                        <input name="setFlowID" type="text" data-bind="value: SET_FLOW_ID, enabled: IsStageTypeFlowEnabled" data-field-name="@i18N.Label.FlowSetDetail_SET_FLOW_ID" />
+                        <div style="margin: 5px 0;">
+                            <span data-for='setFlowID' class='k-invalid-msg'></span>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>@i18N.Label.FlowSetDetail_STAGE_SETTING</th>
+                    <td>
+                        <div class="set-options">
+                            <input id="setOptionMail" type="checkbox" class="k-checkbox" data-bind="checked: SET_OPTION.MAIL" />
+                            <label class="k-checkbox-label" for="setOptionMail">@i18N.Label.FlowSetDetail_SET_OPTION_MAIL</label>
+                        </div>
+                        <div class="set-options">
+                            <input id="setDecision" type="checkbox" class="k-checkbox" data-bind="checked: SET_DECISION" />
+                            <label class="k-checkbox-label" for="setDecision">@i18N.Label.FlowSetDetail_SET_DECISION</label>
+                        </div>
+                        <div class="set-options">
+                            <input id="setOptionSignature" type="checkbox" class="k-checkbox" data-bind="checked: SET_OPTION.SIGNATURE" />
+                            <label class="k-checkbox-label" for="setOptionSignature">@i18N.Label.FlowSetDetail_SET_OPTION_SIGNATURE</label>
+                        </div>
+                        <div class="set-options">
+                            <input id="setOptionCertificate" type="checkbox" class="k-checkbox" data-bind="checked: SET_OPTION.CERTIFICATE" />
+                            <label class="k-checkbox-label" for="setOptionCertificate">@i18N.Label.FlowSetDetail_SET_OPTION_CERTIFICATE</label>
+                        </div>
+                        <div class="set-options">
+                            <input id="setOptionSealed" type="checkbox" class="k-checkbox" data-bind="checked: SET_OPTION.SEALED" />
+                            <label class="k-checkbox-label" for="setOptionSealed">@i18N.Label.FlowSetDetail_SET_OPTION_SEALED</label>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </script>
+
+    <!-- 樣版：Grid 工具列 -->
+    <script id="gridToolbar" type="text/x-kendo-template">
+        <button type="button" class="k-button k-button-icontext" onclick="flowSetCreateController.ShowEditStageWindow(flowSetCreateController.stageDefaultModel)">
+            <span class="k-icon k-i-plus"></span>@i18N.Button.B05
+        </button>
+    </script>
+
+    <script type="text/javascript">
+
+        // 表單驗證器初始設定
+        $.validator.setDefaults({ ignore: [] });
+
+        /*
+            類別：流程設定新增
+            作者：Steven Tsai
+        */
+        function FlowSetCreateJS() {
+
+            var self = this;
+
+            // 預設的關卡設定資訊
+            var defaultSetStage = @Html.Raw(Json.Encode((Model == null || Model.SET_STAGE == null) ? new List<FlowSetDetailModel.EditView>() : Model.SET_STAGE));
+
+            // 選單資料列舉
+            var listEnum = { ORG: 0, ROLE: 1, USER: 2, FLOW: 3 };
+
+            // 選單資料：單位、角色、使用者、流程設定
+            var orgList = @Html.Raw(Json.Encode(ViewBag.orgList));
+            var roleList = @Html.Raw(Json.Encode(ViewBag.roleList));
+            var userList = @Html.Raw(Json.Encode(ViewBag.userList));
+            var flowSetList = @Html.Raw(Json.Encode(ViewBag.flowSetList));
+
+            // 關卡預設資料模型
+            this.stageDefaultModel = {
+                IS_ADD: true,
+                SET_ODR: null,
+                SET_ORG_ID: null,
+                SET_ROLE_ID: null,
+                SET_USER_ID: null,
+                SET_FLOW_ID: null,
+                SET_DECISION: false,
+                SET_OPTION: { MAIL: false, SIGNATURE: false, CERTIFICATE: false, SEALED: false }
+            };
+
+            /*
+                函數：初始化關卡清單
+                參數：無
+                備註：無
+            */
+            this.InitStageGrid = function () {
+
+                // 初始化 Grid 控制項
+                var grid = $('#grid').kendoGrid({
+                    dataSource: defaultSetStage,
+                    columns: [
+                        { template: '<div class="icon_edit" title="@i18N.Button.B06" onclick="flowSetCreateController.UpdateStage(this)"><span class="k-icon k-i-edit"></span></div>', width: 30 },
+                        { template: '<div class="icon_delete" title="@i18N.Button.B07" onclick="flowSetCreateController.DeleteStage(this)"><span class="k-icon k-i-close"></span></div>', width: 30 },
+                        { title: '@i18N.Label.FlowSetDetail_STAGE', template: flowSetCreateController.InitGridStageField, width: 320 },
+                        { title: '@i18N.Label.FlowSetDetail_SET_OPTION_MAIL', template: function (item) { return flowSetCreateController.InitGridFlgField(item.SET_OPTION.MAIL) } },
+                        { field: 'SET_DECISION', title: '@i18N.Label.FlowSetDetail_SET_DECISION', template: function (item) { return flowSetCreateController.InitGridFlgField(item.SET_DECISION) } },
+                        { title: '@i18N.Label.FlowSetDetail_SET_OPTION_SIGNATURE', template: function (item) { return flowSetCreateController.InitGridFlgField(item.SET_OPTION.SIGNATURE) } },
+                        { title: '@i18N.Label.FlowSetDetail_SET_OPTION_CERTIFICATE', template: function (item) { return flowSetCreateController.InitGridFlgField(item.SET_OPTION.CERTIFICATE) } },
+                        { title: '@i18N.Label.FlowSetDetail_SET_OPTION_SEALED', template: function (item) { return flowSetCreateController.InitGridFlgField(item.SET_OPTION.SEALED) } },
+                    ],
+                    toolbar: kendo.template($("#gridToolbar").html())
+                }).data('kendoGrid');
+
+                // 設定 Grid 排序行為
+                self.InitGridSortable();
+
+            }
+
+            /*
+                函數：初始化 Grid 的排序行為
+                參數：無
+                備註：為了確保初始化排序的動作再 Grid Build 後才執行, 須將此事件用 setTimeout 包裝（於 event-loop 最後才執行）
+            */
+            this.InitGridSortable = function() {
+                var grid = $('#grid').data('kendoGrid');
+                setTimeout(function() {
+                    grid.table.kendoSortable({
+                        filter: '>tbody >tr',
+                        cursor: 'move',
+                        hint: function (e) {
+                            return e.clone().css('opacity', 0.3);
+                        },
+                        placeholder: function (e) {
+                            return e.clone().addClass('k-state-hover').css('opacity', 0.7);
+                        },
+                        container: '#grid tbody',
+                        change: function (e) {
+                            var dataItem = grid.dataSource.getByUid(e.item.data("uid"));
+                            grid.dataSource.remove(dataItem);
+                            grid.dataSource.insert(e.newIndex, dataItem);
+                            self.UpdateStageOrder();
+                        }
+                    });
+                }, 10);
+            }
+
+            /*
+                函數：初始化 Grid 的批核關卡欄位
+                參數：
+                    item => 關卡項目資訊
+                備註：無
+            */
+            this.InitGridStageField = function (item) {
+                // 批核關卡類型：角色
+                if (item.SET_ROLE_ID) {
+                    return item.SET_ORG_ID
+                                ? GetTextFromList(listEnum.ORG, item.SET_ORG_ID) + ' - ' + GetTextFromList(listEnum.ROLE, item.SET_ROLE_ID)
+                                : GetTextFromList(listEnum.ROLE, item.SET_ROLE_ID);
+                }
+
+                // 批核關卡類型：使用者
+                if (item.SET_USER_ID) {
+                    return GetTextFromList(listEnum.USER, item.SET_USER_ID);
+                }
+
+                // 批核關卡類型：流程
+                if (item.SET_FLOW_ID) {
+                    return GetTextFromList(listEnum.FLOW, item.SET_FLOW_ID);
+                }
+
+                return "-"
+            }
+
+            /*
+                函數：從指定類型的清單取得對應顯示名稱
+                參數：
+                    type => 選單類型
+                    key => 搜尋的索引值
+                備註：無
+            */
+            function GetTextFromList(type, key){
+                var typeDesc;
+                var sourceList = [];
+                switch (type) {
+                    case listEnum.ORG:
+                        typeDesc = '@i18N.Label.FlowSetDetail_SET_ORG_ID';
+                        sourceList = orgList;
+                        break;
+                    case listEnum.ROLE:
+                        typeDesc = '@i18N.Label.FlowSetDetail_SET_ROLE_ID';
+                        sourceList = roleList;
+                        break;
+                    case listEnum.USER:
+                        typeDesc = '@i18N.Label.FlowSetDetail_SET_USER_ID';
+                        sourceList = userList;
+                        break;
+                    case listEnum.FLOW:
+                        typeDesc = '@i18N.Label.FlowSetDetail_SET_FLOW_ID';
+                        sourceList = flowSetList;
+                        break;
+                    default:
+                        return '';
+                }
+                var item = $.grep(sourceList, function (e) { return e['Value'] == key; });
+                return item.length > 0 ? item[0]['Text'] : '@i18N.Message.R14'.format(typeDesc);
+            }
+
+            /*
+                函數：初始化 Grid 的啟用相關欄位
+                參數：
+                    flg => 啟用狀態
+                備註：無
+            */
+            this.InitGridFlgField = function (flg) {
+                return flg  ? '<span class="k-icon k-i-check-circle k-i-checkmark-circle" style="color: green; font-size: large;"></span>'
+                            : '<span class="k-icon k-i-close-circle k-i-x-circle" style="color: red; font-size: large;"></span>';
+            }
+
+            /*
+                函數：更新批核關卡順序
+                參數：無
+                備註：無
+            */
+            this.UpdateStageOrder = function () {
+                $.each($("#grid").data("kendoGrid").dataSource.data(), function (index, item) {
+                    item["SET_ODR"] = index + 1;
+                });
+            }
+
+            /*
+                函數：執行更新批核關卡
+                參數：無
+                備註：無
+            */
+            this.UpdateStage = function (e) {
+                var dataItem = $('#grid').data("kendoGrid").dataItem($(e).closest("tr"));
+                self.ShowEditStageWindow(dataItem);
+            }
+
+            /*
+                函數：顯示編輯關卡視窗
+                參數：
+                    editItem => 欲編輯的關卡資料
+                備註：無
+            */
+            this.ShowEditStageWindow = function (editItem) {
+
+                // 開啟畫面時, 預設選擇的關卡類型
+                var defaultStageType = "role";
+                defaultStageType = editItem.SET_USER_ID ? "user" : defaultStageType;
+                defaultStageType = editItem.SET_FLOW_ID ? "flow" : defaultStageType;
+
+                // 初始設定編輯畫面的 ViewModel 資訊
+                var viewModel = kendo.observable({
+                    IS_EDIT: editItem.IS_ADD ? false : true,
+                    SET_ODR: editItem.SET_ODR ? editItem.SET_ODR : "",
+                    SET_ORG_ID: editItem.SET_ORG_ID ? editItem.SET_ORG_ID : "",
+                    SET_ROLE_ID: editItem.SET_ROLE_ID ? editItem.SET_ROLE_ID : "",
+                    SET_USER_ID: editItem.SET_USER_ID ? editItem.SET_USER_ID : "",
+                    SET_FLOW_ID: editItem.SET_FLOW_ID ? editItem.SET_FLOW_ID : "",
+                    SET_DECISION: editItem.SET_DECISION ? editItem.SET_DECISION : false,
+                    SET_OPTION: {
+                        MAIL: editItem.SET_OPTION.MAIL ? editItem.SET_OPTION.MAIL : false,
+                        SIGNATURE: editItem.SET_OPTION.SIGNATURE ? editItem.SET_OPTION.SIGNATURE : false,
+                        CERTIFICATE: editItem.SET_OPTION.CERTIFICATE ? editItem.SET_OPTION.CERTIFICATE : false,
+                        SEALED: editItem.SET_OPTION.SEALED ? editItem.SET_OPTION.SEALED : false,
+                    },
+                    STAGE: defaultStageType,
+                    StageTypeChange: function () {
+
+                        // 清空關卡類型資料
+                        this.set("SET_ORG_ID", "");
+                        this.set("SET_ROLE_ID", "");
+                        this.set("SET_USER_ID", "");
+                        this.set("SET_FLOW_ID", "");
+
+                        // 根據指定關卡類型, 判斷必填規則
+                        var stage = this.get("STAGE");
+                        var $validator = $("#frmEditStage").data("kendoValidator");
+                        $validator.validateInput($("input[name='setRoleID']").prop("required", stage === "role"));
+                        $validator.validateInput($("input[name='setUserID']").prop("required", stage === "user"));
+                        $validator.validateInput($("input[name='setFlowID']").prop("required", stage === "flow"));
+
+                    },
+                    IsStageTypeRoleEnabled: function () { return this.get("STAGE") === "role"; },
+                    IsStageTypeUserEnabled: function () { return this.get("STAGE") === "user"; },
+                    IsStageTypeFlowEnabled: function () { return this.get("STAGE") === "flow"; },
+                });
+
+                // 產生 Window 視窗版塊（Bind Tmpl 與 ViewModel）
+                $editWindowContent = $("<div>").appendTo("body");
+                $editWindowContent.attr("id", "editStageWindow");
+                $editWindowContent.html(kendo.template($("#editStageWindowContent").html()));
+                kendo.bind($editWindowContent, viewModel);
+
+                // 初始化表單驗證行為
+                $("#frmEditStage").kendoValidator({
+                    rules: { },
+                    messages: {
+                        required: function (e) {
+                            return '@i18N.Message.R13'.format(e.data("fieldName"));
+                        }
+                    }
+                });
+
+                // 控制項初始化：單位選單
+                $("input[name='setOrgID']").kendoDropDownList({
+                    dataSource: { data: orgList },
+                    dataTextField: "Text",
+                    dataValueField: "Value",
+                    optionLabel: "@i18N.Message.R12",
+                });
+
+                // 控制項初始化：角色選單
+                $("input[name='setRoleID']").kendoDropDownList({
+                    dataSource: { data: roleList },
+                    dataTextField: "Text",
+                    dataValueField: "Value",
+                    optionLabel: "@i18N.Message.R12"
+                });
+
+                // 控制項初始化：使用者選單
+                $("input[name='setUserID']").kendoDropDownList({
+                    dataSource: { data: userList },
+                    dataTextField: "Text",
+                    dataValueField: "Value",
+                    optionLabel: "@i18N.Message.R12"
+                });
+
+                // 控制項初始化：流程選單
+                $("input[name='setFlowID']").kendoDropDownList({
+                    dataSource: { data: flowSetList },
+                    dataTextField: "Text",
+                    dataValueField: "Value",
+                    optionLabel: "@i18N.Message.R12"
+                });
+
+                // 顯示視窗, 並進行控制項初始化
+                $editWindow = $editWindowContent.kendoWindow({
+                    title: '@i18N.Label.FlowSetDetail_STAGE' + ' - ' + (editItem.IS_ADD ? '@i18N.Button.B05' : '@i18N.Button.B06'),
+                    width: "850px",
+                    visible: false,
+                    modal: true,
+                    resizable: false,
+                    actions: ["Close"],
+                    activate: function () { },
+                    deactivate: function () {
+                        $editWindow.destroy();
+                    },
+                }).data("kendoWindow").center().open();
+
+            }
+
+            /*
+                函數：刪除批核關卡
+                參數：無
+                備註：無
+            */
+            this.DeleteStage = function (e) {
+
+                $grid = $('#grid').data("kendoGrid");
+
+                // 取得欲刪除的項目
+                var dataItem = $grid.dataItem($(e).closest('tr'));
+
+                // 確認是否刪除
+                confirmMessage('@i18N.Message.C04', function () {
+                    $grid.dataSource.remove(dataItem);
+                    self.UpdateStageOrder();
+                });
+
+            }
+
+            /*
+                函數：完成編輯批核關卡
+                參數：無
+                備註：無
+            */
+            this.SaveStage = function () {
+
+                // 批核關卡編輯的表單
+                $editFrm = $('#frmEditStage');
+
+                // 驗證表單
+                if ($editFrm.data('kendoValidator').validate()) {
+
+                    // 抓取編輯關卡視窗中的 ViewModel 資訊
+                    var viewModel = $($editFrm.find('input')[0]).get(0).kendoBindingTarget.source;
+                    var dataSource = $('#grid').data('kendoGrid').dataSource;
+
+                    // 判斷是新增或更新, 如為更新需先移除舊有關卡資料
+                    if (viewModel.IS_EDIT) {
+                        var editItem = $.grep(dataSource.data(), function (e) { return e["SET_ODR"] === viewModel.SET_ODR; })[0];
+                        dataSource.remove(editItem);
+                    }
+
+                    // 新增（更新）批核關卡
+                    dataSource.insert(viewModel.SET_ODR ? viewModel.SET_ODR - 1: dataSource.data().length, {
+                        SET_ODR: viewModel.SET_ODR ? viewModel.SET_ODR : dataSource.data().length + 1,
+                        SET_ORG_ID: viewModel.SET_ORG_ID,
+                        SET_ROLE_ID: viewModel.SET_ROLE_ID,
+                        SET_USER_ID: viewModel.SET_USER_ID,
+                        SET_FLOW_ID: viewModel.SET_FLOW_ID,
+                        SET_DECISION: viewModel.SET_DECISION,
+                        SET_OPTION: {
+                            MAIL: viewModel.SET_OPTION.MAIL,
+                            SIGNATURE: viewModel.SET_OPTION.SIGNATURE,
+                            CERTIFICATE: viewModel.SET_OPTION.CERTIFICATE,
+                            SEALED: viewModel.SET_OPTION.SEALED,
+                        }
+                    });
+
+                    // 關閉編輯批核關卡視窗
+                    $("#editStageWindow").data("kendoWindow").close();
+                }
+
+            }
+
+            /*
+                函數：重設表單
+                參數：無
+                備註：無
+            */
+            this.ResetForm = function() {
+                $('#frmCreate').resetForm();
+                $("#grid").data("kendoGrid").setDataSource(new kendo.data.DataSource({
+                    data: defaultSetStage
+                }));
+            }
+
+            /*
+                函數：存檔
+                參數：無
+                備註：執行存檔送出動作
+            */
+            this.Save = function () {
+
+                // 表單是否驗證通過
+                if (!$('#frmCreate').valid()) {
+                    return false;
+                }
+
+                $.ajax({
+                    url: "@Url.Action("Create", "FlowSet")",
+                    type: 'POST',
+                    data: {
+                        FLOW_ID: $("#FLOW_ID").val(),
+                        FLOW_NAME: $("#FLOW_NAME").val(),
+                        MEMO: $("#MEMO").val(),
+                        EFFECTIVE_DATE: $("#EFFECTIVE_DATE").val(),
+                        EXPIRE_DATE: $("#EXPIRE_DATE").val(),
+                        SET_STAGE: JSON.parse(JSON.stringify($('#grid').data('kendoGrid').dataSource.data()))
+                    },
+                    success: self.SaveSuccess,
+                    error: alertMessage
+                });
+
+            }
+
+            /*
+                函數：存檔成功
+                參數：無
+                備註：執行存檔成功 Callback 動作
+            */
+            this.SaveSuccess = function (response) {
+                alertMessage(response, function () {
+                    if (response.success) {
+                        parent.location.reload();
+                    }
+                });
+            }
+        }
+
+        // 流程設定新增 JS 控制器
+        var flowSetCreateController = new FlowSetCreateJS();
+
+        /*
+            函數：載入初始化
+            參數：無
+            備註：於功能畫面載入完畢時執行
+        */
+        $(function () {
+
+            // 初始化關卡資訊
+            flowSetCreateController.InitStageGrid();
+
+            // 綁定有效日觸發到期日重設值的事件
+            $('#_EFFECTIVE_DATE').data('kendoDatePicker').bind('change', function() {
+                var current = this.value() ? this.value().getTime() :  null;
+                var target = $('#EXPIRE_DATE').val() ? Date.parse($('#EXPIRE_DATE').val()) : null;
+                if (current && target && current > target) {
+                    $('#_EXPIRE_DATE').data('kendoDatePicker').value('');
+                    $('#_EXPIRE_DATE').trigger('change');
+                }
+            });
+
+        });
+
+        /*
+            函數：畫面 Resize 事件
+            參數：無
+            備註：當畫面 Resize 時, Grid 會被 Rebuild, 屆時仍須重新初始化排序行為
+        */
+        $(window).resize(function() {
+            // 設定 Grid 排序行為
+            flowSetCreateController.InitGridSortable();
+        });
+
+    </script>
+}

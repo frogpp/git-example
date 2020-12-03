@@ -1,0 +1,65 @@
+﻿<div id="dlgOrgTree_@ViewData["ID"]"><div id="orgTree_@ViewData["ID"]" style="height:300px;"></div></div>
+<script>
+    $('#@ViewData["ID"]').css('float', 'left').css('width', '90%').after($('<div />').css('clear', 'both')).before($('<button />').attr('type', 'button').text('...').kendoButton({
+        click: function () {
+                openOrgTreeDialog('@ViewData["ID"]');
+            }
+    })).kendoMultiSelect({
+        maxSelectedItems: @((bool)ViewData["MULTISELECT"] ? "null": "1"),
+        dataValueField: 'ORG_ID',
+        dataTextField: 'ORG_DISPLAY'
+        }).data('kendoMultiSelect').readonly(true);
+    $('#@ViewData["ID"]').data('kendoMultiSelect').value($.map($('#@ViewData["ID"]').data('kendoMultiSelect').dataSource.data(), function (o) {
+        return o.ORG_ID;
+    }));
+    $('#orgTree_@ViewData["ID"]').data('hasCheckbox', '@ViewData["MULTISELECT"].ToString().ToLower()' == 'true').kendoTreeView({
+        dataSource: new kendo.data.HierarchicalDataSource({
+            transport: {
+                read: function(opt) {
+                    $.get('@Url.Action("QueryEmpOrgs", "EmpOrg")', { ORG_ID: opt.data.ORG_ID ? opt.data.ORG_ID : '@ViewData["PARENT_NODEID"]' }, function (result) {
+                        opt.success(result);
+                    }).fail(function (result) {
+                        opt.error(result);
+                    });
+                }
+            },
+            schema: {
+                model: {
+                    id: 'ORG_ID',
+                    hasChildren: 'HASCHILDREN'
+                }
+            }
+        }),
+        dataTextField: 'ORG_DISPLAY',
+        checkboxes: $('#orgTree_@ViewData["ID"]').data('hasCheckbox'),
+        dataBound: function (e) {
+            setChkTreeNodes('@ViewData["ID"]');
+        }
+    });
+    $('#dlgOrgTree_@ViewData["ID"]').kendoDialog({
+        title: false,
+        closable: false,
+        visible: false,
+        actions: [{
+            text: '確定',
+            action: function (e) {
+                var aryChecked = [],
+                    orgTree = $('#orgTree_@ViewData["ID"]').data('kendoTreeView'),
+                    orgSelector = $('#@ViewData["ID"]').data('kendoMultiSelect');
+                if ($('#orgTree_@ViewData["ID"]').data('hasCheckbox'))
+                    getChkTreeNodes(orgTree.dataSource.view(), aryChecked);
+                else
+                    if (orgTree.dataItem(orgTree.select()))
+                        aryChecked.push(orgTree.dataItem(orgTree.select()));
+                orgSelector.setDataSource(new kendo.data.DataSource({
+                    data: aryChecked
+                }));
+                orgSelector.value($.map(orgSelector.dataSource.data(), function (o) {
+                    return o.ORG_ID;
+                }));
+                orgSelector.trigger('change');
+            }
+        },
+        { text: '取消' }]
+    });
+</script>

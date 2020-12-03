@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = Resources.MvcSitemap.MailModule_1;
+}
+@section buttons {
+    <script>
+        toolBar.add({
+            id: 'btnQuery',
+            type: 'button',
+            text: '@i18N.Button.B04',
+            overflow: 'never',
+            click: function () {
+                setGrid();
+            }
+        });
+    </script>
+}
+@section forms {
+    <form id="frmQuery">
+        @Html.AntiForgeryToken()
+        <table>
+            <tr>
+                <th>@Html.Label(i18N.Label.MailLog_LOG_DATE)</th>
+                <td>
+                    @Html.TextBox("qryMAIL_DATE", DateTime.Now.ToString("yyyy/MM/dd"))
+                    @Html.Partial("_TWDatetime", new ViewDataDictionary { { "ID", "qryMAIL_DATE" }, { "DISPLAYTIME", false } })
+                </td>
+            </tr>
+        </table>
+    </form>
+}
+<div id="grid"></div>
+<script>
+    var grid = $('#grid').kendoGrid({
+        columns: [
+            {
+                field: 'MAIL_SENDER', title: '@i18N.Label.MailLog_MAIL_SENDER', template: function (e) {
+                    var mail = JSON.parse(htmlDecode(e.MAIL_SENDER))
+                    return '<a href="mailto:' + mail.Address + '">' + mail.DisplayName + '</a>';
+                }
+            },
+            {
+                field: 'MAIL_RECEIVER', title: '@i18N.Label.MailLog_MAIL_RECEIVER', template: function (e) {
+                    return $.map(JSON.parse(htmlDecode(e.MAIL_RECEIVER)), function (o) {
+                        return '<a href="mailto:' + o.Address + '">' + o.DisplayName + '</a>';
+                    }).join('<br />');
+                } },
+            {
+                field: 'CC_RECEIVER', title: '@i18N.Label.MailLog_CC_RECEIVER', template: function (e) {
+                    return $.map(JSON.parse(htmlDecode(e.CC_RECEIVER)), function (o) {
+                        return '<a href="mailto:' + o.Address + '">' + o.DisplayName + '</a>';
+                    }).join('<br />');
+                } },
+            {
+                field: 'BCC_RECEIVER', title: '@i18N.Label.MailLog_BCC_RECEIVER', template: function (e) {
+                    return $.map(JSON.parse(htmlDecode(e.BCC_RECEIVER)), function (o) {
+                        return '<a href="mailto:' + o.Address + '">' + o.DisplayName + '</a>';
+                    }).join('<br />');
+                } },
+            { field: 'SEND_FLG', title: '@i18N.Label.MailLog_SEND_FLG', width: 100, attributes: { style: 'text-align: center;'} },
+            { field: 'LOG_DATE', title: '@i18N.Label.MailLog_LOG_DATE', width: 180 },
+        ],
+        detailInit: function (e) {
+            $('<span></span>')
+                .data('content', sanitizeHtml(htmlDecode(htmlDecode(e.data.MAIL_CONTENT)))).text(e.data.MAIL_SUBJECT).css('white-space', 'nowrap')
+                .kendoTooltip({
+                    content: function (e) {
+                        return $('<div></div>').append(e.target.data('content').css('width', parseInt($(document).width() * 0.8)));
+                    }
+                }).appendTo(e.detailCell);
+        }
+    }).data('kendoGrid');
+    function setGrid() {
+       grid.genGrid({
+            url: '@Url.Action("QueryPageable", "MailLog")',
+            data: {
+                log_date: $('#frmQuery input[name=qryMAIL_DATE]').val()
+            }
+        });
+    }
+</script>
+@section scripts {
+    <script>
+        $(function () {
+            setGrid();
+        });
+    </script>
+}
+

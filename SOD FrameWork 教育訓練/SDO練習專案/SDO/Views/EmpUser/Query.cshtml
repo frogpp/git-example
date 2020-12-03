@@ -1,0 +1,95 @@
+﻿@model SDO.Models.EmpUserModel
+@{
+    ViewBag.Title = Resources.MvcSitemap.Sysop_1;
+}
+@section buttons {
+    <script>
+        toolBar.add({
+            id: 'btnQuery',
+            type: 'button',
+            text: '查詢',
+            click: function () {
+                $('#frmQuery').submit();
+            }
+        });
+    </script>
+}
+@section forms {
+    @using (Ajax.BeginForm("Query", "EmpUser", null, new AjaxOptions
+    {
+        OnSuccess = "setGrid",
+        OnFailure = "alertMessage"
+    }, new { id = "frmQuery" }))
+    {
+        @Html.AntiForgeryToken()
+        <table>
+            <tr>
+                <th>@Html.LabelFor(m => m.USER_ID)</th>
+                <td>
+                    @Html.TextBox("qryUSER_ID")
+                </td>
+                <th>@Html.LabelFor(m => m.USER_NAME)</th>
+                <td>
+                    @Html.TextBox("qryUSER_NAME")
+                </td>
+            </tr>
+        </table>
+    }
+}
+@using (Ajax.BeginForm("Delete", "EmpUser", null, new AjaxOptions
+{
+    OnSuccess = "deleteSuccess",
+    OnFailure = "alertMessage"
+}, new { id = "frmDelete" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("IDS")
+}
+<div id="grid"></div>
+<script type="text/javascript" title="init">
+    var grid = $('#grid').kendoGrid({
+        columns: [
+            {
+                command: [{
+                    name: 'deleteUser', text: '', iconClass: 'k-icon k-i-delete', title: '刪除', click: function (e) {
+                        e.preventDefault();
+                        var data = this.dataItem($(e.target).closest("tr"));
+                        confirmMessage('確定要刪除此使用者嗎？', function () {
+                            $('#frmDelete').find('#IDS').val(data.USER_ID);
+                            $('#frmDelete').submit();
+                        });
+                    }
+                }, {
+                    name: 'updateUser', text: '', iconClass: 'k-icon k-i-edit', title: '修改', click: function (e) {
+                        e.preventDefault
+                        var data = this.dataItem($(e.target).closest("tr"));
+                        setWinWork(encodeURI('@Url.Action("Update", "EmpUser")/' + data.USER_ID), '修改');
+                    }
+                }]
+            },
+            { field: 'USER_ID', title: '帳號' },
+            { field: 'USER_NAME', title: '姓名' },
+            { field: 'USER_EMAIL', title: '電子郵件' }
+        ],
+    }).data('kendoGrid');
+    function setGrid(result) {
+        $.when($('#frmQuery').cacheForm()).then(function () {
+            grid.genGrid(result);
+        });
+    }
+</script>
+@section scripts {
+    <script>
+        function deleteSuccess(result) {
+            alertMessage(result, function () {
+                $('#btnQuery').click();
+            });
+        }
+        $(function () {
+            $.when($('#frmQuery').restoreForm()).then(function () {
+                $('#btnQuery').click();
+            });
+        });
+    </script>
+}
+
