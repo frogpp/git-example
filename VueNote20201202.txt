@@ -1,0 +1,871 @@
+Swagger http://pei.usa543.com:96/swagger/index.html
+
+
+pdf  URL:  shorturl.at/uyBPQ
+Long URL: https://whimsical.com/NCe1wwbTMAnLHGJXpwBfZs
+
+- install VS code
+- install npm
+
+> npm -v
+> npm install -g @vue/cli
+
+//powershell 無法執行 (預設執行原則為 Restricted)
+> 使用系統管理員身分執行
+> set-ExecutionPolicy RemoteSigned
+https://blog.csdn.net/lihefei_coder/article/details/100522281
+
+
+> vue create product-portal
+> cd product-portal
+> npm run serve
+
+
+# 透過圖形使用者介面建立專案
+> vue ui
+
+
+# VS Code plugins
+- Prettier - Code formatter
+- Vetur
+- Vue VSCode Snippets
+- Trailing Spaces
+
+- Settings Sync(推 保留套件設定)
+- vscode-icons
+- Todo Tree
+- Bracket Pair Colorizer
+- Auto Rename Tag
+- Auto Complete TagAuto Complete Tag
+- GitLens
+
+> npm run build
+
+# element Form, 安裝完會在node_modules資料夾中
+> npm i element-ui -S  
+
+# .vue 檔案內容結構
+<template> <!-- 頁面結構 -->
+    <div>
+        ...
+    </div>
+</template>
+
+<script> <!-- 動態效果 -->
+export default {
+    data() {
+        return { // initialize
+            ...
+        }
+    },
+    methods: {
+        btnOnClick() {
+            alert('Hi');
+            ...
+            ...
+            ...
+        }  
+    }
+}
+</script>
+
+<style> <!-- 外觀 (CSS or SCSS) -->
+    ...
+</style>
+
+# vue 使用套件
+- element : ui form表單/桌面端組件庫
+- router : 換頁套件/路由管理器
+
+# vue 指令彙總
+
+
+> npm -v #查看npm安裝版本
+> npm install -g @vue/cli #安裝vue
+> vue create product-portal #開啟新專案
+> vue ui #使用者介面專案管理管理
+> npm run build #專案建置
+> npm run serve #專案執行
+> npm i element-ui -S #專案安裝element
+
+
+- npm i element-ui -S #安裝element
+
+# Json 使用工具
+> http://www.objgen.com/json
+> https://www.json-generator.com/
+\
+
+// Element UI 在 VS CODE 裡的 Plugin >> https://marketplace.visualstudio.com/items?itemName=SS.element-ui-snippets
+
+########## main.js ##########
+import Vue from 'vue'
+import App from './App.vue'
+
+
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+
+Vue.use(ElementUI);
+Vue.config.productionTip = false
+
+########## End of  main.js ##########
+
+########## App.vue ###############
+  <div id="app">
+    <el-button type="primary">我是按鈕</el-button>    
+    <img alt="Vue logo" src="./assets/logo.png">
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  </div>
+########## End of App.vue ###############  
+
+
+<template>
+  <div id="app">
+
+    <el-form ref="form" :model="form" label-width="120px">
+      <el-form-item>
+        <el-input v-model="form.name" placeholder="Account"></el-input>
+      </el-form-item>
+        <el-form-item >
+        <el-input v-model="form.name" placeholder="Password"></el-input>
+      </el-form-item>
+      <el-button type="primary">Submit</el-button>
+    </el-form>
+
+    <img alt="Vue logo" src="./assets/logo.png">
+    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  </div>
+</template>
+
+<script>
+import HelloWorld from './components/HelloWorld.vue'
+export default {
+  name: 'App',
+  components: {
+    HelloWorld
+  },
+   data() {
+      return {
+        form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        }
+      }
+    },
+}
+</script>
+
+
+
+# Button Event
+      <el-button type="primary" @click="myclick">Submit</el-button>
+
+      <el-button type="primary" v-on:click="myclick">Submit</el-button>
+
+SPA: Single Page Application
+
+
+### 架構
+
+- project/
+  - node_modules/ Libraries
+  - dist/ build 完的檔案們
+  - src/ 醬汁們
+    - assets/
+    - components/
+    - routers/
+    - views/
+    - App.vue
+    - main.js
+
+### Router
+
+`npm install vue-router`
+https://router.vuejs.org/installation.html#direct-download-cdn
+
+
+=============================router.js=====================
+import Vue from 'vue'
+import VueRouter  from 'vue-router'
+
+import customer from './components/customer.vue'
+import product from './components/product.vue'
+
+Vue.use(VueRouter)
+
+//router setup
+const router = new VueRouter({
+  mode : 'history',
+  routes : [
+    { path: '/customer', component: customer },
+    { path: '/product', component: product }
+  ]}
+  )
+
+export default router
+
+========================end of router.js=====================    
+
+
+========================main.js========================
+import Vue from 'vue'
+import App from './App.vue'
+import router from './router'
+
+import ElementUI from 'element-ui'
+import 'element-ui/lib/theme-chalk/index.css'
+
+Vue.use(ElementUI);
+Vue.config.productionTip = false
+
+new Vue({
+  render: h => h(App),
+  router
+}).$mount('#app')
+
+========================end of main.js=====================
+
+
+========================product.vue=====================
+
+<template>
+    <div> product</div>
+</template>
+
+<script>
+export default {
+    name:'product'
+}
+</script>
+========================end of product.vue=====================
+
+========================customer.vue=====================
+
+<template>
+    <div> customer</div>
+</template>
+
+<script>
+export default {
+    name:'customer'
+}
+</script>
+========================end of customer.vue=====================
+
+========================App.vue=====================
+
+<template>
+  <div id="app" class="login-wrap"> APP.vue
+    <p>
+    <router-link to="/customer">Go to Customer</router-link>
+    <p>
+    <router-link to="/product">Go to Product</router-link>
+    <hr>
+    <router-view></router-view>  </div>
+</template>
+========================end of App.vue=====================
+
+
+======================== Login Form style =====================
+
+<style scoped>
+ .login-wrap {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+</style>
+======================== End of Login Form style ================
+
+
+======================== Menu Content =====================
+
+
+<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" router="true">
+  <el-menu-item index="0" route="/login">Login</el-menu-item>
+  <el-menu-item index="1">出貨</el-menu-item>  
+  <el-submenu index="2">
+    <template slot="title">商品管理</template>
+    <el-menu-item index="2-1">商品管理</el-menu-item>
+    <el-menu-item index="2-2">商品出貨記錄</el-menu-item>
+  </el-submenu>
+  <el-menu-item index="3" route="/customer">顧客管理</el-menu-item>
+  <el-menu-item index="4"><a href="https://www.google.com" target="_blank">Google</a></el-menu-item>
+</el-menu>
+========================End of  Menu Content =====================
+
+
+
+============================ App.vue  (myHeader version)==================
+
+<template>
+  <div id="app" class="login-wrap"> APP.vue
+
+    <myheader />
+    <router-view></router-view>
+  </div>
+</template>
+
+<script>
+import myheader from './components/myheader'
+
+export default {
+  name: 'App',
+  activeIndex: '1',
+  components: {
+    myheader
+  },
+   data() {   //initialize
+      console.log(this.$route.params.status)
+      return {
+        counter : 0,
+        form: {
+          name: '',
+          password: '',
+        }
+      }
+   },
+   methods : { // event handler
+     myclick() {
+       //alert('oh yes ! clicked')
+       this.counter++
+     },
+      handleSelect(key, keyPath) {
+        console.log(key, keyPath);
+      }
+   }
+}
+</script>
+============================End of App.vue  (myHeader version)==================
+
+
+============================ myHeader.vue ==================
+
+<template>
+    <div>
+        <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect" router="true">
+        <el-menu-item index="0" route="/login">Login</el-menu-item>
+        <el-menu-item index="1">出貨</el-menu-item>  
+        <el-submenu index="2">
+            <template slot="title">商品管理</template>
+            <el-menu-item index="2-1">商品管理</el-menu-item>
+            <el-menu-item index="2-2">商品出貨記錄</el-menu-item>
+        </el-submenu>
+        <el-menu-item index="3" route="/customer">顧客管理</el-menu-item>
+        <el-menu-item index="4"><a href="https://www.google.com" target="_blank">Google</a></el-menu-item>
+        </el-menu>
+    </div>
+</template>
+
+<script>
+    export default {
+        name: 'myheader',
+        activeIndex: '1',
+        data() {   //initialize
+            return {
+                counter : 0,
+                form: {
+                name: '',
+                password: '',
+                }
+            }
+        },
+        methods : { // event handler
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            }
+        }
+    }
+</script>
+
+<style lang="scss" scoped>
+
+</style>
+============================End of myHeader.vue ==================
+
+API 整理文件
+Postman
+Swagger
+
+
+CI CD工具匯整
+jenkins
+TeamCity
+Netlify
+
+需求分析文件
+confluence
+
+示意圖 
+whimsical
+
+
+============================Product.vue ==================
+
+
+<template>
+    <div> <h1>product</h1>
+        <el-select v-model="selectedValue" placeholder="Select" @change="myclick">
+            <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+            </el-option>
+        </el-select>
+    <hr>
+
+      <el-table
+        :data="tableData"
+        border
+        style="width: 100%">
+        <el-table-column
+        prop="date"
+        label="商品"
+        width="180">
+        </el-table-column>
+        <el-table-column
+        prop="name"
+        label="地區"
+        width="180">
+        </el-table-column>
+        <el-table-column
+        prop="address"
+        label="數量">
+        </el-table-column>
+         <el-table-column
+            fixed="right"
+            label="Operations"
+            width="120">
+        <el-button
+          @click.native.prevent="deleteRow(scope.$index, tableData)"
+          type="text"
+          size="small"
+          class="el-icon-shopping-cart-full">          
+        </el-button>
+     </el-table-column>
+
+    </el-table>
+    
+    </div>
+</template>
+
+<script>
+export default {
+    name:'product',
+    data() {
+        return {
+        options: [{
+          value: '商品1',
+          label: '我是商品1'
+        }, {
+          value: '商品2',
+          label: '我是商品2'
+        }, {
+          value: '商品3',
+          label: '我是商品3'
+        }, {
+          value: '商品4',
+          label: '我是商品4'
+        }, {
+          value: '商品5',
+          label: '我是商品5'
+        }],
+        selectedValue: '',
+        tableData: [{
+          date: '產品-03',
+          name: '台北',
+          address: '21'
+        }, {
+          date: '產品-02',
+          name: '高雄',
+          address: '23'
+        }, {
+          date: '產品-04',
+          name: '台北',
+          address: '11'
+        }, {
+          date: '產品-01',
+          name: '台中',
+          address: '16'
+        }]
+        }
+    }, 
+    methods : {
+        myclick() {
+            alert(this.selectedValue)
+        }
+    }
+}
+</script>
+
+
+============================End of Product.vue ==================
+
+
+============================ Product.vue Slot version ==================
+
+//  點選資料
+<template>
+    <div> <h1>product</h1>
+        <el-select v-model="selectedValue" placeholder="Select" @change="myclick">
+            <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+            </el-option>
+        </el-select>
+    <hr>
+
+      <el-table
+        :data="tableData"
+        border
+        style="width: 100%">
+        <el-table-column
+        prop="date"
+        label="商品"
+        width="180">
+        </el-table-column>
+        <el-table-column
+        prop="name"
+        label="地區"
+        width="180">
+        </el-table-column>
+        <el-table-column
+        prop="address"
+        label="數量">
+        </el-table-column>
+         <!-- <el-table-column
+            fixed="right"
+            label="Operations"
+            width="120">
+            <el-button
+              @click="cartClick()"
+              type="text"
+              size="small"
+              class="el-icon-shopping-cart-full">          
+            </el-button>
+         </el-table-column> -->
+        <el-table-column
+          fixed="right"
+          label="Operations"
+          width="120">
+          <template slot-scope="scope">
+            <el-button
+              class="el-icon-shopping-cart-full"
+              @click="displayRow(scope.$index, tableData)"
+              type="text"
+              size="small">
+              出貨
+            </el-button>
+          </template>
+     </el-table-column>
+
+    </el-table>
+    
+
+<el-dialog :title="selectedItem.date + '   ' + selectedItem.name  + '   ' + selectedItem.address" :visible.sync="dialogFormVisible">
+  <el-form :model="form">
+    <el-form-item label="會員編號" :label-width="formLabelWidth">
+      <el-input v-model="form.name" autocomplete="off"></el-input>
+    </el-form-item>
+    <el-form-item label="會員姓名" :label-width="formLabelWidth">
+      <el-input v-model="form.name" autocomplete="off"></el-input>
+    </el-form-item>
+    <el-form-item label="訂單點數" :label-width="formLabelWidth">
+      <el-input v-model="form.name" autocomplete="off"></el-input>
+    </el-form-item>
+    <el-form-item label="出貨數量" :label-width="formLabelWidth">
+      <el-input v-model="form.name" autocomplete="off"></el-input>
+    </el-form-item>   
+  </el-form>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogFormVisible = false">Cancel</el-button>
+    <el-button type="primary" @click="dialogFormVisible = false">Confirm</el-button>
+  </span>
+</el-dialog>
+
+
+
+    </div>
+</template>
+
+<script>
+export default {
+    name:'product',
+    
+    data() {
+        return {
+        dialogFormVisible: false,
+        formLabelWidth: '120px',
+        selectedItem: '',
+        form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        },  
+
+        options: [{
+          value: '商品1',
+          label: '我是商品1'
+        }, {
+          value: '商品2',
+          label: '我是商品2'
+        }, {
+          value: '商品3',
+          label: '我是商品3'
+        }, {
+          value: '商品4',
+          label: '我是商品4'
+        }, {
+          value: '商品5',
+          label: '我是商品5'
+        }],
+        selectedValue: '',
+        tableData: [{
+          date: 'iPhone 12 MAX',
+          name: '台北',
+          address: '21'
+        }, {
+          date: 'Google Pixel 4a',
+          name: '高雄',
+          address: '23'
+        }, {
+          date: 'iPhone 12 Pro',
+          name: '台北',
+          address: '11'
+        }, {
+          date: 'Google Pixel 5L',
+          name: '台中',
+          address: '16'
+        }]
+        }
+    }, 
+    methods : {
+        myclick() {
+            alert(this.selectedValue)
+        },
+        cartClick() {
+          this.dialogFormVisible = true
+        },
+      displayRow(index, rows) {
+          this.dialogFormVisible = true
+        //rows.splice(index, 1);
+        console.log(index);
+        console.log(rows[index].date)
+        this.selectedItem = rows[index]
+      }        
+    }
+}
+</script>
+        
+============================End of Product.vue Slot version ==================
+
+        
+        
+============================ Product.vue   API version ==================
+        
+<template>
+    <div> <h1>product</h1>
+        <el-select v-model="selectedValue" placeholder="Select" @change="myclick">
+            <el-option
+            v-for="item in options"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+            </el-option>
+        </el-select>
+    <hr>
+
+      <el-table
+        :data="tableData"
+        border
+        style="width: 100%">
+        <el-table-column
+        prop="date"
+        label="商品"
+        width="180">
+        </el-table-column>
+        <el-table-column
+        prop="name"
+        label="地區"
+        width="180">
+        </el-table-column>
+        <el-table-column
+        prop="address"
+        label="數量">
+        </el-table-column>
+         <!-- <el-table-column
+            fixed="right"
+            label="Operations"
+            width="120">
+            <el-button
+              @click="cartClick()"
+              type="text"
+              size="small"
+              class="el-icon-shopping-cart-full">          
+            </el-button>
+         </el-table-column> -->
+        <el-table-column
+          fixed="right"
+          label="Operations"
+          width="120">
+          <template slot-scope="scope">
+            <el-button
+              class="el-icon-shopping-cart-full"
+              @click="displayRow(scope.$index, tableData)"
+              type="text"
+              size="small">
+              出貨
+            </el-button>
+          </template>
+     </el-table-column>
+
+    </el-table>
+    
+
+<el-dialog :title="selectedItem.date + '   ' + selectedItem.name  + '   ' + selectedItem.address" :visible.sync="dialogFormVisible">
+  <el-form :model="form">
+    <el-form-item label="會員編號" :label-width="formLabelWidth">
+      <el-input v-model="form.name" autocomplete="off"></el-input>
+    </el-form-item>
+    <el-form-item label="會員姓名" :label-width="formLabelWidth">
+      <el-input v-model="form.name" autocomplete="off"></el-input>
+    </el-form-item>
+    <el-form-item label="訂單點數" :label-width="formLabelWidth">
+      <el-input v-model="form.name" autocomplete="off"></el-input>
+    </el-form-item>
+    <el-form-item label="出貨數量" :label-width="formLabelWidth">
+      <el-input v-model="form.name" autocomplete="off"></el-input>
+    </el-form-item>   
+  </el-form>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="dialogFormVisible = false">Cancel</el-button>
+    <el-button type="primary" @click="dialogFormVisible = false">Confirm</el-button>
+  </span>
+</el-dialog>
+
+
+
+    </div>
+</template>
+
+<script>
+import axios from 'axios'
+
+export default {
+    name:'product',
+    created() {
+      axios.get('http://localhost:3000/products')
+          .then(Response => {
+            console.log(Response)
+            this.tableData = Response.data
+          })
+    },
+    data() {
+      let tableData = ''
+
+        return {
+        dialogFormVisible: false,
+        formLabelWidth: '120px',
+        selectedItem: '',
+        form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
+        },  
+
+        options: [{
+          value: '商品1',
+          label: '我是商品1'
+        }, {
+          value: '商品2',
+          label: '我是商品2'
+        }, {
+          value: '商品3',
+          label: '我是商品3'
+        }, {
+          value: '商品4',
+          label: '我是商品4'
+        }, {
+          value: '商品5',
+          label: '我是商品5'
+        }],
+        selectedValue: '',
+        tableData: tableData
+        }
+    }, 
+    methods : {
+        myclick() {
+            alert(this.selectedValue)
+        },
+        cartClick() {
+          this.dialogFormVisible = true
+        },
+      displayRow(index, rows) {
+          this.dialogFormVisible = true
+        //rows.splice(index, 1);
+        console.log(index);
+        console.log(rows[index].date)
+        this.selectedItem = rows[index]
+      }        
+    }
+}
+</script>
+        
+        ============================ End of Product.vue   API version ==================
+
+https://gofile.io/d/uf4gMX   source code v1125
+
+=2020/12/02===================================================
+# Install Vuex
+> npm install vuex --save
+
+# main.js
+import Vuex from 'vuex';
+
+...
+
+Vue.use(Vuex);
+
+...
+
+const store = new Vuex.Store({
+  state: {
+    counter: 0
+  }
+});
+
+...
+
+new Vue({
+  render: h => h(App),
+  router,
+  store
+}).$mount('#app')
+
+
+# any *.vue
+
+this.$store.state.counter
+==============================================================
