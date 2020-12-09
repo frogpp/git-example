@@ -1,7 +1,7 @@
 【練習題】建立WebAPI及版控
 一、新增一個 WebAPI 專案，命名「FrogWebAPI」
 二、安裝及設定 Swegger 套件
-三、安裝 Git／申請 Github 帳號，建立專案 Git 檔案庫，將專案 Commit 至雲端
+三、安裝 Git／開立 Github 帳號，建立專案 Git 檔案庫，將專案 Commit 至雲端
 四、安裝操作 Postman 進行 API 功能驗證
 五、佈署專案至本機 IIS，啟動服務並設定防火牆
 <PS>專案範例請參考：
