@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<head>
+</head>
+<body>
+    <h1>Index</h1>
+    <table border="1">
+        <tr>
+            <th style="width:100px">DI</th>
+            <th style="width:100px">Count</th>
+            <th style="width:100px">HasValue</th>
+        </tr>
+        <tr>
+            <td>Transient</td>
+            <td>@ViewBag.TransientId</td>
+            <td>@ViewBag.TransientHashCode</td>
+        </tr>
+        <tr>
+            <td>Scoped</td>
+            <td>@ViewBag.ScopedId</td>
+            <td>@ViewBag.ScopedHashCode</td>
+        </tr>
+        <tr>
+            <td>Singleton</td>
+            <td>@ViewBag.SingletonId</td>
+            <td>@ViewBag.SingletonHashCode</td>
+        </tr>
+    </table>
+    <hr>
+</body>

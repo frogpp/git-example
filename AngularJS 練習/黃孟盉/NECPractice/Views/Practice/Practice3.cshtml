@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "AngularJS Filter 練習";
+}
+
+<h2>AngularJS Filter 練習</h2>
+
+<p>請於本頁進行以下的 Filter練習</p>
+<ol>
+    <li>請練習每個對單一資料進行格式化的 Filter</li>
+    <li>請練習每個對資料集合進行處理的 Filter</li>
+</ol>
+<hr />
+<div ng-app="Practice3" ng-controller="textCtrl" class="demo">
+    <p ng-repeat="text in textList | limitTo:2">{{text | uppercase}}</p>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        var practice3 = angular.module("Practice3", []);
+
+        practice3.controller("textCtrl", function ($scope) {
+            $scope.textList = ["a", "b", "c", "d", "e"];
+        });
+    </script>
+}

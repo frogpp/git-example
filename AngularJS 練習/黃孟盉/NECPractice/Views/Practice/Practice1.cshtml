@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "AngularJS 資料繫結練習";
+}
+
+<h2>AngularJS 資料繫結練習</h2>
+
+<p>請於本頁練習以下的資料繫結</p>
+<ol>
+    <li class="ng-non-bindable">請使用 {{ }} 進行 inline 資料繫結</li>
+    <li>請使用 ng-bind 進行單向資料繫結</li>
+    <li>請使用 ng-model 進行雙向資料繫結</li>
+</ol>
+<div ng-app="Practice1" ng-controller="textCtrl" class="demo">
+    <span>一、</span>
+    {{text}}
+    <hr />
+    <span>二、</span>
+    ng-bind: <span ng-bind="bind"></span>
+    <hr />
+    <span>三、</span>
+    ng-model: <input type="text" ng-model="model" />
+    {{model}}
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        var practice1 = angular.module("Practice1", []);
+
+        practice1.controller("textCtrl", function ($scope) {
+            var name = "inline資料繫結";
+            $scope.text = name;
+            $scope.bind = "ng-bind";
+            $scope.model = "ng-model";
+        });
+    </script>
+}

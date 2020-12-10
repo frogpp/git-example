@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "AngularJS Ajax Request 練習";
+}
+
+<h2>AngularJS Ajax Request 練習</h2>
+<p>請於本頁進行以下的 Ajax 練習</p>
+<ol>
+    <li>以 get 方式從 server端 取得資料</li>
+    <li>以 post 方式將資料送至 server端，並取得回應資料</li>
+</ol>
+<div ng-app="Practice4" ng-controller="textCtrl" class="demo">
+    <span>Get</span><br />
+    <button type="button" ng-click="getData1()">回覆資料</button>
+    <p ng-repeat="item in items1">{{item}}</p>
+    <hr />
+    <span>Post</span><br />
+    <input type="text" ng-model="number" />
+    <button type="button" ng-click="getData2()">回覆資料</button>
+    <p ng-repeat="item in items2">{{item}}</p>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        var practice4 = angular.module("Practice4", []);
+        practice4.controller("textCtrl", function ($scope, $http) {
+            $scope.getData1 = function () {
+                $http
+                    .get('@Url.Action("GetItems", "Practice")')
+                    .success(function (data) {
+                        $scope.items1 = data;
+                    });
+            };
+
+            $scope.number = 1;
+            $scope.getData2 = function () {
+                var data = { number: $scope.number };
+                $http
+                    .post('@Url.Action("PostItems", "Practice")', data)
+                    .success(function (data) {
+                        $scope.items2 = data;
+                    });
+            };
+        });
+    </script>
+}

@@ -1,0 +1,99 @@
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\NECPractice.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\NECPractice.pdb
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\Antlr3.Runtime.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\EntityFramework.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\EntityFramework.SqlServer.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\Microsoft.Web.Infrastructure.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\Newtonsoft.Json.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.Mvc.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.Optimization.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.Providers.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.Razor.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.WebPages.Deployment.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.WebPages.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.WebPages.Razor.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\WebGrease.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\EntityFramework.xml
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\EntityFramework.SqlServer.xml
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\Newtonsoft.Json.xml
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.Mvc.xml
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.Razor.xml
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.WebPages.xml
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.WebPages.Deployment.xml
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.WebPages.Razor.xml
+D:\Work\Develop\MVC\NECPractice\NECPractice\obj\Debug\NECPractice.csprojResolveAssemblyReference.cache
+D:\Work\Develop\MVC\NECPractice\NECPractice\obj\Debug\NECPractice.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\obj\Debug\NECPractice.pdb
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\NECPractice.dll.config
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\NECPractice.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\NECPractice.pdb
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\Antlr3.Runtime.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\EntityFramework.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\EntityFramework.SqlServer.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\Newtonsoft.Json.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\System.Net.Http.Formatting.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\System.Web.Http.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\System.Web.Http.WebHost.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\System.Web.Mvc.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\System.Web.Optimization.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\System.Web.Providers.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\System.Web.Razor.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\System.Web.WebPages.Deployment.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\System.Web.WebPages.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\System.Web.WebPages.Razor.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\WebGrease.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\EntityFramework.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\EntityFramework.SqlServer.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\Newtonsoft.Json.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\System.Net.Http.Formatting.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\System.Web.Http.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\System.Web.Http.WebHost.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\System.Web.Mvc.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\System.Web.Razor.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\System.Web.WebPages.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\System.Web.WebPages.Deployment.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\bin\System.Web.WebPages.Razor.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\obj\Debug\NECPractice.csprojAssemblyReference.cache
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\obj\Debug\NECPractice.csproj.CoreCompileInputs.cache
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\obj\Debug\NECPractice.csproj.CopyComplete
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\obj\Debug\NECPractice.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 1\NECPractice\obj\Debug\NECPractice.pdb
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\NECPractice.dll.config
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\NECPractice.dll
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\NECPractice.pdb
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\Antlr3.Runtime.dll
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\EntityFramework.dll
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\EntityFramework.SqlServer.dll
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\Microsoft.Web.Infrastructure.dll
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\Newtonsoft.Json.dll
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\System.Net.Http.Formatting.dll
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\System.Web.Http.dll
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\System.Web.Http.WebHost.dll
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\System.Web.Mvc.dll
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\System.Web.Optimization.dll
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\System.Web.Providers.dll
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\System.Web.Razor.dll
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\System.Web.WebPages.Deployment.dll
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\System.Web.WebPages.dll
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\System.Web.WebPages.Razor.dll
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\WebGrease.dll
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\EntityFramework.xml
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\EntityFramework.SqlServer.xml
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\Newtonsoft.Json.xml
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\System.Net.Http.Formatting.xml
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\System.Web.Http.xml
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\System.Web.Http.WebHost.xml
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\System.Web.Mvc.xml
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\System.Web.Razor.xml
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\System.Web.WebPages.xml
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\System.Web.WebPages.Deployment.xml
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\bin\System.Web.WebPages.Razor.xml
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\obj\Debug\NECPractice.csprojAssemblyReference.cache
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\obj\Debug\NECPractice.csproj.CoreCompileInputs.cache
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\obj\Debug\NECPractice.csproj.CopyComplete
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\obj\Debug\NECPractice.dll
+C:\Webs\git-exsample\AngularJS 練習\黃孟盉\NECPractice\obj\Debug\NECPractice.pdb

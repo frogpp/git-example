@@ -1,0 +1,76 @@
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\WebApplication1.exe
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\WebApplication1.deps.json
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\WebApplication1.runtimeconfig.json
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\WebApplication1.runtimeconfig.dev.json
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\WebApplication1.dll
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\WebApplication1.pdb
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\WebApplication1.Views.dll
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\WebApplication1.Views.pdb
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.csprojAssemblyReference.cache
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.AssemblyInfoInputs.cache
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.AssemblyInfo.cs
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.csproj.CoreCompileInputs.cache
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.RazorAssemblyInfo.cache
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.RazorAssemblyInfo.cs
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.TagHelpers.input.cache
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.TagHelpers.output.cache
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.RazorCoreGenerate.cache
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.RazorTargetAssemblyInfo.cache
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.RazorTargetAssemblyInfo.cs
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.Views.pdb
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\staticwebassets\WebApplication1.StaticWebAssets.Manifest.cache
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\staticwebassets\WebApplication1.StaticWebAssets.xml
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.dll
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.pdb
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.genruntimeconfig.cache
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.csproj.CopyComplete
+C:\Users\lsjji\Documents\德義資訊\職能訓練\.NET Core\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\Configuration\settings.json
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\appsettings.Development.json
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\appsettings.json
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\Configuration\settings.json
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\WebApplication1.exe
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\WebApplication1.deps.json
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\WebApplication1.runtimeconfig.json
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\WebApplication1.runtimeconfig.dev.json
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\WebApplication1.dll
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\WebApplication1.pdb
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\WebApplication1.Views.dll
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\bin\Debug\netcoreapp3.1\WebApplication1.Views.pdb
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.csprojAssemblyReference.cache
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.AssemblyInfoInputs.cache
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.AssemblyInfo.cs
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.csproj.CoreCompileInputs.cache
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.MvcApplicationPartsAssemblyInfo.cache
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.RazorAssemblyInfo.cache
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.RazorAssemblyInfo.cs
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\staticwebassets\WebApplication1.StaticWebAssets.Manifest.cache
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\staticwebassets\WebApplication1.StaticWebAssets.xml
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\scopedcss\bundle\WebApplication1.styles.css
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.TagHelpers.input.cache
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.TagHelpers.output.cache
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.RazorCoreGenerate.cache
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Home\Index.cshtml.g.cs
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Home\Privacy.cshtml.g.cs
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Shared\Error.cshtml.g.cs
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_Layout.cshtml.g.cs
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\_ViewImports.cshtml.g.cs
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\Razor\Views\_ViewStart.cshtml.g.cs
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.RazorTargetAssemblyInfo.cache
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.RazorTargetAssemblyInfo.cs
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.Views.pdb
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.dll
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.pdb
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.genruntimeconfig.cache
+C:\Webs\git-exsample\NetCore練習\黃孟盉\WebApplication1\WebApplication1\obj\Debug\netcoreapp3.1\WebApplication1.csproj.CopyComplete
