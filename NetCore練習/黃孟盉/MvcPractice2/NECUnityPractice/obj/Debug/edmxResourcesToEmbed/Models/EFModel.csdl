@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TestDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="TestDBEntities1" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Interest" EntityType="TestDBModel.Interest" />
+  </EntityContainer>
+  <EntityType Name="Interest">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Food" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Drink" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sport" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+</Schema>

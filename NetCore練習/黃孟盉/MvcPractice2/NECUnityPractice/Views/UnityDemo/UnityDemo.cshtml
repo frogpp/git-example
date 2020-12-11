@@ -1,0 +1,88 @@
+﻿<div ng-app="interestApp" ng-controller="interestCtrl">
+    <table class="list-table">
+        <tr>
+            <th>你喜歡的食物：</th>
+            <td><input type="text" ng-model="interest.Food" /></td>
+            <th>你喜歡的飲料：</th>
+            <td><input type="text" ng-model="interest.Drink" /></td>
+            <td><input type="button" ng-click="addInterest(interest)" value="新增" /></td>
+        </tr>
+    </table>
+
+    <table class="list-table">
+        <thead>
+            <tr>
+                <th>編號</th>
+                <th>你喜歡的食物</th>
+                <th>你喜歡的飲料</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="interest in interests">
+                <td>{{ interest.Id }}</td>
+                <td>{{ interest.Food }}</td>
+                <td>{{ interest.Drink }}</td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
+
+@section scripts{
+    <script>
+        // (function () {...})() 為 Self-Contained 或稱為 Self-Executing 函式
+        // 此用法會直接執行函式中的程式，函式中的變數/函式等不會存在全域區，也就不會跟別程式的命名衝突到
+
+        (function () {
+            angular.module('interestApp', []);
+
+            angular.module('interestApp').controller('interestCtrl', interestCtrl);
+
+            function interestCtrl($http, $scope, $timeout) {
+                $scope.getInterests = function () {
+                    $http.post('@Url.Content("GetInterests")')
+                        .success(function (interests) {
+                            $scope.interests = interests;
+                        });
+                }
+
+                $scope.addInterest = function (interest) {
+                    $http.post('@Url.Content("AddInterest")', interest)
+                        .success(function (response) {
+                            $scope.interests.push(response);
+                            showMessageDialog("新增成功");
+                        })
+                        .error(function () {
+                            showMessageDialog("新增失敗");
+                        });
+                }
+
+                $scope.getInterests();
+            }
+
+            // 使用 jQuery UI dialog 來顯示訊息
+            function showMessageDialog(msg) {
+                var html = "<div>" + msg + "</div>";
+                var msgDiv = angular.element(html);
+
+                msgDiv.dialog({
+                    title: "系統訊息",
+                    buttons: [
+                        {
+                            text: "確認",
+                            click: function () {
+                                $(this).dialog("close");
+                            }
+                        }
+                    ],
+                    close: function () {
+                        $(this).dialog("destroy");
+                    }
+                });
+            }
+
+            interestCtrl.$inject = ["$http", "$scope", "$timeout"];
+        })()
+    </script>
+}
+

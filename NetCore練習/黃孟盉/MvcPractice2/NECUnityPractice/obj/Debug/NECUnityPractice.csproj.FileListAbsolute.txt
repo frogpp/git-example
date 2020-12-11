@@ -1,0 +1,184 @@
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\NECPractice.dll.config
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\NECPractice.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\NECPractice.pdb
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\Antlr3.Runtime.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\EntityFramework.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\EntityFramework.SqlServer.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\Newtonsoft.Json.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Net.Http.Formatting.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.Http.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.Http.WebHost.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.Mvc.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.Optimization.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.Providers.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.Razor.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.WebPages.Deployment.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.WebPages.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.WebPages.Razor.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\WebGrease.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\EntityFramework.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\EntityFramework.SqlServer.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\Newtonsoft.Json.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Net.Http.Formatting.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.Http.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.Http.WebHost.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.Mvc.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.Razor.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.WebPages.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.WebPages.Deployment.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.WebPages.Razor.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\zh-Hant\EntityFramework.resources.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\zh-Hant\EntityFramework.SqlServer.resources.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\obj\Debug\NECUnityPractice.csprojResolveAssemblyReference.cache
+C:\Users\howhowleo\Desktop\te\NECPractice\obj\Debug\NECPractice.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\obj\Debug\NECPractice.pdb
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\NECPractice.dll.config
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\NECPractice.dll
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\NECPractice.pdb
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\Antlr3.Runtime.dll
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\EntityFramework.dll
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\EntityFramework.SqlServer.dll
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\Newtonsoft.Json.dll
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\System.Net.Http.Formatting.dll
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\System.Web.Http.dll
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\System.Web.Http.WebHost.dll
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\System.Web.Mvc.dll
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\System.Web.Optimization.dll
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\System.Web.Providers.dll
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\System.Web.Razor.dll
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\System.Web.WebPages.Deployment.dll
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\System.Web.WebPages.dll
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\System.Web.WebPages.Razor.dll
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\WebGrease.dll
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\EntityFramework.xml
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\EntityFramework.SqlServer.xml
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\Newtonsoft.Json.xml
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\System.Net.Http.Formatting.xml
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\System.Web.Http.xml
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\System.Web.Http.WebHost.xml
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\System.Web.Mvc.xml
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\System.Web.Razor.xml
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\System.Web.WebPages.xml
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\System.Web.WebPages.Deployment.xml
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\System.Web.WebPages.Razor.xml
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\zh-Hant\EntityFramework.resources.dll
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\bin\zh-Hant\EntityFramework.SqlServer.resources.dll
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\obj\Debug\NECUnityPractice.csprojResolveAssemblyReference.cache
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\obj\Debug\NECPractice.dll
+C:\Users\howhowleo\Desktop\te\NECUnityPractice\obj\Debug\NECPractice.pdb
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\NECPractice.dll.config
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\NECPractice.dll
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\NECPractice.pdb
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\Antlr3.Runtime.dll
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\EntityFramework.dll
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\EntityFramework.SqlServer.dll
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\Newtonsoft.Json.dll
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\System.Net.Http.Formatting.dll
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\System.Web.Http.dll
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\System.Web.Http.WebHost.dll
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\System.Web.Mvc.dll
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\System.Web.Optimization.dll
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\System.Web.Providers.dll
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\System.Web.Razor.dll
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\System.Web.WebPages.Deployment.dll
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\System.Web.WebPages.dll
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\System.Web.WebPages.Razor.dll
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\WebGrease.dll
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\EntityFramework.xml
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\EntityFramework.SqlServer.xml
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\Newtonsoft.Json.xml
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\System.Net.Http.Formatting.xml
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\System.Web.Http.xml
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\System.Web.Http.WebHost.xml
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\System.Web.Mvc.xml
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\System.Web.Razor.xml
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\System.Web.WebPages.xml
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\System.Web.WebPages.Deployment.xml
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\System.Web.WebPages.Razor.xml
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\zh-Hant\EntityFramework.resources.dll
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\bin\zh-Hant\EntityFramework.SqlServer.resources.dll
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\obj\Debug\NECUnityPractice.csprojResolveAssemblyReference.cache
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\obj\Debug\NECPractice.dll
+C:\Users\Dean\Downloads\NECUnityPractice\NECUnityPractice\obj\Debug\NECPractice.pdb
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\NECPractice.dll.config
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\NECPractice.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\NECPractice.pdb
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\Antlr3.Runtime.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\EntityFramework.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\EntityFramework.SqlServer.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\Newtonsoft.Json.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\System.Net.Http.Formatting.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\System.Web.Http.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\System.Web.Http.WebHost.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\System.Web.Mvc.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\System.Web.Optimization.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\System.Web.Providers.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\System.Web.Razor.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\System.Web.WebPages.Deployment.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\System.Web.WebPages.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\System.Web.WebPages.Razor.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\WebGrease.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\EntityFramework.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\EntityFramework.SqlServer.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\Newtonsoft.Json.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\System.Net.Http.Formatting.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\System.Web.Http.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\System.Web.Http.WebHost.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\System.Web.Mvc.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\System.Web.Razor.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\System.Web.WebPages.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\System.Web.WebPages.Deployment.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\System.Web.WebPages.Razor.xml
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\zh-Hant\EntityFramework.resources.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\bin\zh-Hant\EntityFramework.SqlServer.resources.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\obj\Debug\NECUnityPractice.csprojAssemblyReference.cache
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\obj\Debug\NECUnityPractice.csproj.CoreCompileInputs.cache
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\obj\Debug\NECUnityPractice.csproj.CopyComplete
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\obj\Debug\NECPractice.dll
+C:\Users\lsjji\Downloads\NECPractice_Part 2\MvcPractice2\NECUnityPractice\obj\Debug\NECPractice.pdb
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\NECPractice.dll.config
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\NECPractice.dll
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\NECPractice.pdb
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\Antlr3.Runtime.dll
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\EntityFramework.dll
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\EntityFramework.SqlServer.dll
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\Newtonsoft.Json.dll
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\System.Net.Http.Formatting.dll
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\System.Web.Http.dll
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\System.Web.Http.WebHost.dll
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\System.Web.Mvc.dll
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\System.Web.Optimization.dll
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\System.Web.Providers.dll
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\System.Web.Razor.dll
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\System.Web.WebPages.Deployment.dll
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\System.Web.WebPages.dll
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\System.Web.WebPages.Razor.dll
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\WebGrease.dll
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\EntityFramework.xml
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\EntityFramework.SqlServer.xml
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\Newtonsoft.Json.xml
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\System.Net.Http.Formatting.xml
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\System.Web.Http.xml
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\System.Web.Http.WebHost.xml
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\System.Web.Mvc.xml
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\System.Web.Razor.xml
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\System.Web.WebPages.xml
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\System.Web.WebPages.Deployment.xml
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\System.Web.WebPages.Razor.xml
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\zh-Hant\EntityFramework.resources.dll
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\bin\zh-Hant\EntityFramework.SqlServer.resources.dll
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\obj\Debug\NECUnityPractice.csprojAssemblyReference.cache
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\obj\Debug\NECUnityPractice.csproj.CoreCompileInputs.cache
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\obj\Debug\NECUnityPractice.csproj.CopyComplete
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\obj\Debug\NECPractice.dll
+C:\Users\frogp\Downloads\New folder\NECUnityPractice\obj\Debug\NECPractice.pdb

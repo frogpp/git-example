@@ -1,0 +1,97 @@
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\NECPractice.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\NECPractice.pdb
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\Antlr3.Runtime.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\EntityFramework.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\EntityFramework.SqlServer.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\Microsoft.Web.Infrastructure.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\Newtonsoft.Json.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.Mvc.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.Optimization.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.Providers.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.Razor.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.WebPages.Deployment.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.WebPages.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.WebPages.Razor.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\WebGrease.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\EntityFramework.xml
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\EntityFramework.SqlServer.xml
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\Newtonsoft.Json.xml
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.Mvc.xml
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.Razor.xml
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.WebPages.xml
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.WebPages.Deployment.xml
+D:\Work\Develop\MVC\NECPractice\NECPractice\bin\System.Web.WebPages.Razor.xml
+D:\Work\Develop\MVC\NECPractice\NECPractice\obj\Debug\NECPractice.csprojResolveAssemblyReference.cache
+D:\Work\Develop\MVC\NECPractice\NECPractice\obj\Debug\NECPractice.dll
+D:\Work\Develop\MVC\NECPractice\NECPractice\obj\Debug\NECPractice.pdb
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\NECPractice.dll.config
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\NECPractice.dll
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\NECPractice.pdb
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\Antlr3.Runtime.dll
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\EntityFramework.dll
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\EntityFramework.SqlServer.dll
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\Microsoft.Web.Infrastructure.dll
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\Newtonsoft.Json.dll
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\System.Net.Http.Formatting.dll
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\System.Web.Http.dll
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\System.Web.Http.WebHost.dll
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\System.Web.Mvc.dll
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\System.Web.Optimization.dll
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\System.Web.Providers.dll
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\System.Web.Razor.dll
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\System.Web.WebPages.Deployment.dll
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\System.Web.WebPages.dll
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\System.Web.WebPages.Razor.dll
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\WebGrease.dll
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\EntityFramework.xml
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\EntityFramework.SqlServer.xml
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\Newtonsoft.Json.xml
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\System.Net.Http.Formatting.xml
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\System.Web.Http.xml
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\System.Web.Http.WebHost.xml
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\System.Web.Mvc.xml
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\System.Web.Razor.xml
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\System.Web.WebPages.xml
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\System.Web.WebPages.Deployment.xml
+D:\souces code\MVC\20151224 NECpractive\NECPractice\bin\System.Web.WebPages.Razor.xml
+D:\souces code\MVC\20151224 NECpractive\NECPractice\obj\Debug\NECPractice.dll
+D:\souces code\MVC\20151224 NECpractive\NECPractice\obj\Debug\NECPractice.pdb
+D:\souces code\MVC\20151224 NECpractive\NECPractice\obj\Debug\NECPractice.csprojResolveAssemblyReference.cache
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\NECPractice.dll.config
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\NECPractice.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\NECPractice.pdb
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\Antlr3.Runtime.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\EntityFramework.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\EntityFramework.SqlServer.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\Microsoft.Web.Mvc.FixedDisplayModes.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\Newtonsoft.Json.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Net.Http.Formatting.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.Http.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.Http.WebHost.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.Mvc.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.Optimization.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.Providers.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.Razor.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.WebPages.Deployment.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.WebPages.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.WebPages.Razor.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\WebGrease.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\EntityFramework.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\EntityFramework.SqlServer.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\Newtonsoft.Json.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Net.Http.Formatting.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.Http.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.Http.WebHost.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.Mvc.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.Razor.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.WebPages.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.WebPages.Deployment.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\System.Web.WebPages.Razor.xml
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\zh-Hant\EntityFramework.resources.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\bin\zh-Hant\EntityFramework.SqlServer.resources.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\obj\Debug\NECPractice.csprojResolveAssemblyReference.cache
+C:\Users\howhowleo\Desktop\te\NECPractice\obj\Debug\NECPractice.dll
+C:\Users\howhowleo\Desktop\te\NECPractice\obj\Debug\NECPractice.pdb

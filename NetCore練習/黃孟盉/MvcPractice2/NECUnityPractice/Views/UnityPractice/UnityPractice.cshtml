@@ -1,0 +1,152 @@
+﻿<div data-ng-app="InterestApp" data-ng-controller="InterestCtrl">
+    查詢表單區
+    <table class="list-table">
+        <tr>
+            <td>
+                你喜歡的食物：
+            </td>
+            <td>
+                <input type="text" ng-model="searchText"/>
+            </td>
+            <td>
+                <input type="button" ng-click="Search(searchText)" value="查詢" />
+            </td>
+        </tr>
+    </table>
+    新增表單區
+    <table class="list-table">
+        <tr>
+            <td>
+                你喜歡的食物：
+            </td>
+            <td>
+                <input type="text" ng-model="Form.Food" />
+            </td>
+            <td>
+                你喜歡的飲料：
+            </td>
+            <td>
+                <input type="text" ng-model="Form.Drink" />
+            </td>
+            <td>
+                你喜歡的運動：
+            </td>
+            <td>
+                <input type="text" ng-model="Form.Sport" />
+            </td>
+            <td>
+                <input type="button" ng-click="AddData(Form)" value="新增" />
+            </td>
+        </tr>
+    </table>
+    資料顯示區
+    <table class="list-table">
+        <thead>
+            <tr>
+                <th>
+                    編號
+                </th>
+                <th>
+                    你喜歡的食物
+                </th>
+                <th>
+                    你喜歡的飲料
+                </th>
+                <th>
+                    你喜歡的運動
+                </th>
+                <th>
+                    功能
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="d in List" ng-include="getTemplateList(d)"></tr>
+        </tbody>
+    </table>
+    <script type="text/ng-template" id="display">
+        <td> {{d.Id}}</td>
+        <td> {{d.Food}}</td>
+        <td> {{d.Drink}}</td>
+        <td> {{d.Sport}}</td>
+        <td>
+            <input type="button" ng-click="Edit(d)" value="修改" />
+            <input type="button" ng-click="Delete(d)" value="刪除" />
+        </td>
+    </script>
+    <script type="text/ng-template" id="edit">
+        <td> {{selected.Id}}</td>
+        <td><input type="text" ng-model="selected.Food" /></td>
+        <td><input type="text" ng-model="selected.Drink" /></td>
+        <td><input type="text" ng-model="selected.Sport" /></td>
+        <td>
+            <input type="button" ng-click="Updata(selected)" value="更新" />
+            <input type="button" ng-click="reset()" value="取消" />
+        </td>
+    </script>
+</div>
+@section scripts{
+    <script>
+        var InterestApp = angular.module('InterestApp', []);
+        InterestApp.controller('InterestCtrl', function ($http, $scope) {
+            $scope.List = [];
+            $scope.Form = {};
+            $scope.selected = [];
+            $scope.searchText = "";
+
+            $http.post('@Url.Content("GetList")', { text: "" }).success(function (response) {
+                $scope.List = response;
+            })
+            $scope.Search = function (text)
+            {
+                var data = { text: text };
+                $http.post('@Url.Content("GetList")', data).success(function (response) {
+                $scope.List = response;
+                })
+            }
+
+            $scope.AddData = function (data) {
+                $http.post('@Url.Content("Add")', data).success(function (response) {
+                    $scope.List.push(response);
+                    alert("新增成功");
+                }).error(function () {
+                    alert("新增失敗");
+                })
+            }
+
+            $scope.getTemplateList = function (List) {
+                if (List.Id === $scope.selected.Id) return 'edit';
+                else return 'display';
+            }
+
+            $scope.Edit = function (data) {
+                $scope.selected = angular.copy(data);
+            }
+
+            $scope.Updata = function (data) {
+                $http.post('@Url.Content("Updata")', data).success(function (response) {
+                    $scope.List = response;
+                    alert("更新成功");
+                }).error(function () {
+                    alert("更新失敗");
+                })
+                $scope.selected = {};
+            }
+
+            $scope.Delete = function (data) {
+                $http.post('@Url.Content("Delete")', data).success(function (response) {
+                    $scope.List.pop(response);
+                    alert("刪除成功");
+                }).error(function () {
+                    alert("刪除失敗");
+                })
+            }
+
+            $scope.reset = function () {
+                $scope.selected = {};
+            }
+
+        })
+    </script>
+}
+
