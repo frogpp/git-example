@@ -162,7 +162,7 @@ ORDER BY BOOK_LEND_RECORD.CRE_DATE DESC
 ------------------------------------------------------------------------------------------------------------------------------
 /*9.新增一筆借閱紀錄，借書人為李四，書本ID為2004，並修改借閱日期為2019/01/02*/
 DECLARE @UID VARCHAR(20)
-SET @UID = (SELECT TOP 1 [USER_ID] FROM MEMBER_M WHERE USER_CNAME = '李四')
+SET @UID = (SELECT TOP 1 [USER_ID] FROM MEMBER_M WHERE USER_CNAME = N'李四')
 INSERT INTO [BOOK_LEND_RECORD]
 		([BOOK_ID]
 		,[KEEPER_ID]
